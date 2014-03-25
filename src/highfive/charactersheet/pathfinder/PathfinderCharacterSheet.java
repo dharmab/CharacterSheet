@@ -1,7 +1,7 @@
 package highfive.charactersheet.pathfinder;
 
-import highfive.charactersheet.AbstractCharacterSheet;
+import highfive.charactersheet.CharacterSheet;
 
-public class PathfinderCharacterSheet extends AbstractCharacterSheet {
+public class PathfinderCharacterSheet extends CharacterSheet {
 
 }
