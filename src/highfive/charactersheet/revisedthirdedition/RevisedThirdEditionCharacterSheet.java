@@ -59,6 +59,10 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet {
     // Skills
     private HashMap<String, Skill> skills = new HashMap<String, Skill>();
 
+    /**
+     * Populate the skills with the standard skills from the
+     * DnD 3.5 character sheet.
+     */
     private void populateSkills() {
         skills.put("Appraise", new Skill(Ability.INTELLIGENCE));
         skills.put("Balance", new Skill(Ability.DEXTERITY));
@@ -302,6 +306,12 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet {
         return getSkill(skillName).getMiscModifier();
     }
 
+    /**
+     * Returns the skill modifier of the given skill
+     * @param skillname The name of the skill
+     * @return The total skill modifier
+     * @throws NoSuchElementException if the given skill is not found
+     */
     public int getSkillModifer(String skillname) throws NoSuchElementException {
         Skill skill = getSkill(skillname);
         int abilityModifier = 0;
@@ -328,6 +338,10 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet {
         return abilityModifier + skill.getRank() + skill.getMiscModifier();
     }
 
+    /**
+     *
+     * @return the armor class size modifier for this character
+     */
     private int getSizeAttackAndArmorClassModifier() {
         switch (size) {
             case FINE:
@@ -353,6 +367,10 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet {
         }
     }
 
+    /**
+     * Calculates the total armor class
+     * @return the total armor class
+     */
     public int getArmorClass() {
         return armorBonus
                 + shieldBonus
@@ -435,6 +453,10 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet {
         this.willMiscModifier = willMiscModifier;
     }
 
+    /**
+     *
+     * @return the total Fortitude saving throw bonus
+     */
     public int getFortitudeSavingThrow() {
         return fortitudeBaseSave
                 + getConstitutionModifer()
@@ -442,6 +464,10 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet {
                 + fortitudeMiscModifier;
     }
 
+    /**
+     *
+     * @return the total Reflex saving throw bonus
+     */
     public int getReflexSavingThrow() {
         return reflexBaseSave
                 + getDexterityModifier()
@@ -449,6 +475,10 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet {
                 + reflexMiscModifier;
     }
 
+    /**
+     *
+     * @return the total Will saving throw bonus
+     */
     public int getWillSavingThrow() {
         return willBaseSave
                 + getWisdom()
