@@ -4,6 +4,7 @@ import highfive.charactersheet.CharacterSheet;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 public class RevisedThirdEditionCharacterSheet extends CharacterSheet {
 
@@ -244,5 +245,46 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet {
      */
     public int getInitiative() {
         return getDexterityModifier() + initiativeMiscModifier;
+    }
+
+    private Skill getSkill(String skillName) throws NoSuchElementException {
+        if (!skills.containsKey(skillName)) {
+            throw new NoSuchElementException(skillName + "was not found in this character's skills");
+        }
+        return skills.get(skillName);
+    }
+
+    public int getSkillRank(String skillName) throws NoSuchElementException {
+        return getSkill(skillName).getRank();
+    }
+
+    public int getSkillMiscModifier(String skillName) throws NoSuchElementException {
+        return getSkill(skillName).getMiscModifier();
+    }
+
+    public int getSkillModifer(String skillname) throws NoSuchElementException {
+        Skill skill = getSkill(skillname);
+        int abilityModifier = 0;
+        switch (skill.getKeyAbility()) {
+            case STRENGTH:
+                abilityModifier = strength;
+                break;
+            case DEXTERITY:
+                abilityModifier = dexterity;
+                break;
+            case CONSTITUTION:
+                abilityModifier = constitution;
+                break;
+            case INTELLIGENCE:
+                abilityModifier = intelligence;
+                break;
+            case WISDOM:
+                abilityModifier = constitution;
+                break;
+            case CHARISMA:
+                abilityModifier = charisma;
+                break;
+        }
+        return abilityModifier + skill.getRank() + skill.getMiscModifier();
     }
 }
