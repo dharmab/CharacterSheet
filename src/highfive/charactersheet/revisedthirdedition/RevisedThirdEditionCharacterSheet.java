@@ -2,6 +2,7 @@ package highfive.charactersheet.revisedthirdedition;
 
 import highfive.charactersheet.CharacterSheet;
 
+import java.util.HashMap;
 import java.util.List;
 
 public class RevisedThirdEditionCharacterSheet extends CharacterSheet {
@@ -55,10 +56,45 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet {
     private int willMiscModifier;
 
     // Skills
-    private Skill appraise = new Skill("Appraise", Ability.INTELLIGENCE);
-    private Skill balance = new Skill("Balance", Ability.DEXTERITY);
-    private Skill bluff = new Skill("Bluff", Ability.CHARISMA);
-    // @TODO complete set of skills
+    private HashMap<String, Skill> skills = new HashMap<String, Skill>();
+
+    private void populateSkills() {
+        skills.put("Appraise", new Skill(Ability.INTELLIGENCE));
+        skills.put("Balance", new Skill(Ability.DEXTERITY));
+        skills.put("Bluff", new Skill(Ability.CHARISMA));
+        skills.put("Climb", new Skill(Ability.STRENGTH));
+        skills.put("Concentration", new Skill(Ability.CONSTITUTION));
+        skills.put("Craft", new Skill(Ability.INTELLIGENCE));
+        skills.put("Decipher Script", new Skill(Ability.INTELLIGENCE));
+        skills.put("Diplomacy", new Skill(Ability.CHARISMA));
+        skills.put("Disable Device", new Skill(Ability.INTELLIGENCE));
+        skills.put("Disguise", new Skill(Ability.CHARISMA));
+        skills.put("Escape Artist", new Skill(Ability.DEXTERITY));
+        skills.put("Forgery", new Skill(Ability.INTELLIGENCE));
+        skills.put("Gather Information", new Skill(Ability.CHARISMA));
+        skills.put("Handle Animal", new Skill(Ability.CHARISMA));
+        skills.put("Heal", new Skill(Ability.WISDOM));
+        skills.put("Hide", new Skill(Ability.DEXTERITY));
+        skills.put("Intimidate", new Skill(Ability.CHARISMA));
+        skills.put("Jump", new Skill(Ability.STRENGTH));
+        skills.put("Knowledge", new Skill(Ability.INTELLIGENCE));
+        skills.put("Listen", new Skill(Ability.WISDOM));
+        skills.put("Move Silently", new Skill(Ability.DEXTERITY));
+        skills.put("Open Lock", new Skill(Ability.DEXTERITY));
+        skills.put("Perform", new Skill(Ability.CHARISMA));
+        skills.put("Profession", new Skill(Ability.WISDOM));
+        skills.put("Ride", new Skill(Ability.DEXTERITY));
+        skills.put("Search", new Skill(Ability.INTELLIGENCE));
+        skills.put("Sense Motive", new Skill(Ability.WISDOM));
+        skills.put("Sleight of Hand", new Skill(Ability.DEXTERITY));
+        skills.put("Spellcraft", new Skill(Ability.INTELLIGENCE));
+        skills.put("Spot", new Skill(Ability.WISDOM));
+        skills.put("Survival", new Skill(Ability.WISDOM));
+        skills.put("Swim", new Skill(Ability.STRENGTH));
+        skills.put("Tumble", new Skill(Ability.DEXTERITY));
+        skills.put("Use Magic Device", new Skill(Ability.CHARISMA));
+        skills.put("Use Rope", new Skill(Ability.DEXTERITY));
+    }
 
     // @TODO attack
 
@@ -204,10 +240,9 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet {
     /**
      * Calculates total initiative. Total initiative is equal
      * to the sum of the Dexterity Modifier and Initiative Misc Modifier.
-     * @return the total intitaive
+     * @return the total initiative
      */
     public int getInitiative() {
-        int initiative = this.getDexterityModifier() + initiativeMiscModifier;
-        return initiative;
+        return getDexterityModifier() + initiativeMiscModifier;
     }
 }

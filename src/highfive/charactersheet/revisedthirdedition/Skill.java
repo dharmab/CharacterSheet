@@ -1,10 +1,10 @@
 package highfive.charactersheet.revisedthirdedition;
 
 public class Skill {
-    private String skillName;
     private Ability keyAbility;
     private int rank;
     private int miscModifier;
+    private boolean isClassSkill;
 
     public int getMiscModifier() {
         return miscModifier;
@@ -14,8 +14,7 @@ public class Skill {
         this.miscModifier = miscModifier;
     }
 
-    public Skill(String skillName, Ability keyAbility) {
-        this.skillName = skillName;
+    public Skill(Ability keyAbility) {
         this.keyAbility = keyAbility;
     }
 
@@ -27,11 +26,15 @@ public class Skill {
         this.rank = rank;
     }
 
-    public String getSkillName() {
-        return skillName;
-    }
-
     public Ability getKeyAbility() {
         return keyAbility;
+    }
+
+    public boolean getIsClassSkill() {
+        return isClassSkill;
+    }
+
+    public void setIsClassSkill(boolean isClassSkill) {
+        this.isClassSkill = isClassSkill;
     }
 }
