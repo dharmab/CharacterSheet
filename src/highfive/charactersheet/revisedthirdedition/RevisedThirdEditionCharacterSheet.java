@@ -97,6 +97,46 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet {
         skills.put("Use Rope", new Skill(Ability.DEXTERITY));
     }
 
+    public int getArmorBonus() {
+        return armorBonus;
+    }
+
+    public void setArmorBonus(int armorBonus) {
+        this.armorBonus = armorBonus;
+    }
+
+    public int getShieldBonus() {
+        return shieldBonus;
+    }
+
+    public void setShieldBonus(int shieldBonus) {
+        this.shieldBonus = shieldBonus;
+    }
+
+    public int getNaturalArmor() {
+        return naturalArmor;
+    }
+
+    public void setNaturalArmor(int naturalArmor) {
+        this.naturalArmor = naturalArmor;
+    }
+
+    public int getDeflectionModifer() {
+        return deflectionModifer;
+    }
+
+    public void setDeflectionModifer(int deflectionModifer) {
+        this.deflectionModifer = deflectionModifer;
+    }
+
+    public int getArmorClassMiscModifier() {
+        return armorClassMiscModifier;
+    }
+
+    public void setArmorClassMiscModifier(int armorClassMiscModifier) {
+        this.armorClassMiscModifier = armorClassMiscModifier;
+    }
+
     // @TODO attack
 
     // @TODO gear
@@ -286,5 +326,133 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet {
                 break;
         }
         return abilityModifier + skill.getRank() + skill.getMiscModifier();
+    }
+
+    private int getSizeAttackAndArmorClassModifier() {
+        switch (size) {
+            case FINE:
+                return 8;
+            case DIMINUTIVE:
+                return 4;
+            case TINY:
+                return 2;
+            case SMALL:
+                return 1;
+            case MEDIUM:
+                return 0;
+            case LARGE:
+                return -1;
+            case HUGE:
+                return -2;
+            case GARGANTUAN:
+                return -4;
+            case COLOSSAL:
+                return -8;
+            default:
+                return 0;
+        }
+    }
+
+    public int getArmorClass() {
+        return armorBonus
+                + shieldBonus
+                + getDexterityModifier()
+                + getSizeAttackAndArmorClassModifier()
+                + naturalArmor
+                + deflectionModifer
+                + armorClassMiscModifier;
+    }
+
+    public int getFortitudeBaseSave() {
+        return fortitudeBaseSave;
+    }
+
+    public void setFortitudeBaseSave(int fortitudeBaseSave) {
+        this.fortitudeBaseSave = fortitudeBaseSave;
+    }
+
+    public int getFortitudeMagicModifier() {
+        return fortitudeMagicModifier;
+    }
+
+    public void setFortitudeMagicModifier(int fortitudeMagicModifier) {
+        this.fortitudeMagicModifier = fortitudeMagicModifier;
+    }
+
+    public int getFortitudeMiscModifier() {
+        return fortitudeMiscModifier;
+    }
+
+    public void setFortitudeMiscModifier(int fortitudeMiscModifier) {
+        this.fortitudeMiscModifier = fortitudeMiscModifier;
+    }
+
+    public int getReflexBaseSave() {
+        return reflexBaseSave;
+    }
+
+    public void setReflexBaseSave(int reflexBaseSave) {
+        this.reflexBaseSave = reflexBaseSave;
+    }
+
+    public int getReflexMagicModifier() {
+        return reflexMagicModifier;
+    }
+
+    public void setReflexMagicModifier(int reflexMagicModifier) {
+        this.reflexMagicModifier = reflexMagicModifier;
+    }
+
+    public int getReflexMiscModifier() {
+        return reflexMiscModifier;
+    }
+
+    public void setReflexMiscModifier(int reflexMiscModifier) {
+        this.reflexMiscModifier = reflexMiscModifier;
+    }
+
+    public int getWillBaseSave() {
+        return willBaseSave;
+    }
+
+    public void setWillBaseSave(int willBaseSave) {
+        this.willBaseSave = willBaseSave;
+    }
+
+    public int getWillMagicModifier() {
+        return willMagicModifier;
+    }
+
+    public void setWillMagicModifier(int willMagicModifier) {
+        this.willMagicModifier = willMagicModifier;
+    }
+
+    public int getWillMiscModifier() {
+        return willMiscModifier;
+    }
+
+    public void setWillMiscModifier(int willMiscModifier) {
+        this.willMiscModifier = willMiscModifier;
+    }
+
+    public int getFortitudeSavingThrow() {
+        return fortitudeBaseSave
+                + getConstitutionModifer()
+                + fortitudeMagicModifier
+                + fortitudeMiscModifier;
+    }
+
+    public int getReflexSavingThrow() {
+        return reflexBaseSave
+                + getDexterityModifier()
+                + reflexMagicModifier
+                + reflexMiscModifier;
+    }
+
+    public int getWillSavingThrow() {
+        return willBaseSave
+                + getWisdom()
+                + willMagicModifier
+                + willMiscModifier;
     }
 }
