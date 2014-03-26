@@ -4,6 +4,10 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import javax.swing.JPanel;
 
+/**
+ * @author Team HighFive
+ */
+
 public class CharacterSheetView extends JPanel {
 
     /**
