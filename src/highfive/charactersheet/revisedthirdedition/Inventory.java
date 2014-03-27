@@ -18,4 +18,27 @@ public class Inventory {
         this.name = "Gear";
         this.items = new ArrayList<Item>();
     }
+
+    public void addToInventory(Item item){
+        this.items.add(item);
+    }
+
+    public void removeFromInventory(Item item){
+        if (items.contains(item)){
+            items.remove(item);
+        }
+        else throw new NullPointerException();
+    }
+
+    public void renameInventory(String newName){
+        this.name = newName;
+    }
+
+    public void modifyItemName(Item item, String newName){
+        items.get(this.items.indexOf(item)).setName(newName);
+    }
+
+    public void modifyItemWeight(Item item, double weight){
+        items.get(this.items.indexOf(item)).setWeight(weight);
+    }
 }

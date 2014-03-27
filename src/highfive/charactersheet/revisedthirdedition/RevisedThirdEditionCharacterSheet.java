@@ -67,6 +67,48 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet {
     private HashMap<String, Inventory> inventories = new HashMap<String, Inventory>();
 
     /**
+     * Creates a default inventory. Default constructor of an Inventory sets name to "Gear"
+     */
+    private void createDefaultInventory(){
+        inventories.put("Gear", new Inventory());
+    }
+
+    /**
+     * Adds an Inventory to the sheet
+     * @param key the name of the Inventory. The parameter will also name the Inventory
+     */
+    private void addInventory(String key){
+        inventories.put(key, new Inventory(key));
+    }
+
+    /**
+     * Deletes an Inventory from the sheet, removing all items with it.
+     * @param key the name of the Inventory
+     */
+    private void deleteInventory(String key){
+        inventories.remove(key);
+    }
+
+    /**
+     * Adds an item to a specified Inventory
+     * @param key the key of the Inventory to add the item to
+     * @param item item's name
+     * @param weight item's weight
+     */
+    private void addToInventory(String key, String item, double weight){
+        inventories.get(key).addToInventory(new Item(item, weight));
+    }
+
+    /**
+     * Removes an item from a specified Inventory
+     * @param key the key of the Inventory to remove the item from
+     * @param item item's name
+     */
+    private void addToInventory(String key, Item item){
+        inventories.get(key).removeFromInventory(item);
+    }
+
+    /**
      * Populate the skills with the standard skills from the
      * DnD 3.5 character sheet.
      */
@@ -147,8 +189,6 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet {
     public void setArmorClassMiscModifier(int armorClassMiscModifier) {
         this.armorClassMiscModifier = armorClassMiscModifier;
     }
-
-    // @TODO inventory
 
     // @TODO Feats
 
