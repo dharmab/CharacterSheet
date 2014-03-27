@@ -56,8 +56,15 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet {
     private int willMagicModifier;
     private int willMiscModifier;
 
+    //base attack modifier
+
+    private int baseAttack;
+
     // Skills
     private HashMap<String, Skill> skills = new HashMap<String, Skill>();
+
+    //Inventory
+    private HashMap<String, Inventory> inventories = new HashMap<String, Inventory>();
 
     /**
      * Populate the skills with the standard skills from the
@@ -140,10 +147,6 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet {
     public void setArmorClassMiscModifier(int armorClassMiscModifier) {
         this.armorClassMiscModifier = armorClassMiscModifier;
     }
-
-    // @TODO attack
-
-    // @TODO gear
 
     // @TODO inventory
 
