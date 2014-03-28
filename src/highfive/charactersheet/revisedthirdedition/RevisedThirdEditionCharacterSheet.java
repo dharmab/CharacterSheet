@@ -70,14 +70,14 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet {
      * Creates a default inventory. Default constructor of an Inventory sets name to "Gear"
      */
     private void createDefaultInventory(){
-        inventories.put("Gear", new Inventory());
+        inventories.put("Gear", new Inventory("Gear"));
     }
 
     /**
      * Adds an Inventory to the sheet
      * @param key the name of the Inventory. The parameter will also name the Inventory
      */
-    private void addInventory(String key){
+    public void addInventory(String key){
         inventories.put(key, new Inventory(key));
     }
 
@@ -85,27 +85,35 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet {
      * Deletes an Inventory from the sheet, removing all items with it.
      * @param key the name of the Inventory
      */
-    private void deleteInventory(String key){
+    public void deleteInventory(String key){
         inventories.remove(key);
     }
 
     /**
      * Adds an item to a specified Inventory
-     * @param key the key of the Inventory to add the item to
-     * @param item item's name
-     * @param weight item's weight
+     * @param inventory the key of the Inventory to add the item to
+     * @param itemName item's name
+     * @param itemWeight item's weight
      */
-    private void addToInventory(String key, String item, double weight){
-        inventories.get(key).addToInventory(new Item(item, weight));
+    public void addToInventory(String inventory, String itemName, double itemWeight){
+        addToInventory(inventory, new Item(itemName, itemWeight));
     }
 
     /**
-     * Removes an item from a specified Inventory
+     * Adds an item from a specified Inventory
      * @param key the key of the Inventory to remove the item from
      * @param item item's name
      */
-    private void addToInventory(String key, Item item){
-        inventories.get(key).removeFromInventory(item);
+    public void addToInventory(String key, Item item){
+        if (inventories.containsKey(key)) {
+            Inventory inv = inventories.get(key);
+            inv.add(item);
+            inventories.replace(key, inv);
+        } else {
+            Inventory inv = new Inventory(key);
+            inv.add(item);
+            inventories.put(key, inv);
+        }
     }
 
     /**
