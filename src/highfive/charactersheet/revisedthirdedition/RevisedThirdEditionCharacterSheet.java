@@ -2,9 +2,7 @@ package highfive.charactersheet.revisedthirdedition;
 
 import highfive.charactersheet.CharacterSheet;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.NoSuchElementException;
+import java.util.*;
 
 public class RevisedThirdEditionCharacterSheet extends CharacterSheet {
 
@@ -200,7 +198,19 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet {
 
     // @TODO Feats
 
-    private List<String> languages;
+    private HashSet<String> languages;
+
+    public Collection<String> getLanguages() {
+        return languages;
+    }
+
+    public boolean addLanguage(String language) {
+        return languages.add(language);
+    }
+
+    public boolean removeLanguage(String language) {
+        return languages.remove(language);
+    }
 
     // @TODO Spells
 
