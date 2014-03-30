@@ -196,8 +196,6 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet {
         this.armorClassMiscModifier = armorClassMiscModifier;
     }
 
-    // @TODO Feats
-
     private HashSet<String> languages;
 
     private HashSet<Feat> feats;
@@ -218,7 +216,16 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet {
 
     // @TODO Spells
 
-    // @TODO Constructor method(s)
+    // Constructor
+    public RevisedThirdEditionCharacterSheet() {
+        characterName = "New Character";
+        playerName = "";
+        characterClass = "";
+        race = "";
+        alignment = Alignment.NETRUAL;
+        size = Size.MEDIUM;
+    }
+
 
     // Getters and Setters
     /*
