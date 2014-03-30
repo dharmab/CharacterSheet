@@ -200,6 +200,10 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet {
 
     private HashSet<String> languages;
 
+    private HashSet<Feat> feats;
+
+    private HashSet<SpecialAbility> specialAbilities;
+
     public Collection<String> getLanguages() {
         return languages;
     }
@@ -545,5 +549,41 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet {
                 + getWisdom()
                 + willMagicModifier
                 + willMiscModifier;
+    }
+
+    public boolean addFeat(Feat feat) {
+        return feats.add(feat);
+    }
+
+    public boolean addFeat(String name) {
+        Feat feat = new Feat();
+        feat.setName(name);
+        return feats.add(feat);
+    }
+
+    public boolean removeFeat(Feat feat) {
+        return feats.remove(feat);
+    }
+
+    public Collection<Feat> getFeats() {
+        return feats;
+    }
+
+    public boolean addSpecialAbility(SpecialAbility ability) {
+        return specialAbilities.add(ability);
+    }
+
+    public boolean addSpecialAbility(String name) {
+        SpecialAbility ability = new SpecialAbility();
+        ability.setName(name);
+        return specialAbilities.add(ability);
+    }
+
+    public boolean removeSpecialAbility(SpecialAbility ability) {
+        return specialAbilities.remove(ability);
+    }
+
+    public Collection<SpecialAbility> getSpecialAbilities() {
+        return specialAbilities;
     }
 }
