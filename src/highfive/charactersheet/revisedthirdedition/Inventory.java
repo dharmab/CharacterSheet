@@ -29,7 +29,7 @@ public class Inventory {
         } else {
             oldQuantity = 0;
         }
-        items.replace(item, oldQuantity + quantity);
+        items.put(item, oldQuantity + quantity);
     }
 
     public void add(Item item) {
@@ -55,7 +55,7 @@ public class Inventory {
         if (quantity >= oldQuantity) {
             items.remove(item);
         } else {
-            items.replace(item, oldQuantity - quantity);
+            items.put(item, oldQuantity - quantity);
         }
     }
 

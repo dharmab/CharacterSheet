@@ -64,11 +64,20 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet {
     //Inventory
     private HashMap<String, Inventory> inventories = new HashMap<String, Inventory>();
 
+    //Spells
+    private HashMap<String, SpellBook> spellbooks = new HashMap<String, SpellBook>();
+
+    private int spellsave;//DC to save against character's spells
+    private int spellFailure;//for arcane casters
+
+
+
     /**
      * Creates a default inventory. Default constructor of an Inventory sets name to "Gear"
      */
     private void createDefaultInventory(){
         inventories.put("Gear", new Inventory("Gear"));
+        inventories.put("Money", new Inventory("Money"));
     }
 
     /**
@@ -106,7 +115,7 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet {
         if (inventories.containsKey(key)) {
             Inventory inv = inventories.get(key);
             inv.add(item);
-            inventories.replace(key, inv);
+            inventories.put(key, inv);
         } else {
             Inventory inv = new Inventory(key);
             inv.add(item);
