@@ -73,7 +73,7 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet {
     // DC to save against character's spells
     private int spellsave;
 
-    // For arcane casters
+    //Arcane spell failure
     private int spellFailure;
 
     // Constructor
@@ -84,10 +84,13 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet {
         race = "";
         alignment = Alignment.NETRUAL;
         size = Size.MEDIUM;
+        createDefaultInventory();
     }
 
+
+
     /**
-     * Creates a default inventory. Default constructor of an Inventory sets name to "Gear"
+     * Creates a default inventories
      */
     private void createDefaultInventory() {
         inventories.put("Gear", new Inventory("Gear"));
@@ -96,7 +99,6 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet {
 
     /**
      * Adds an Inventory to the sheet
-     *
      * @param key the name of the Inventory. The parameter will also name the Inventory
      */
     public void addInventory(String key) {
@@ -105,7 +107,6 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet {
 
     /**
      * Deletes an Inventory from the sheet, removing all items with it.
-     *
      * @param key the name of the Inventory
      */
     public void deleteInventory(String key) {
@@ -125,7 +126,6 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet {
 
     /**
      * Adds an item from a specified Inventory
-     *
      * @param key  the key of the Inventory to remove the item from
      * @param item item's name
      */

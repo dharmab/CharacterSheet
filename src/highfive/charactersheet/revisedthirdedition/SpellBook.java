@@ -104,11 +104,11 @@ public class SpellBook {
     }
 
     public void addtoPreparedSpells(Spell spell) {
-        spellBook.put(spell.getName(), spell);
+        preparedSpells.put(spell.getName(), spell);
     }
 
     public void removeFromPreparedSpells(Spell spell) {
-        spellBook.remove(spell);
+        preparedSpells.remove(spell);
     }
 
     /**
