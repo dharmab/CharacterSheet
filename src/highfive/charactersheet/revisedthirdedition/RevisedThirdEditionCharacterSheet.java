@@ -2,7 +2,10 @@ package highfive.charactersheet.revisedthirdedition;
 
 import highfive.charactersheet.CharacterSheet;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.NoSuchElementException;
 
 public class RevisedThirdEditionCharacterSheet extends CharacterSheet {
 
@@ -67,51 +70,66 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet {
     //Spells
     private HashMap<String, SpellBook> spellbooks = new HashMap<String, SpellBook>();
 
-    private int spellsave;//DC to save against character's spells
-    private int spellFailure;//for arcane casters
+    // DC to save against character's spells
+    private int spellsave;
 
+    // For arcane casters
+    private int spellFailure;
 
+    // Constructor
+    public RevisedThirdEditionCharacterSheet() {
+        characterName = "New Character";
+        playerName = "";
+        characterClass = "";
+        race = "";
+        alignment = Alignment.NETRUAL;
+        size = Size.MEDIUM;
+    }
 
     /**
      * Creates a default inventory. Default constructor of an Inventory sets name to "Gear"
      */
-    private void createDefaultInventory(){
+    private void createDefaultInventory() {
         inventories.put("Gear", new Inventory("Gear"));
         inventories.put("Money", new Inventory("Money"));
     }
 
     /**
      * Adds an Inventory to the sheet
+     *
      * @param key the name of the Inventory. The parameter will also name the Inventory
      */
-    public void addInventory(String key){
+    public void addInventory(String key) {
         inventories.put(key, new Inventory(key));
     }
 
     /**
      * Deletes an Inventory from the sheet, removing all items with it.
+     *
      * @param key the name of the Inventory
      */
-    public void deleteInventory(String key){
+    public void deleteInventory(String key) {
         inventories.remove(key);
     }
 
     /**
      * Adds an item to a specified Inventory
-     * @param inventory the key of the Inventory to add the item to
-     * @param itemName item's name
+     *
+     * @param inventory  the key of the Inventory to add the item to
+     * @param itemName   item's name
      * @param itemWeight item's weight
      */
-    public void addToInventory(String inventory, String itemName, double itemWeight){
+    public void addToInventory(String inventory, String itemName, double itemWeight) {
         addToInventory(inventory, new Item(itemName, itemWeight));
     }
 
     /**
      * Adds an item from a specified Inventory
-     * @param key the key of the Inventory to remove the item from
+     *
+     * @param key  the key of the Inventory to remove the item from
      * @param item item's name
      */
-    public void addToInventory(String key, Item item){
+    public void addToInventory(String key, Item item) {
         if (inventories.containsKey(key)) {
             Inventory inv = inventories.get(key);
             inv.add(item);
@@ -164,77 +182,6 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet {
         skills.put("Use Magic Device", new Skill(Ability.CHARISMA));
         skills.put("Use Rope", new Skill(Ability.DEXTERITY));
     }
-
-    public int getArmorBonus() {
-        return armorBonus;
-    }
-
-    public void setArmorBonus(int armorBonus) {
-        this.armorBonus = armorBonus;
-    }
-
-    public int getShieldBonus() {
-        return shieldBonus;
-    }
-
-    public void setShieldBonus(int shieldBonus) {
-        this.shieldBonus = shieldBonus;
-    }
-
-    public int getNaturalArmor() {
-        return naturalArmor;
-    }
-
-    public void setNaturalArmor(int naturalArmor) {
-        this.naturalArmor = naturalArmor;
-    }
-
-    public int getDeflectionModifer() {
-        return deflectionModifer;
-    }
-
-    public void setDeflectionModifer(int deflectionModifer) {
-        this.deflectionModifer = deflectionModifer;
-    }
-
-    public int getArmorClassMiscModifier() {
-        return armorClassMiscModifier;
-    }
-
-    public void setArmorClassMiscModifier(int armorClassMiscModifier) {
-        this.armorClassMiscModifier = armorClassMiscModifier;
-    }
-
-    private HashSet<String> languages;
-
-    private HashSet<Feat> feats;
-
-    private HashSet<SpecialAbility> specialAbilities;
-
-    public Collection<String> getLanguages() {
-        return languages;
-    }
-
-    public boolean addLanguage(String language) {
-        return languages.add(language);
-    }
-
-    public boolean removeLanguage(String language) {
-        return languages.remove(language);
-    }
-
-    // @TODO Spells
-
-    // Constructor
-    public RevisedThirdEditionCharacterSheet() {
-        characterName = "New Character";
-        playerName = "";
-        characterClass = "";
-        race = "";
-        alignment = Alignment.NETRUAL;
-        size = Size.MEDIUM;
-    }
-
 
     // Getters and Setters
     /*
@@ -377,8 +324,6 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet {
         return (ability - 10) / 2; // Java rounds down implicitly
     }
 
-    // @TODO armor class getters and settings
-
     public int getTotalHitPoints() {
         return totalHitPoints;
     }
@@ -414,6 +359,7 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet {
     /**
      * Calculates total initiative. Total initiative is equal
      * to the sum of the Dexterity Modifier and Initiative Misc Modifier.
+     *
      * @return the total initiative
      */
     public int getInitiative() {
@@ -437,11 +383,12 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet {
 
     /**
      * Returns the skill modifier of the given skill
+     *
      * @param skillname The name of the skill
      * @return The total skill modifier
      * @throws NoSuchElementException if the given skill is not found
      */
-    public int getSkillModifer(String skillname) throws NoSuchElementException {
+    public int getSkillModifier(String skillname) throws NoSuchElementException {
         Skill skill = getSkill(skillname);
         int abilityModifier = 0;
         switch (skill.getKeyAbility()) {
@@ -468,7 +415,6 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet {
     }
 
     /**
-     *
      * @return the armor class size modifier for this character
      */
     private int getSizeAttackAndArmorClassModifier() {
@@ -498,6 +444,7 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet {
 
     /**
      * Calculates the total armor class
+     *
      * @return the total armor class
      */
     public int getArmorClass() {
@@ -583,7 +530,6 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet {
     }
 
     /**
-     *
      * @return the total Fortitude saving throw bonus
      */
     public int getFortitudeSavingThrow() {
@@ -594,7 +540,6 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet {
     }
 
     /**
-     *
      * @return the total Reflex saving throw bonus
      */
     public int getReflexSavingThrow() {
@@ -605,7 +550,6 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet {
     }
 
     /**
-     *
      * @return the total Will saving throw bonus
      */
     public int getWillSavingThrow() {
@@ -649,5 +593,63 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet {
 
     public Collection<SpecialAbility> getSpecialAbilities() {
         return specialAbilities;
+    }
+
+    public int getArmorBonus() {
+        return armorBonus;
+    }
+
+    public void setArmorBonus(int armorBonus) {
+        this.armorBonus = armorBonus;
+    }
+
+    public int getShieldBonus() {
+        return shieldBonus;
+    }
+
+    public void setShieldBonus(int shieldBonus) {
+        this.shieldBonus = shieldBonus;
+    }
+
+    public int getNaturalArmor() {
+        return naturalArmor;
+    }
+
+    public void setNaturalArmor(int naturalArmor) {
+        this.naturalArmor = naturalArmor;
+    }
+
+    public int getDeflectionModifer() {
+        return deflectionModifer;
+    }
+
+    public void setDeflectionModifer(int deflectionModifer) {
+        this.deflectionModifer = deflectionModifer;
+    }
+
+    public int getArmorClassMiscModifier() {
+        return armorClassMiscModifier;
+    }
+
+    public void setArmorClassMiscModifier(int armorClassMiscModifier) {
+        this.armorClassMiscModifier = armorClassMiscModifier;
+    }
+
+    private HashSet<String> languages;
+
+    private HashSet<Feat> feats;
+
+    private HashSet<SpecialAbility> specialAbilities;
+
+    public Collection<String> getLanguages() {
+        return languages;
+    }
+
+    public boolean addLanguage(String language) {
+        return languages.add(language);
+    }
+
+    public boolean removeLanguage(String language) {
+        return languages.remove(language);
     }
 }
