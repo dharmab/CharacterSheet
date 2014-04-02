@@ -1,6 +1,5 @@
 package highfive.charactersheet.revisedthirdedition;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -37,6 +36,22 @@ public class AnimalCompanion {
     HashMap<String, SpecialAbility> tricks;
     HashMap<String, Skill> skills;
     HashMap<String, Feat> feats;
+
+    public AnimalCompanion() {
+        this.name = "Animal";
+        this.specialAbilities = new HashMap<String, SpecialAbility>();
+        this.tricks = new HashMap<String, SpecialAbility>();
+        this.skills = new HashMap<String, Skill>();
+        this.feats = new HashMap<String, Feat>();
+    }
+
+    public AnimalCompanion(String name) {
+        this.name = name;
+        this.specialAbilities = new HashMap<String, SpecialAbility>();
+        this.tricks = new HashMap<String, SpecialAbility>();
+        this.skills = new HashMap<String, Skill>();
+        this.feats = new HashMap<String, Feat>();
+    }
 
     public String getName() {
         return name;
