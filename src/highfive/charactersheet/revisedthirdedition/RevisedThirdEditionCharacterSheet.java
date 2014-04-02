@@ -2,13 +2,11 @@ package highfive.charactersheet.revisedthirdedition;
 
 import highfive.charactersheet.CharacterSheet;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.NoSuchElementException;
+import java.util.*;
 
 public class RevisedThirdEditionCharacterSheet extends CharacterSheet {
 
+/*********************************BEGIN FIELDS**************************************/
     // Biographical info
     private String characterName;
     private String playerName;
@@ -62,21 +60,35 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet {
     private int baseAttack;
 
     // Skills
-    private HashMap<String, Skill> skills = new HashMap<String, Skill>();
+    private HashMap<String, Skill> skills;
 
     //Inventory
-    private HashMap<String, Inventory> inventories = new HashMap<String, Inventory>();
+    private HashMap<String, Inventory> inventories;
 
     //Spells
-    private HashMap<String, SpellBook> spellbooks = new HashMap<String, SpellBook>();
-
-    // DC to save against character's spells
+    private HashMap<String, SpellBook> spellbooks;
     private int spellsave;
-
-    //Arcane spell failure
     private int spellFailure;
 
-    // Constructor
+    //Animal Companion
+    private HashMap<String, AnimalCompanion> animalCompanions;
+
+    //Wild Shape (Druid)
+    private HashMap<String, WildShape> wildShapes;
+    private boolean currentlyInWildShape;
+    private WildShape currentWildShape;
+
+    //Languages
+    private HashSet<String> languages;
+
+    //Feats
+    private HashSet<Feat> feats;
+
+    //Special Abilities
+    private HashSet<SpecialAbility> specialAbilities;
+
+/************************************CONSTRUCTOR METHODS********************************************/
+
     public RevisedThirdEditionCharacterSheet() {
         characterName = "New Character";
         playerName = "";
@@ -84,13 +96,23 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet {
         race = "";
         alignment = Alignment.NETRUAL;
         size = Size.MEDIUM;
+        inventories = new HashMap<String, Inventory>();
         createDefaultInventory();
+        skills = new HashMap<String, Skill>();
+        populateSkills();
+        spellbooks = new HashMap<String, SpellBook>();
+        animalCompanions = new HashMap<String, AnimalCompanion>();
+        wildShapes = new HashMap<String, WildShape>();
+        currentlyInWildShape = false;
+        languages = new HashSet<String>();
+        addLanguage("Common");
+        feats = new HashSet<Feat>();
+        specialAbilities = new HashSet<SpecialAbility>();
     }
 
-
-
+/********************************UTILITY METHODS*****************************************/
     /**
-     * Creates a default inventories
+     * Creates a 2 default inventories, "Gear" and "Money"
      */
     private void createDefaultInventory() {
         inventories.put("Gear", new Inventory("Gear"));
@@ -235,7 +257,10 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet {
     }
 
     public Size getSize() {
-        return size;
+        if (currentlyInWildShape) {
+            return currentWildShape.getSize();
+        }
+        else return size;
     }
 
     public void setSize(Size size) {
@@ -243,6 +268,9 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet {
     }
 
     public int getStrength() {
+        if (currentlyInWildShape) {
+            return strength + currentWildShape.getAdditionalStrength();
+        }
         return strength;
     }
 
@@ -255,7 +283,10 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet {
     }
 
     public int getDexterity() {
-        return dexterity;
+        if (currentlyInWildShape) {
+            return dexterity + currentWildShape.getAdditionalDexterity();
+        }
+        else return dexterity;
     }
 
     public void setDexterity(int dexterity) {
@@ -267,7 +298,10 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet {
     }
 
     public int getConstitution() {
-        return constitution;
+        if (currentlyInWildShape) {
+            return constitution + currentWildShape.getAdditionalConstitution();
+        }
+        else return constitution;
     }
 
     public void setConstitution(int constitution) {
@@ -451,7 +485,8 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet {
         return armorBonus
                 + shieldBonus
                 + getDexterityModifier()
-                + getSizeAttackAndArmorClassModifier()
+                - getSizeAttackAndArmorClassModifier()
+                    //subtraction because greater size decreases armor class
                 + naturalArmor
                 + deflectionModifer
                 + armorClassMiscModifier;
@@ -612,7 +647,10 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet {
     }
 
     public int getNaturalArmor() {
-        return naturalArmor;
+        if (!currentlyInWildShape) {
+            return naturalArmor;
+        }
+        else return currentWildShape.getNaturalArmorBonus();
     }
 
     public void setNaturalArmor(int naturalArmor) {
@@ -635,12 +673,6 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet {
         this.armorClassMiscModifier = armorClassMiscModifier;
     }
 
-    private HashSet<String> languages;
-
-    private HashSet<Feat> feats;
-
-    private HashSet<SpecialAbility> specialAbilities;
-
     public Collection<String> getLanguages() {
         return languages;
     }
@@ -651,5 +683,67 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet {
 
     public boolean removeLanguage(String language) {
         return languages.remove(language);
+    }
+
+    public void addAnimalCompanion(String name) {
+        if (animalCompanions.containsKey(name)) {
+            throw new IllegalArgumentException("Cannot have duplicate animal companions");
+        }
+        animalCompanions.put(name, new AnimalCompanion(name));
+    }
+
+    public void removeAnimalCompanion(String name) {
+        if (!animalCompanions.containsKey(name)) {
+            throw new IllegalArgumentException("Animal companion not found");
+        }
+        animalCompanions.remove(name);
+    }
+
+    public HashMap<String, AnimalCompanion> getAnimalCompanions() {
+        return animalCompanions;
+    }
+
+    public void addWildShape(String name) {
+        if (wildShapes.containsKey(name)) {
+            throw new IllegalArgumentException("Cannot have duplicate wild shapes");
+        }
+        wildShapes.put(name, new WildShape(name));
+    }
+
+    public void removeWildShape(String name) {
+        if (!wildShapes.containsKey(name)) {
+            throw new IllegalArgumentException("Wild shape not found");
+        }
+        wildShapes.remove(name);
+    }
+
+    public void changeToWildForm(String name) {
+        if (!wildShapes.containsKey(name)) {
+            throw new IllegalArgumentException("Wild shape not found");
+        }
+        if (!currentlyInWildShape) {
+            currentWildShape = wildShapes.get(name);
+            currentlyInWildShape = true;
+            WildShape tempWildShape = wildShapes.get(name);
+            Collection<SpecialAbility> tempSA = tempWildShape.getSpecialAbilities().values();
+            for (SpecialAbility ability : tempSA) {
+                this.addSpecialAbility(ability);
+            }
+        }
+    }
+
+    public void changeBack(String name) {
+        if (!wildShapes.containsKey(name)) {
+            throw new IllegalArgumentException("Wild shape not found");
+        }
+        if (currentlyInWildShape) {
+            WildShape tempWildShape = wildShapes.get(name);
+            Collection<SpecialAbility> tempSA = tempWildShape.getSpecialAbilities().values();
+            for (SpecialAbility ability : tempSA) {
+                this.removeSpecialAbility(ability);
+            }
+            currentWildShape = null;
+            currentlyInWildShape = false;
+        }
     }
 }
