@@ -1,12 +1,7 @@
 package highfive.charactersheet;
 
-import java.awt.BorderLayout;
-import java.awt.GridLayout;
-import java.awt.TextField;
-
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import javax.swing.*;
+import java.awt.*;
 
 /**
  * @author archana
@@ -80,16 +75,5 @@ public class StatsSection extends AbstractSection
     {
         JPanel topPanel = getSectionPanel("Stats", buildStatsSection());
         return topPanel;
-    }
-
-    public static void main(String[] args)
-    {
-        StatsSection s = new StatsSection();
-        CharacterSheetView f = new CharacterSheetView();
-        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        f.add(s.getStatsSetion());
-        f.setSize(600,600);
-        f.setLocation(300,50);
-        f.setVisible(true);
     }
 }
