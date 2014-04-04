@@ -6,8 +6,6 @@
 package highfive.charactersheet;
 
 import javax.swing.*;
-import javax.swing.JPanel;
-import java.awt.*;
 
 
 /**
@@ -138,13 +136,6 @@ public class Section {
     private void collapseButtonActionPerformed(java.awt.event.ActionEvent evt) {
         unhide = !unhide;
         collapsePanel.setVisible(unhide);
-    }
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        Section a = new Section();
     }
 
     //

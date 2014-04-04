@@ -1,5 +1,7 @@
 package highfive.charactersheet;
 
+import highfive.charactersheet.revisedthirdedition.StatsSection;
+
 import javax.swing.*;
 
 public class Main {

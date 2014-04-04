@@ -1,12 +1,9 @@
-package highfive.charactersheet;
+package highfive.charactersheet.revisedthirdedition;
 
-import java.awt.BorderLayout;
-import java.awt.GridLayout;
-import java.awt.TextField;
+import highfive.charactersheet.AbstractSection;
 
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import javax.swing.*;
+import java.awt.*;
 
 /**
  * @author archana
@@ -45,14 +42,14 @@ public class AttackSection extends AbstractSection
         return topPanel;
     }
 
-    public static void main(String[] args)
-    {
-        AttackSection s = new AttackSection();
-        CharacterSheetView f = new CharacterSheetView();
-        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        f.add(s.getAttackSetion());
-        f.setSize(600,600);
-        f.setLocation(300,50);
-        f.setVisible(true);
-    }
+//    public static void main(String[] args)
+//    {
+//        AttackSection s = new AttackSection();
+//        CharacterSheetView f = new CharacterSheetView();
+//        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//        f.add(s.getAttackSetion());
+//        f.setSize(600,600);
+//        f.setLocation(300,50);
+//        f.setVisible(true);
+//    }
 }

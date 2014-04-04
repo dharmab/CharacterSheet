@@ -1,4 +1,6 @@
-package highfive.charactersheet;
+package highfive.charactersheet.revisedthirdedition;
+
+import highfive.charactersheet.AbstractSection;
 
 import javax.swing.*;
 import java.awt.*;
