@@ -10,53 +10,53 @@ import javax.swing.*;
 public class StatsSection extends Section {
     private JLabel strengthLabel = new JLabel("STR");
     private JTextField strengthAbilityScore = new JTextField();
-    private JLabel strengthAbilityModifer = new JLabel();
+    private JLabel strengthAbilityModifier = new JLabel();
 
     private JLabel dexterityLabel = new JLabel("DEX");
     private JTextField dexterityAbilityScore = new JTextField();
-    private JLabel dexterityAbilityModifer = new JLabel();
+    private JLabel dexterityAbilityModifier = new JLabel();
 
     private JLabel constitutionLabel = new JLabel("CON");
     private JTextField constitutionAbilityScore = new JTextField();
-    private JLabel constitutionAbilityModifer = new JLabel();
+    private JLabel constitutionAbilityModifier = new JLabel();
 
     private JLabel intelligenceLabel = new JLabel("INT");
     private JTextField intelligenceAbilityScore = new JTextField();
-    private JLabel intelligenceAbilityModifer = new JLabel();
+    private JLabel intelligenceAbilityModifier = new JLabel();
 
     private JLabel wisdomLabel = new JLabel("WIS");
     private JTextField wisdomAbilityScore = new JTextField();
-    private JLabel wisdomAbilityModifer = new JLabel();
+    private JLabel wisdomAbilityModifier = new JLabel();
 
     private JLabel charismaLabel = new JLabel("CHA");
     private JTextField charismaAbilityScore = new JTextField();
-    private JLabel charismaAbilityModifer = new JLabel();
+    private JLabel charismaAbilityModifier = new JLabel();
 
     public StatsSection() {
         super("Ability Scores");
         this.addContent(strengthLabel);
         this.addContent(strengthAbilityScore);
-        this.addContent(strengthAbilityModifer);
+        this.addContent(strengthAbilityModifier);
 
         this.addContent(dexterityLabel);
         this.addContent(dexterityAbilityScore);
-        this.addContent(dexterityAbilityModifer);
+        this.addContent(dexterityAbilityModifier);
 
         this.addContent(constitutionLabel);
         this.addContent(constitutionAbilityScore);
-        this.addContent(constitutionAbilityModifer);
+        this.addContent(constitutionAbilityModifier);
 
         this.addContent(intelligenceLabel);
         this.addContent(intelligenceAbilityScore);
-        this.addContent(intelligenceAbilityModifer);
+        this.addContent(intelligenceAbilityModifier);
 
         this.addContent(wisdomLabel);
         this.addContent(wisdomAbilityScore);
-        this.addContent(wisdomAbilityModifer);
+        this.addContent(wisdomAbilityModifier);
 
         this.addContent(charismaLabel);
         this.addContent(charismaAbilityScore);
-        this.addContent(charismaAbilityModifer);
+        this.addContent(charismaAbilityModifier);
 
     }
 }
