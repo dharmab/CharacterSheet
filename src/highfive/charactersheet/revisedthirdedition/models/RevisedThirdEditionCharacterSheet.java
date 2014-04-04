@@ -1,8 +1,11 @@
-package highfive.charactersheet.revisedthirdedition;
+package highfive.charactersheet.revisedthirdedition.models;
 
 import highfive.charactersheet.CharacterSheet;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.NoSuchElementException;
 
 public class RevisedThirdEditionCharacterSheet extends CharacterSheet {
 

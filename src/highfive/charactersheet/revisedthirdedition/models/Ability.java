@@ -1,4 +1,4 @@
-package highfive.charactersheet.revisedthirdedition;
+package highfive.charactersheet.revisedthirdedition.models;
 
 public enum Ability {
     STRENGTH,

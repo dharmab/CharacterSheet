@@ -1,4 +1,4 @@
-package highfive.charactersheet.revisedthirdedition;
+package highfive.charactersheet.revisedthirdedition.models;
 
 import java.util.HashMap;
 

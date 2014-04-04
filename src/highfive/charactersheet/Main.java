@@ -1,22 +1,22 @@
 package highfive.charactersheet;
 
-import highfive.charactersheet.revisedthirdedition.StatsSection;
+import highfive.charactersheet.revisedthirdedition.ui.BioSection;
+import highfive.charactersheet.revisedthirdedition.ui.StatsSection;
 
 import javax.swing.*;
 
 public class Main {
     public static void main(String[] args) {
-        StatsSection statsSection = new StatsSection();
-
-        CharacterSheetView characterSheetView = new CharacterSheetView();
-        characterSheetView.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        characterSheetView.add(statsSection.getStatsSetion());
-        characterSheetView.setSize(600, 600);
-        characterSheetView.setLocation(300, 50);
-        characterSheetView.setVisible(true);
-
         JFrame mainWindow = new MainWindow("Character Sheet");
-        mainWindow.add(characterSheetView);
+        JPanel csv = new CharacterSheetView();
+
+        BioSection bio = new BioSection();
+        StatsSection stats = new StatsSection();
+
+        csv.add(bio);
+        csv.add(stats);
+
+        mainWindow.add(csv);
         mainWindow.setVisible(true);
     }
 }
