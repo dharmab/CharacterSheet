@@ -2,7 +2,10 @@ package highfive.charactersheet.revisedthirdedition;
 
 import highfive.charactersheet.CharacterSheet;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.NoSuchElementException;
 
 public class RevisedThirdEditionCharacterSheet extends CharacterSheet {
 
@@ -439,7 +442,7 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet {
                 abilityModifier = intelligence;
                 break;
             case WISDOM:
-                abilityModifier = constitution;
+                abilityModifier = wisdom;
                 break;
             case CHARISMA:
                 abilityModifier = charisma;
