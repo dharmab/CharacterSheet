@@ -22,9 +22,10 @@ public class AbstractSection
     /**
      * Returns an empty JPanel. This method should be overwritten in each concrete
      * section class.
+     * @param sheet CharacterSheet whose data will be used to build the section
      * @return an empty JPanel
      */
-    public JPanel buildSection() {
+    public JPanel buildSection(CharacterSheet sheet) {
         return new JPanel();
     }
 }

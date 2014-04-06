@@ -1,4 +1,7 @@
-package highfive.charactersheet;
+package highfive.charactersheet.revisedthirdedition;
+
+import highfive.charactersheet.AbstractSection;
+import highfive.charactersheet.CharacterSheet;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
@@ -16,8 +19,8 @@ public class AttackSection extends AbstractSection
     static JPanel topPanel = new JPanel();
     JPanel innerPanel = new JPanel(new GridLayout(1, 1));
 
-
-    public JPanel buildStatsSection()
+    @Override
+    public JPanel buildSection(CharacterSheet sheet)
     {
         JPanel pane = new JPanel(new BorderLayout());
         pane.setLayout(new GridLayout(0, 1));
@@ -39,20 +42,9 @@ public class AttackSection extends AbstractSection
         return pane;
     }
 
-    public JPanel getAttackSetion()
+    public JPanel getAttackSection()
     {
-        JPanel topPanel = getSectionPanel("Stats", buildStatsSection());
+        JPanel topPanel = getSectionPanel("Stats", buildSection(new RevisedThirdEditionCharacterSheet()));
         return topPanel;
-    }
-
-    public static void main(String[] args)
-    {
-        AttackSection s = new AttackSection();
-        CharacterSheetView f = new CharacterSheetView();
-        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        f.add(s.getAttackSetion());
-        f.setSize(600,600);
-        f.setLocation(300,50);
-        f.setVisible(true);
     }
 }

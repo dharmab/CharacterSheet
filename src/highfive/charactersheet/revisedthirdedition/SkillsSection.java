@@ -1,10 +1,12 @@
 package highfive.charactersheet.revisedthirdedition;
 
 import highfive.charactersheet.AbstractSection;
+import highfive.charactersheet.CharacterSheet;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.AbstractSet;
+import java.util.TreeSet;
 import java.util.HashMap;
 
 /**
@@ -20,6 +22,7 @@ public class SkillsSection extends AbstractSection{
     public SkillsSection(RevisedThirdEditionCharacterSheet characterSheet) {
         this.characterSheet = characterSheet;
         this.skillNames = (AbstractSet<String>)characterSheet.getSkillsAsHashMap().keySet();
+        skillNames = new TreeSet<String>(skillNames);
         this.skillsTable = characterSheet.getSkillsAsHashMap();
     }
 
@@ -28,7 +31,8 @@ public class SkillsSection extends AbstractSection{
      * @return the Skills section as a JPanel
      */
     @Override
-    public JPanel buildSection() {
+    public JPanel buildSection(CharacterSheet sheet) {
+        this.characterSheet = (RevisedThirdEditionCharacterSheet)sheet;
         topPanel.removeAll();
         skillsPanel.removeAll();
         skillsPanel.add(new JLabel("Class Skill"));
