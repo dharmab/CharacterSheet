@@ -18,4 +18,13 @@ public class AbstractSection
         panel.add(taskPane);
         return panel;
     }
+
+    /**
+     * Returns an empty JPanel. This method should be overwritten in each concrete
+     * section class.
+     * @return an empty JPanel
+     */
+    public JPanel buildSection() {
+        return new JPanel();
+    }
 }

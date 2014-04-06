@@ -8,7 +8,7 @@ import javax.swing.JMenuItem;
 
 public class CharacterSheetView  extends JFrame
 {
-    CharacterSheetView()
+    public CharacterSheetView()
     {
         JMenu file = new JMenu("File");
         JMenuItem newItem = new JMenuItem("New");

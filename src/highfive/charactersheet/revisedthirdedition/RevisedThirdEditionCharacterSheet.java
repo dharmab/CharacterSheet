@@ -139,8 +139,8 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet {
     }
 
     /**
+     * Three-parameter version
      * Adds an item to a specified Inventory
-     *
      * @param inventory  the key of the Inventory to add the item to
      * @param itemName   item's name
      * @param itemWeight item's weight
@@ -150,8 +150,9 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet {
     }
 
     /**
-     * Adds an item from a specified Inventory
-     * @param key  the key of the Inventory to remove the item from
+     * 2-parameter version
+     * Adds an item to a specified Inventory
+     * @param key  the key of the Inventory to add the item to
      * @param item item's name
      */
     public void addToInventory(String key, Item item) {
@@ -206,6 +207,14 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet {
         skills.put("Tumble", new Skill(Ability.DEXTERITY));
         skills.put("Use Magic Device", new Skill(Ability.CHARISMA));
         skills.put("Use Rope", new Skill(Ability.DEXTERITY));
+    }
+
+    /**
+     * Adds a new skill to the list of skills
+     * @param newSkill
+     */
+    public void addSkill(String name, Skill newSkill) {
+        skills.put(name, newSkill);
     }
 
     // Getters and Setters
@@ -311,7 +320,7 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet {
         this.constitution = constitution;
     }
 
-    public int getConstitutionModifer() {
+    public int getConstitutionModifier() {
         return getAbilityModifier(constitution);
     }
 
@@ -401,6 +410,10 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet {
      */
     public int getInitiative() {
         return getDexterityModifier() + initiativeMiscModifier;
+    }
+
+    public HashMap<String, Skill> getSkillsAsHashMap() {
+        return skills;
     }
 
     private Skill getSkill(String skillName) throws NoSuchElementException {
@@ -572,7 +585,7 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet {
      */
     public int getFortitudeSavingThrow() {
         return fortitudeBaseSave
-                + getConstitutionModifer()
+                + getConstitutionModifier()
                 + fortitudeMagicModifier
                 + fortitudeMiscModifier;
     }
