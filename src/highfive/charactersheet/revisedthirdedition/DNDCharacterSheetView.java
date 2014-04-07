@@ -7,7 +7,7 @@ import highfive.charactersheet.CharacterSheetView;
  * Created by Marcus on 4/6/2014.
  */
 public class DNDCharacterSheetView extends CharacterSheetView {
-    //@todo GeneralSection generalSection;
+    GeneralSection generalSection;
     StatsSection statsSection;
     SkillsSection skillsSection;
     AttackSection attackSection;
@@ -18,9 +18,27 @@ public class DNDCharacterSheetView extends CharacterSheetView {
     //@todo InventorySection inventorySection;
     //@todo FeatsSection featsSection;
 
-    public DNDCharacterSheetView(RevisedThirdEditionCharacterSheet sheet, AbstractSection[] sections) {
-        for (AbstractSection s : sections) {
-            this.add(s.buildSection(sheet));
-        }
+    public DNDCharacterSheetView(RevisedThirdEditionCharacterSheet sheet) {
+        this.generalSection = new GeneralSection();
+        this.statsSection = new StatsSection();
+        this.skillsSection = new SkillsSection();
+        this.attackSection = new AttackSection();
+        //this.specialAbilitiesSection = new SpecialAbiltiesSection();
+        //this.spellsSection = new SpellsSection();
+        //this.animalCompanionSection = new AnimalCompanionSection();
+        //this.armorSection = new ArmorSection();
+        //this.inventorySection = new InventorySection();
+        //this.featsSection = new FeatsSection();
+        
+        add(generalSection.buildSection(sheet));
+        add(statsSection.buildSection(sheet));
+        add(skillsSection.buildSection(sheet));
+        add(attackSection.buildSection(sheet));
+        //add(specialAbilitiesSection.buildSection(sheet));
+        //add(spellsSection.buildSection(sheet));
+        //add(animalCompanionSection.buildSection(sheet));
+        //add(armorSection.buildSection(sheet));
+        //add(inventorySection.buildSection(sheet));
+        //add(featsSection.buildSection(sheet));
     }
 }

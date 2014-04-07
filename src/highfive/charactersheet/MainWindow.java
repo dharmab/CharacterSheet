@@ -27,20 +27,7 @@ public class MainWindow extends JFrame {
 
     public JPanel getTestSheet() {
         RevisedThirdEditionCharacterSheet testSheet = new RevisedThirdEditionCharacterSheet();
-        DNDCharacterSheetView testView = new DNDCharacterSheetView(testSheet, new AbstractSection[]
-            {
-                //@todo new GeneralSection(),
-                new StatsSection(),
-                new SkillsSection(testSheet),
-                new AttackSection()
-                //@todo new specialAbilitiesSection(),
-                //@todo new spellsSection(),
-                //@todo new AnimalCompanionSection(),
-                //@todo new ArmorSection(),
-                //@todo new InventorySection(),
-                //@todo new FeatsSection()
-            }
-        );
+        DNDCharacterSheetView testView = new DNDCharacterSheetView(testSheet);
         return testView;
     }
 }

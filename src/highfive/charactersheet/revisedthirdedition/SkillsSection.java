@@ -19,8 +19,8 @@ public class SkillsSection extends AbstractSection{
     AbstractSet<String> skillNames;
     HashMap<String, Skill> skillsTable;
 
-    public SkillsSection(RevisedThirdEditionCharacterSheet characterSheet) {
-        this.characterSheet = characterSheet;
+    public SkillsSection() {
+        this.characterSheet = new RevisedThirdEditionCharacterSheet();
         this.skillNames = (AbstractSet<String>)characterSheet.getSkillsAsHashMap().keySet();
         skillNames = new TreeSet<String>(skillNames);
         this.skillsTable = characterSheet.getSkillsAsHashMap();
