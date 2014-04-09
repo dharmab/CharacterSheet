@@ -1,46 +1,18 @@
 package highfive.charactersheet;
 
+import org.jdesktop.swingx.JXTaskPane;
+
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-/**
- * Created by zaid on 4/3/14.
- */
-public abstract class Section extends JPanel {
-    private JPanel titleBar;
-    private JLabel titleLabel;
-    private JButton collapseButton;
+public abstract class Section extends JXTaskPane {
+
     private JPanel contentArea;
 
     public Section(String title) {
-        titleBar = new JPanel();
-        titleLabel = new JLabel(title);
-        titleLabel.setHorizontalAlignment(JLabel.CENTER);
-
-        collapseButton = new JButton("Collapse");
-        collapseButton.setEnabled(true);
-        collapseButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                if (contentArea.isVisible()) {
-                    contentArea.setVisible(false);
-                } else {
-                    contentArea.setVisible(true);
-                }
-            }
-        });
-
-        titleBar.setLayout(new BorderLayout());
-        titleBar.add(collapseButton, BorderLayout.EAST);
-        titleBar.add(titleLabel, BorderLayout.CENTER);
-
+        setTitle(title);
         contentArea = new JPanel();
-
-        this.setLayout(new BorderLayout());
-        super.add(titleBar, BorderLayout.NORTH);
-        super.add(contentArea, BorderLayout.CENTER);
+        add(contentArea);
     }
 
     public Component addContent(Component comp) {
