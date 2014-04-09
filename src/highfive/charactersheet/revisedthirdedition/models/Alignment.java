@@ -1,4 +1,4 @@
-package highfive.charactersheet.revisedthirdedition;
+package highfive.charactersheet.revisedthirdedition.models;
 
 public enum Alignment {
     CHAOTIC_EVIL, CHAOTIC_NEUTRAL, CHAOTIC_GOOD,

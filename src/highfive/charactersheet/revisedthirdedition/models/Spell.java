@@ -1,4 +1,4 @@
-package highfive.charactersheet.revisedthirdedition;
+package highfive.charactersheet.revisedthirdedition.models;
 
 /**
  * Created by Marcus on 3/31/2014.

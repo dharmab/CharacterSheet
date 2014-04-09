@@ -1,12 +1,13 @@
-package highfive.charactersheet.revisedthirdedition;
+package highfive.charactersheet.revisedthirdedition.models;
 
-public class Feat {
+
+public class SpecialAbility {
     private String name;
     private String description;
     private String page;
 
-    public Feat() {
-        name = "New Feat";
+    public SpecialAbility() {
+        name = "New Special Ability";
         description = "";
         page = "";
     }
@@ -40,9 +41,9 @@ public class Feat {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Feat feat = (Feat) o;
+        SpecialAbility ability = (SpecialAbility) o;
 
-        return !(name != null ? !name.equals(feat.name) : feat.name != null);
+        return !(name != null ? !name.equals(ability.name) : ability.name != null);
 
     }
 

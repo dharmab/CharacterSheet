@@ -1,4 +1,4 @@
-package highfive.charactersheet.revisedthirdedition;
+package highfive.charactersheet.revisedthirdedition.models;
 
 public class Skill {
     private Ability keyAbility;
