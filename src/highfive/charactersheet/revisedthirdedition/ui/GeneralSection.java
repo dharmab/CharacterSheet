@@ -1,25 +1,20 @@
-package highfive.charactersheet.revisedthirdedition;
+package highfive.charactersheet.revisedthirdedition.ui;
 
-import highfive.charactersheet.CharacterSheet;
-import highfive.charactersheet.AbstractSection;
+import highfive.charactersheet.Section;
+import highfive.charactersheet.revisedthirdedition.CommonFunctions;
+
 import javax.swing.*;
 import java.awt.*;
 
-/**
- * Created by archana on 4/6/2014.
- */
-public class GeneralSection extends AbstractSection
+public class GeneralSection extends Section
 {
 
-    @Override
-    public JPanel buildSection(CharacterSheet sheet)
-    {
+    public GeneralSection(String title) {
+        super(title);
         JPanel finalPanel = new JPanel(new BorderLayout());
         finalPanel.setLayout(new GridLayout(0, 0));
         finalPanel.add(demographicDetailsPanel());
-
-        JPanel topPanel = getSectionPanel("General Details", finalPanel);
-        return topPanel;
+        addContent(finalPanel);
     }
 
     private static JPanel demographicDetailsPanel()
@@ -28,12 +23,12 @@ public class GeneralSection extends AbstractSection
         JPanel panel1 = new JPanel(new BorderLayout());
         panel1.setLayout(new GridBagLayout());
 
-        TextField field_charname = new TextField(10);
-        TextField field_playername = new TextField(10);
+        TextField characterName = new TextField(10);
+        TextField playerName = new TextField(10);
 
         //row 0
-        panel1.add(field_charname,new CommonFunctions().setGridConstraints(0.5, 0, 0));
-        panel1.add(field_playername,new CommonFunctions().setGridConstraints(0.5, 1, 0));
+        panel1.add(characterName,new CommonFunctions().setGridConstraints(0.5, 0, 0));
+        panel1.add(playerName,new CommonFunctions().setGridConstraints(0.5, 1, 0));
         //row 1
         panel1.add(new JLabel("Character Name"),new CommonFunctions().setGridConstraints(0.5, 0, 1));
         panel1.add(new JLabel("Player"),new CommonFunctions().setGridConstraints(0.5, 0, 1));

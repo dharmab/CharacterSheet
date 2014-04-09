@@ -1,40 +1,33 @@
-package highfive.charactersheet.revisedthirdedition;
+package highfive.charactersheet.revisedthirdedition.ui;
 
-import highfive.charactersheet.AbstractSection;
-import highfive.charactersheet.CharacterSheet;
+import highfive.charactersheet.Section;
+import highfive.charactersheet.revisedthirdedition.models.RevisedThirdEditionCharacterSheet;
+import highfive.charactersheet.revisedthirdedition.models.Skill;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.AbstractSet;
-import java.util.TreeSet;
 import java.util.HashMap;
 
 /**
  * Created by Marcus on 4/3/2014.
  */
-public class SkillsSection extends AbstractSection{
-    private JPanel topPanel = new JPanel();
-    private JPanel skillsPanel = new JPanel(new GridLayout(0, 7));
+public class SkillsSection extends Section {
     RevisedThirdEditionCharacterSheet characterSheet;
     AbstractSet<String> skillNames;
     HashMap<String, Skill> skillsTable;
 
-    public SkillsSection() {
-        this.characterSheet = new RevisedThirdEditionCharacterSheet();
-        this.skillNames = (AbstractSet<String>)characterSheet.getSkillsAsHashMap().keySet();
-        skillNames = new TreeSet<String>(skillNames);
-        this.skillsTable = characterSheet.getSkillsAsHashMap();
+    public SkillsSection(String title) {
+        super(title);
+        add(buildSection());
     }
 
     /**
      * Fills the Skills section with appropriate data, and returns it as a JPanel
      * @return the Skills section as a JPanel
      */
-    @Override
-    public JPanel buildSection(CharacterSheet sheet) {
-        this.characterSheet = (RevisedThirdEditionCharacterSheet)sheet;
-        topPanel.removeAll();
-        skillsPanel.removeAll();
+    private JPanel buildSection() {
+        JPanel skillsPanel = new JPanel(new GridLayout(0, 7));
         skillsPanel.add(new JLabel("Class Skill"));
         skillsPanel.add(new JLabel("Skill Name"));
         skillsPanel.add(new JLabel("Key Ability"));
@@ -95,7 +88,6 @@ public class SkillsSection extends AbstractSection{
             skillsPanel.add(new JTextField(skillsTable.get(skill).getRank()));
             skillsPanel.add(new JTextField(skillsTable.get(skill).getMiscModifier()));
         }
-        topPanel.add(skillsPanel);
-        return topPanel;
+        return skillsPanel;
     }
 }

@@ -1,16 +1,15 @@
-package highfive.charactersheet.revisedthirdedition;
+package highfive.charactersheet.revisedthirdedition.ui;
 
-import highfive.charactersheet.AbstractSection;
 import highfive.charactersheet.CharacterSheetView;
 
 /**
  * Created by Marcus on 4/6/2014.
  */
-public class DNDCharacterSheetView extends CharacterSheetView {
+public class RevisedThirdEditionCharacterSheetView extends CharacterSheetView {
     GeneralSection generalSection;
     StatsSection statsSection;
     SkillsSection skillsSection;
-    AttackSection attackSection;
+    //@todo attack section
     //@todo SpecialAbilitiesSection specialAbilitiesSection;
     //@todo SpellsSection spellsSection;
     //@todo AnimalCompanionSection animalCompanionSection;
@@ -18,11 +17,10 @@ public class DNDCharacterSheetView extends CharacterSheetView {
     //@todo InventorySection inventorySection;
     //@todo FeatsSection featsSection;
 
-    public DNDCharacterSheetView(RevisedThirdEditionCharacterSheet sheet) {
-        this.generalSection = new GeneralSection();
-        this.statsSection = new StatsSection();
-        this.skillsSection = new SkillsSection();
-        this.attackSection = new AttackSection();
+    public RevisedThirdEditionCharacterSheetView() {
+        //this.generalSection = new GeneralSection("Character");
+        this.statsSection = new StatsSection("Stats");
+        //this.skillsSection = new SkillsSection("Skills");
         //this.specialAbilitiesSection = new SpecialAbiltiesSection();
         //this.spellsSection = new SpellsSection();
         //this.animalCompanionSection = new AnimalCompanionSection();
@@ -30,10 +28,9 @@ public class DNDCharacterSheetView extends CharacterSheetView {
         //this.inventorySection = new InventorySection();
         //this.featsSection = new FeatsSection();
         
-        add(generalSection.buildSection(sheet));
-        add(statsSection.buildSection(sheet));
-        add(skillsSection.buildSection(sheet));
-        add(attackSection.buildSection(sheet));
+        //add(generalSection);
+        add(statsSection);
+        //add(skillsSection);
         //add(specialAbilitiesSection.buildSection(sheet));
         //add(spellsSection.buildSection(sheet));
         //add(animalCompanionSection.buildSection(sheet));

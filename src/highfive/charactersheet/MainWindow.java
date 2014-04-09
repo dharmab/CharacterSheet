@@ -1,8 +1,8 @@
 package highfive.charactersheet;
 
-import highfive.charactersheet.revisedthirdedition.*;
+import highfive.charactersheet.revisedthirdedition.ui.RevisedThirdEditionCharacterSheetView;
 
-rimport javax.swing.*;
+import javax.swing.*;
 import java.awt.*;
 
 public class MainWindow extends JFrame {
@@ -23,12 +23,8 @@ public class MainWindow extends JFrame {
         bar.add(file);
         setJMenuBar(bar);
 
-        add(getTestSheet());
+        characterSheetView = new RevisedThirdEditionCharacterSheetView();
+        add(characterSheetView);
     }
 
-    public JPanel getTestSheet() {
-        RevisedThirdEditionCharacterSheet testSheet = new RevisedThirdEditionCharacterSheet();
-        DNDCharacterSheetView testView = new DNDCharacterSheetView(testSheet);
-        return testView;
-    }
 }
