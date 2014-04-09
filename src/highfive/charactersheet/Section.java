@@ -8,7 +8,6 @@ import java.awt.*;
 public abstract class Section extends JXTaskPane {
 
     private JPanel contentArea;
-    private CharacterSheet characterSheet; // @TODO character sheet should be held by view, not section. temporary fix
 
     public Section(String title) {
         setTitle(title);
@@ -24,18 +23,10 @@ public abstract class Section extends JXTaskPane {
         contentArea.setLayout(mgr);
     }
 
-    public CharacterSheet getCharacterSheet() {
-        return characterSheet;
-    }
-
-    public void setCharacterSheet(CharacterSheet characterSheet) {
-        this.characterSheet = characterSheet;
-    }
-
     /**
      * When called, this method should sync the characterSheet and the section
      */
-    public void refresh() {
+    public void refresh(CharacterSheet characterSheet) {
 
     }
 }
