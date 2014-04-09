@@ -26,7 +26,5 @@ public abstract class Section extends JXTaskPane {
     /**
      * When called, this method should sync the characterSheet and the section
      */
-    public void refresh(CharacterSheet characterSheet) {
-
-    }
+    public abstract CharacterSheet refresh(CharacterSheet characterSheet);
 }
