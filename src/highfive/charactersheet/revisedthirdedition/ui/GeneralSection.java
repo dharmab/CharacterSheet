@@ -1,5 +1,6 @@
 package highfive.charactersheet.revisedthirdedition.ui;
 
+import highfive.charactersheet.CharacterSheet;
 import highfive.charactersheet.Section;
 import highfive.charactersheet.revisedthirdedition.CommonFunctions;
 
@@ -99,5 +100,10 @@ public class GeneralSection extends Section
         finalPanel.add(panel3);
 
         return finalPanel;
+    }
+
+    @Override
+    public CharacterSheet refresh(CharacterSheet characterSheet) {
+        return null;
     }
 }

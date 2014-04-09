@@ -6,9 +6,11 @@ import highfive.charactersheet.CharacterSheetView;
  * Created by Marcus on 4/6/2014.
  */
 public class RevisedThirdEditionCharacterSheetView extends CharacterSheetView {
-    GeneralSection generalSection;
-    StatsSection statsSection;
-    SkillsSection skillsSection;
+    private GeneralSection generalSection;
+    private StatsSection statsSection;
+    private SkillsSection skillsSection;
+    private SampleSection sampleSection;
+
     //@todo attack section
     //@todo SpecialAbilitiesSection specialAbilitiesSection;
     //@todo SpellsSection spellsSection;
@@ -18,6 +20,7 @@ public class RevisedThirdEditionCharacterSheetView extends CharacterSheetView {
     //@todo FeatsSection featsSection;
 
     public RevisedThirdEditionCharacterSheetView() {
+        this.sampleSection = new SampleSection("Sample");
         //this.generalSection = new GeneralSection("Character");
         this.statsSection = new StatsSection("Stats");
         //this.skillsSection = new SkillsSection("Skills");
@@ -27,7 +30,8 @@ public class RevisedThirdEditionCharacterSheetView extends CharacterSheetView {
         //this.armorSection = new ArmorSection();
         //this.inventorySection = new InventorySection();
         //this.featsSection = new FeatsSection();
-        
+
+        add(sampleSection);
         //add(generalSection);
         add(statsSection);
         //add(skillsSection);

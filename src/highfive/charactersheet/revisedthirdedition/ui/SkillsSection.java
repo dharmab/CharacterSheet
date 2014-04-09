@@ -1,5 +1,6 @@
 package highfive.charactersheet.revisedthirdedition.ui;
 
+import highfive.charactersheet.CharacterSheet;
 import highfive.charactersheet.Section;
 import highfive.charactersheet.revisedthirdedition.models.RevisedThirdEditionCharacterSheet;
 import highfive.charactersheet.revisedthirdedition.models.Skill;
@@ -89,5 +90,10 @@ public class SkillsSection extends Section {
             skillsPanel.add(new JTextField(skillsTable.get(skill).getMiscModifier()));
         }
         return skillsPanel;
+    }
+
+    @Override
+    public CharacterSheet refresh(CharacterSheet characterSheet) {
+        return null;
     }
 }

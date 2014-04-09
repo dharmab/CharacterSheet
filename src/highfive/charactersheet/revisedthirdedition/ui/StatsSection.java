@@ -1,5 +1,6 @@
 package highfive.charactersheet.revisedthirdedition.ui;
 
+import highfive.charactersheet.CharacterSheet;
 import highfive.charactersheet.Section;
 
 import javax.swing.*;
@@ -17,6 +18,11 @@ public class StatsSection extends Section
     public StatsSection(String title) {
         super(title);
         add(getSkillsSection());
+    }
+
+    @Override
+    public CharacterSheet refresh(CharacterSheet characterSheet) {
+        return null;
     }
 
     private JPanel getSkillsSection()
