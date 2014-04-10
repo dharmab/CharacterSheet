@@ -2,11 +2,14 @@ package highfive.charactersheet.revisedthirdedition.ui;
 
 import highfive.charactersheet.CharacterSheetView;
 
+import java.awt.*;
+
 /**
  * Created by Marcus on 4/6/2014.
  */
 public class RevisedThirdEditionCharacterSheetView extends CharacterSheetView {
-    private GeneralSection generalSection;
+
+    private BiographySection generalSection;
     private StatsSection statsSection;
     private SkillsSection skillsSection;
     private SampleSection sampleSection;
@@ -21,25 +24,19 @@ public class RevisedThirdEditionCharacterSheetView extends CharacterSheetView {
 
     public RevisedThirdEditionCharacterSheetView() {
         this.sampleSection = new SampleSection("Sample");
-        //this.generalSection = new GeneralSection("Character");
+        this.generalSection = new BiographySection("Character");
         this.statsSection = new StatsSection("Stats");
-        //this.skillsSection = new SkillsSection("Skills");
-        //this.specialAbilitiesSection = new SpecialAbiltiesSection();
-        //this.spellsSection = new SpellsSection();
-        //this.animalCompanionSection = new AnimalCompanionSection();
-        //this.armorSection = new ArmorSection();
-        //this.inventorySection = new InventorySection();
-        //this.featsSection = new FeatsSection();
 
-        add(sampleSection);
-        //add(generalSection);
-        add(statsSection);
-        //add(skillsSection);
-        //add(specialAbilitiesSection.buildSection(sheet));
-        //add(spellsSection.buildSection(sheet));
-        //add(animalCompanionSection.buildSection(sheet));
-        //add(armorSection.buildSection(sheet));
-        //add(inventorySection.buildSection(sheet));
-        //add(featsSection.buildSection(sheet));
+        setLayout(new GridBagLayout());
+        GridBagConstraints constraints = new GridBagConstraints();
+        constraints.fill = GridBagConstraints.HORIZONTAL;
+        constraints.gridx = 0;
+        constraints.gridy = 0;
+
+        add(generalSection, constraints);
+        constraints.gridy++;
+
+        add(statsSection, constraints);
+        constraints.gridy++;
     }
 }
