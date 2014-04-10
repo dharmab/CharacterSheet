@@ -129,6 +129,7 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet {
         addLanguage("Common");
         feats = new HashSet<Feat>();
         specialAbilities = new HashSet<SpecialAbility>();
+        deity = "";
     }
 
 /********************************UTILITY METHODS*****************************************/

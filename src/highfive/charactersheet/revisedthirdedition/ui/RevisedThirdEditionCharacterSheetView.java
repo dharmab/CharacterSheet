@@ -1,18 +1,16 @@
 package highfive.charactersheet.revisedthirdedition.ui;
 
 import highfive.charactersheet.CharacterSheetView;
+import highfive.charactersheet.revisedthirdedition.models.RevisedThirdEditionCharacterSheet;
 
 import java.awt.*;
 
-/**
- * Created by Marcus on 4/6/2014.
- */
 public class RevisedThirdEditionCharacterSheetView extends CharacterSheetView {
+    private RevisedThirdEditionCharacterSheet characterSheet;
 
     private BiographySection generalSection;
-    private StatsSection statsSection;
+    private AbilityScoreSection abilityScoreSection;
     private SkillsSection skillsSection;
-    private SampleSection sampleSection;
 
     //@todo attack section
     //@todo SpecialAbilitiesSection specialAbilitiesSection;
@@ -23,9 +21,9 @@ public class RevisedThirdEditionCharacterSheetView extends CharacterSheetView {
     //@todo FeatsSection featsSection;
 
     public RevisedThirdEditionCharacterSheetView() {
-        this.sampleSection = new SampleSection("Sample");
+        characterSheet = new RevisedThirdEditionCharacterSheet();
         this.generalSection = new BiographySection("Character");
-        this.statsSection = new StatsSection("Stats");
+        this.abilityScoreSection = new AbilityScoreSection("Ability Scores");
 
         setLayout(new GridBagLayout());
         GridBagConstraints constraints = new GridBagConstraints();
@@ -36,7 +34,14 @@ public class RevisedThirdEditionCharacterSheetView extends CharacterSheetView {
         add(generalSection, constraints);
         constraints.gridy++;
 
-        add(statsSection, constraints);
+        add(abilityScoreSection, constraints);
         constraints.gridy++;
+
+        refresh();
+    }
+
+    public void refresh() {
+        generalSection.refresh(characterSheet);
+        abilityScoreSection.refresh(characterSheet);
     }
 }

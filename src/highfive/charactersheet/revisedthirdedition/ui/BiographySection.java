@@ -7,6 +7,12 @@ import highfive.charactersheet.revisedthirdedition.models.RevisedThirdEditionCha
 import highfive.charactersheet.revisedthirdedition.models.Size;
 
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 
 public class BiographySection extends Section {
     private JLabel characterNameLabel;
@@ -14,7 +20,7 @@ public class BiographySection extends Section {
     private JLabel classLabel;
     private JLabel levelLabel;
     private JLabel raceLabel;
-    private JLabel alighmentLabel;
+    private JLabel alignmentLabel;
     private JLabel deityLabel;
     private JLabel sizeLabel;
 
@@ -43,6 +49,32 @@ public class BiographySection extends Section {
             "Colossal"
     };
 
+    private FocusListener FocusRefreshListener = new FocusListener() {
+        @Override
+        public void focusGained(FocusEvent focusEvent) {
+
+        }
+
+        @Override
+        public void focusLost(FocusEvent focusEvent) {
+            refreshWidgets();
+        }
+    };
+
+    private ActionListener actionRefreshListener = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent actionEvent) {
+            refreshWidgets();
+        }
+    };
+
+    private ChangeListener changeRefreshListener = new ChangeListener() {
+        @Override
+        public void stateChanged(ChangeEvent changeEvent) {
+            refreshWidgets();
+        }
+    };
+
     public BiographySection(String title) {
         super(title);
         initializeWidgets();
@@ -55,21 +87,29 @@ public class BiographySection extends Section {
         classLabel = new JLabel("Class");
         levelLabel = new JLabel("Level");
         raceLabel = new JLabel("Race");
-        alighmentLabel = new JLabel("Alignment");
+        alignmentLabel = new JLabel("Alignment");
         deityLabel = new JLabel("Deity");
         sizeLabel = new JLabel("Size");
 
         characterNameField = new JTextField(5);
+        characterNameField.addFocusListener(FocusRefreshListener);
         playerNameField = new JTextField(5);
+        playerNameField.addFocusListener(FocusRefreshListener);
         classField = new JTextField(5);
+        classField.addFocusListener(FocusRefreshListener);
         levelField = new JSpinner(new SpinnerNumberModel(1, 1, 30, 1));
+        levelField.addChangeListener(changeRefreshListener);
         raceField = new JTextField(5);
+        raceField.addFocusListener(FocusRefreshListener);
         alignmentField = new JComboBox(ALIGNMENTS);
         alignmentField.setEditable(false);
         alignmentField.setSelectedItem("Neutral");
+        alignmentField.addActionListener(actionRefreshListener);
         deityField = new JTextField(5);
+        deityField.addFocusListener(FocusRefreshListener);
         sizeField = new JComboBox(SIZES);
         sizeField.setSelectedItem("Medium");
+        sizeField.addActionListener(actionRefreshListener);
     }
 
     private void assembleWidgets() {
@@ -83,12 +123,16 @@ public class BiographySection extends Section {
         add(levelField);
         add(raceLabel);
         add(raceField);
-        add(alighmentLabel);
+        add(alignmentLabel);
         add(alignmentField);
         add(deityLabel);
         add(deityField);
         add(sizeLabel);
         add(sizeField);
+    }
+
+    private void refreshWidgets() {
+        ((RevisedThirdEditionCharacterSheetView)this.getParent()).refresh();
     }
 
     @Override
