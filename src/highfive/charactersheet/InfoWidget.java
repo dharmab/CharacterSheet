@@ -5,9 +5,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-/**
- * Created by zaid on 4/3/14.
- */
 public class InfoWidget extends JPanel {
     private JLabel label;
     private JPanel staticPanel;
@@ -40,7 +37,15 @@ public class InfoWidget extends JPanel {
         return staticPanel.add(comp);
     }
 
+    public Component getStaticContentComponent(int n) {
+        return staticPanel.getComponent(n);
+    }
+
     public Component addDynamicContent(Component comp) {
         return dynamicPanel.add(comp);
+    }
+
+    public Component getDynamicContentComponent(int n) {
+        return dynamicPanel.getComponent(n);
     }
 }
