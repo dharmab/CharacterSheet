@@ -2,6 +2,7 @@ package highfive.charactersheet.revisedthirdedition.ui;
 
 import highfive.charactersheet.CharacterSheet;
 import highfive.charactersheet.Section;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import javax.swing.*;
 import java.awt.*;
@@ -36,6 +37,6 @@ public class SampleSection extends Section {
 
     @Override
     public CharacterSheet refresh(CharacterSheet characterSheet) {
-        return null;
+        throw new NotImplementedException();
     }
 }
