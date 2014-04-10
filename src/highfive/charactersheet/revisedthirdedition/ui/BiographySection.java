@@ -7,6 +7,8 @@ import highfive.charactersheet.revisedthirdedition.models.RevisedThirdEditionCha
 import highfive.charactersheet.revisedthirdedition.models.Size;
 
 import javax.swing.*;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 
 public class BiographySection extends Section {
     private JLabel characterNameLabel;
@@ -14,7 +16,7 @@ public class BiographySection extends Section {
     private JLabel classLabel;
     private JLabel levelLabel;
     private JLabel raceLabel;
-    private JLabel alighmentLabel;
+    private JLabel alignmentLabel;
     private JLabel deityLabel;
     private JLabel sizeLabel;
 
@@ -42,6 +44,18 @@ public class BiographySection extends Section {
             "Gargantuan",
             "Colossal"
     };
+    private FocusListener refreshListener = new FocusListener() {
+        @Override
+        public void focusGained(FocusEvent focusEvent) {
+
+        }
+
+        @Override
+        public void focusLost(FocusEvent focusEvent) {
+            ((RevisedThirdEditionCharacterSheetView)getParent()).refresh();
+
+        }
+    };
 
     public BiographySection(String title) {
         super(title);
@@ -55,11 +69,12 @@ public class BiographySection extends Section {
         classLabel = new JLabel("Class");
         levelLabel = new JLabel("Level");
         raceLabel = new JLabel("Race");
-        alighmentLabel = new JLabel("Alignment");
+        alignmentLabel = new JLabel("Alignment");
         deityLabel = new JLabel("Deity");
         sizeLabel = new JLabel("Size");
 
         characterNameField = new JTextField(5);
+        characterNameField.addFocusListener(refreshListener);
         playerNameField = new JTextField(5);
         classField = new JTextField(5);
         levelField = new JSpinner(new SpinnerNumberModel(1, 1, 30, 1));
@@ -83,7 +98,7 @@ public class BiographySection extends Section {
         add(levelField);
         add(raceLabel);
         add(raceField);
-        add(alighmentLabel);
+        add(alignmentLabel);
         add(alignmentField);
         add(deityLabel);
         add(deityField);
