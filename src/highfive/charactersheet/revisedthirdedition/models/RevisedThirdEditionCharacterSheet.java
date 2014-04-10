@@ -17,6 +17,24 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet {
     private String race;
     private Alignment alignment;
     private Size size;
+    private int level;
+    private String deity;
+
+    public String getDeity() {
+        return deity;
+    }
+
+    public void setDeity(String deity) {
+        this.deity = deity;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
 
     //Ability scores
     private int strength;
@@ -97,7 +115,7 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet {
         playerName = "";
         characterClass = "";
         race = "";
-        alignment = Alignment.NETRUAL;
+        alignment = Alignment.NEUTRAL;
         size = Size.MEDIUM;
         inventories = new HashMap<String, Inventory>();
         createDefaultInventory();
