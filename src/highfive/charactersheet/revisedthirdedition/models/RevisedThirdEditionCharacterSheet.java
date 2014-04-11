@@ -486,7 +486,7 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet {
     /**
      * @return the armor class size modifier for this character
      */
-    private int getSizeAttackAndArmorClassModifier() {
+    public int getSizeModifier() {
         switch (size) {
             case FINE:
                 return 8;
@@ -520,8 +520,7 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet {
         return armorBonus
                 + shieldBonus
                 + getDexterityModifier()
-                - getSizeAttackAndArmorClassModifier()
-                    //subtraction because greater size decreases armor class
+                + getSizeModifier()
                 + naturalArmor
                 + deflectionModifer
                 + armorClassMiscModifier;
