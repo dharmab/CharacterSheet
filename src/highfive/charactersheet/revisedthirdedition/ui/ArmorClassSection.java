@@ -34,7 +34,7 @@ public class ArmorClassSection extends Section {
 
 
     private void updateParent() {
-        ((RevisedThirdEditionCharacterSheetView) getParent()).refresh();
+        ((RevisedThirdEditionCharacterSheetView) getParent()).update();
     }
 
     public ArmorClassSection(String title) {

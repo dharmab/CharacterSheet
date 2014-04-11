@@ -115,7 +115,7 @@ public class AbilityScoreSection extends Section {
     }
 
     private void updateParent() {
-        ((RevisedThirdEditionCharacterSheetView) getParent()).refresh();
+        ((RevisedThirdEditionCharacterSheetView) getParent()).update();
     }
 
     @Override

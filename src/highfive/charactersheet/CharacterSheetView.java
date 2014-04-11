@@ -12,5 +12,5 @@ public abstract class CharacterSheetView extends JPanel
         this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
     }
 
-    public abstract void refresh();
+    public abstract void update();
 }

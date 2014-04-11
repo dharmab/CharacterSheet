@@ -132,7 +132,7 @@ public class BiographySection extends Section {
     }
 
     private void updateParent() {
-        ((RevisedThirdEditionCharacterSheetView)this.getParent()).refresh();
+        ((RevisedThirdEditionCharacterSheetView)this.getParent()).update();
     }
 
     @Override

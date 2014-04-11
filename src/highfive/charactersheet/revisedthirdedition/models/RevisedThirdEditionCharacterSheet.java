@@ -608,7 +608,7 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet {
      */
     public int getWillSavingThrow() {
         return baseSaveBonus
-                + getWisdom()
+                + getWisdomModifier()
                 + willMagicModifier
                 + willMiscModifier;
     }
