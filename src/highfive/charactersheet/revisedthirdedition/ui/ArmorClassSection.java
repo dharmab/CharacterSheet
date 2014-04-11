@@ -117,7 +117,7 @@ public class ArmorClassSection extends Section {
         armorClassValueLabel.setText(Integer.toString(characterSheet.getArmorClass()));
         armorBonusField.setValue(characterSheet.getArmorBonus());
         shieldBonusField.setValue(characterSheet.getShieldBonus());
-        dexterityModifierLabel.setText((Integer.toString(characterSheet.getDexterityModifier())));
+        dexterityModifierValueLabel.setText((Integer.toString(characterSheet.getDexterityModifier())));
         sizeModifierValueLabel.setText(Integer.toString(characterSheet.getSizeModifier()));
         miscModifierField.setValue(characterSheet.getArmorClassMiscModifier());
     }
