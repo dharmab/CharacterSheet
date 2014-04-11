@@ -64,15 +64,22 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet {
     private int initiativeMiscModifier;
 
     // Factors for calculating saving throws
-    private int fortitudeBaseSave;
+    private int baseSaveBonus;
+
+    public int getBaseSaveBonus() {
+        return baseSaveBonus;
+    }
+
+    public void setBaseSaveBonus(int baseSaveBonus) {
+        this.baseSaveBonus = baseSaveBonus;
+    }
+
     private int fortitudeMagicModifier;
     private int fortitudeMiscModifier;
 
-    private int reflexBaseSave;
     private int reflexMagicModifier;
     private int reflexMiscModifier;
 
-    private int willBaseSave;
     private int willMagicModifier;
     private int willMiscModifier;
 
@@ -526,13 +533,6 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet {
                 + armorClassMiscModifier;
     }
 
-    public int getFortitudeBaseSave() {
-        return fortitudeBaseSave;
-    }
-
-    public void setFortitudeBaseSave(int fortitudeBaseSave) {
-        this.fortitudeBaseSave = fortitudeBaseSave;
-    }
 
     public int getFortitudeMagicModifier() {
         return fortitudeMagicModifier;
@@ -548,14 +548,6 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet {
 
     public void setFortitudeMiscModifier(int fortitudeMiscModifier) {
         this.fortitudeMiscModifier = fortitudeMiscModifier;
-    }
-
-    public int getReflexBaseSave() {
-        return reflexBaseSave;
-    }
-
-    public void setReflexBaseSave(int reflexBaseSave) {
-        this.reflexBaseSave = reflexBaseSave;
     }
 
     public int getReflexMagicModifier() {
@@ -574,13 +566,6 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet {
         this.reflexMiscModifier = reflexMiscModifier;
     }
 
-    public int getWillBaseSave() {
-        return willBaseSave;
-    }
-
-    public void setWillBaseSave(int willBaseSave) {
-        this.willBaseSave = willBaseSave;
-    }
 
     public int getWillMagicModifier() {
         return willMagicModifier;
@@ -602,7 +587,7 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet {
      * @return the total Fortitude saving throw bonus
      */
     public int getFortitudeSavingThrow() {
-        return fortitudeBaseSave
+        return baseSaveBonus
                 + getConstitutionModifier()
                 + fortitudeMagicModifier
                 + fortitudeMiscModifier;
@@ -612,7 +597,7 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet {
      * @return the total Reflex saving throw bonus
      */
     public int getReflexSavingThrow() {
-        return reflexBaseSave
+        return baseSaveBonus
                 + getDexterityModifier()
                 + reflexMagicModifier
                 + reflexMiscModifier;
@@ -622,7 +607,7 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet {
      * @return the total Will saving throw bonus
      */
     public int getWillSavingThrow() {
-        return willBaseSave
+        return baseSaveBonus
                 + getWisdom()
                 + willMagicModifier
                 + willMiscModifier;
