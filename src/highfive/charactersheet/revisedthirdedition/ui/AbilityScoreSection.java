@@ -84,7 +84,7 @@ public class AbilityScoreSection extends Section {
     }
 
     private void assembleWidgets() {
-        setLayout(new GridLayout(7, 6, 10, 10));
+        setLayout(new GridLayout(7, 6));
         add(abilityNameLabel);
         add(abilityScoreLabel);
         add(abilityModifierLabel);

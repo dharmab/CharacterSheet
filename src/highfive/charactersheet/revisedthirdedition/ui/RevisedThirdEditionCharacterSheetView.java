@@ -10,7 +10,7 @@ public class RevisedThirdEditionCharacterSheetView extends CharacterSheetView {
 
     private BiographySection generalSection;
     private AbilityScoreSection abilityScoreSection;
-    private SkillsSection skillsSection;
+    private ArmorClassSection armorClassSection;
 
     //@todo attack section
     //@todo SpecialAbilitiesSection specialAbilitiesSection;
@@ -23,8 +23,9 @@ public class RevisedThirdEditionCharacterSheetView extends CharacterSheetView {
     public RevisedThirdEditionCharacterSheetView() {
         characterSheet = new RevisedThirdEditionCharacterSheet();
         characterSheet = new RevisedThirdEditionCharacterSheet();
-        this.generalSection = new BiographySection("Character");
-        this.abilityScoreSection = new AbilityScoreSection("Ability Scores");
+        generalSection = new BiographySection("Character");
+        abilityScoreSection = new AbilityScoreSection("Ability Scores");
+        armorClassSection = new ArmorClassSection("Armor Class");
 
         setLayout(new GridBagLayout());
         GridBagConstraints constraints = new GridBagConstraints();
@@ -38,11 +39,15 @@ public class RevisedThirdEditionCharacterSheetView extends CharacterSheetView {
         add(abilityScoreSection, constraints);
         constraints.gridy++;
 
+        constraints.gridy++;
+        add(armorClassSection, constraints);
+
         refresh();
     }
 
     public void refresh() {
         generalSection.refresh(characterSheet);
         abilityScoreSection.refresh(characterSheet);
+        armorClassSection.refresh(characterSheet);
     }
 }
