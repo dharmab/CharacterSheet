@@ -5,16 +5,12 @@ import highfive.charactersheet.revisedthirdedition.models.RevisedThirdEditionCha
 
 import java.awt.*;
 
-/**
- * Created by Marcus on 4/6/2014.
- */
 public class RevisedThirdEditionCharacterSheetView extends CharacterSheetView {
     private RevisedThirdEditionCharacterSheet characterSheet;
 
     private BiographySection generalSection;
     private AbilityScoreSection abilityScoreSection;
     private SkillsSection skillsSection;
-    private SampleSection sampleSection;
 
     //@todo attack section
     //@todo SpecialAbilitiesSection specialAbilitiesSection;
