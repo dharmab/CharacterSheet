@@ -9,9 +9,6 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.*;
 
-/**
- * Created by zaid on 4/10/14.
- */
 public class ArmorClassSection extends Section {
     private JLabel armorClassLabel;
     private JLabel armorBonusLabel;
@@ -30,13 +27,13 @@ public class ArmorClassSection extends Section {
     private ChangeListener refreshListener = new ChangeListener() {
         @Override
         public void stateChanged(ChangeEvent changeEvent) {
-            refreshParent();
+            updateParent();
 
         }
     };
 
 
-    private void refreshParent() {
+    private void updateParent() {
         ((RevisedThirdEditionCharacterSheetView) getParent()).refresh();
     }
 
@@ -85,11 +82,11 @@ public class ArmorClassSection extends Section {
     }
 
     @Override
-    public CharacterSheet refresh(CharacterSheet characterSheet) {
-        return refresh((RevisedThirdEditionCharacterSheet) characterSheet);
+    public CharacterSheet update(CharacterSheet characterSheet) {
+        return update((RevisedThirdEditionCharacterSheet) characterSheet);
     }
 
-    private RevisedThirdEditionCharacterSheet refresh(RevisedThirdEditionCharacterSheet characterSheet) {
+    private RevisedThirdEditionCharacterSheet update(RevisedThirdEditionCharacterSheet characterSheet) {
         int armorBonus = (Integer) armorBonusField.getValue();
         int shieldBonus = (Integer) shieldBonusField.getValue();
         int miscModifier = (Integer) miscModifierField.getValue();
@@ -106,13 +103,22 @@ public class ArmorClassSection extends Section {
             characterSheet.setArmorClassMiscModifier(miscModifier);
         }
 
+       load(characterSheet);
+
+       return characterSheet;
+    }
+
+    @Override
+    public void load(CharacterSheet characterSheet) {
+        load((RevisedThirdEditionCharacterSheet) characterSheet);
+    }
+
+    private void load(RevisedThirdEditionCharacterSheet characterSheet) {
         armorClassValueLabel.setText(Integer.toString(characterSheet.getArmorClass()));
         armorBonusField.setValue(characterSheet.getArmorBonus());
         shieldBonusField.setValue(characterSheet.getShieldBonus());
         dexterityModifierLabel.setText((Integer.toString(characterSheet.getDexterityModifier())));
         sizeModifierValueLabel.setText(Integer.toString(characterSheet.getSizeModifier()));
         miscModifierField.setValue(characterSheet.getArmorClassMiscModifier());
-
-        return characterSheet;
     }
 }

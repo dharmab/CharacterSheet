@@ -4,6 +4,7 @@ import highfive.charactersheet.CharacterSheet;
 import highfive.charactersheet.Section;
 import highfive.charactersheet.revisedthirdedition.models.RevisedThirdEditionCharacterSheet;
 import highfive.charactersheet.revisedthirdedition.models.Skill;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import javax.swing.*;
 import java.awt.*;
@@ -25,6 +26,7 @@ public class SkillsSection extends Section {
 
     /**
      * Fills the Skills section with appropriate data, and returns it as a JPanel
+     *
      * @return the Skills section as a JPanel
      */
     private JPanel buildSection() {
@@ -39,7 +41,7 @@ public class SkillsSection extends Section {
         for (String skill : skillNames) {
             skillsPanel.add(new JCheckBox("", skillsTable.get(skill).getIsClassSkill()));
             skillsPanel.add(new JLabel(skill));
-            switch(skillsTable.get(skill).getKeyAbility()) {
+            switch (skillsTable.get(skill).getKeyAbility()) {
                 case STRENGTH:
                     skillsPanel.add(new JLabel("STR"));
                     break;
@@ -63,7 +65,7 @@ public class SkillsSection extends Section {
                     break;
             }
             skillsPanel.add(new JLabel(Integer.toString(characterSheet.getSkillModifier(skill))));
-            switch(skillsTable.get(skill).getKeyAbility()) {
+            switch (skillsTable.get(skill).getKeyAbility()) {
                 case STRENGTH:
                     skillsPanel.add(new JLabel(Integer.toString(characterSheet.getStrengthModifier())));
                     break;
@@ -93,7 +95,12 @@ public class SkillsSection extends Section {
     }
 
     @Override
-    public CharacterSheet refresh(CharacterSheet characterSheet) {
-        return null;
+    public CharacterSheet update(CharacterSheet characterSheet) {
+        throw new NotImplementedException();
+    }
+
+    @Override
+    public void load(CharacterSheet characterSheet) {
+        throw new NotImplementedException();
     }
 }

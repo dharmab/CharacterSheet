@@ -46,8 +46,8 @@ public class RevisedThirdEditionCharacterSheetView extends CharacterSheetView {
     }
 
     public void refresh() {
-        generalSection.refresh(characterSheet);
-        abilityScoreSection.refresh(characterSheet);
-        armorClassSection.refresh(characterSheet);
+        generalSection.update(characterSheet);
+        abilityScoreSection.update(characterSheet);
+        armorClassSection.update(characterSheet);
     }
 }

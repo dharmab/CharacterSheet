@@ -38,7 +38,7 @@ public class AbilityScoreSection extends Section {
     private ChangeListener refreshListener = new ChangeListener() {
         @Override
         public void stateChanged(ChangeEvent changeEvent) {
-            refreshParent();
+            updateParent();
 
         }
     };
@@ -114,16 +114,16 @@ public class AbilityScoreSection extends Section {
         add(charismaModifierLabel);
     }
 
-    private void refreshParent() {
+    private void updateParent() {
         ((RevisedThirdEditionCharacterSheetView) getParent()).refresh();
     }
 
     @Override
-    public CharacterSheet refresh(CharacterSheet characterSheet) {
-        return refresh((RevisedThirdEditionCharacterSheet) characterSheet);
+    public CharacterSheet update(CharacterSheet characterSheet) {
+        return update((RevisedThirdEditionCharacterSheet) characterSheet);
     }
 
-    private RevisedThirdEditionCharacterSheet refresh(RevisedThirdEditionCharacterSheet characterSheet) {
+    private RevisedThirdEditionCharacterSheet update(RevisedThirdEditionCharacterSheet characterSheet) {
         int strengthScore = (Integer) strengthField.getValue();
         int dexterityScore = (Integer) dexterityField.getValue();
         int constitutionScore = (Integer) constitutionField.getValue();
@@ -155,6 +155,17 @@ public class AbilityScoreSection extends Section {
             characterSheet.setCharisma(charismaScore);
         }
 
+        load(characterSheet);
+
+        return characterSheet;
+    }
+
+    @Override
+    public void load(CharacterSheet characterSheet) {
+        load((RevisedThirdEditionCharacterSheet) characterSheet);
+    }
+
+    private void load(RevisedThirdEditionCharacterSheet characterSheet) {
         strengthField.setValue(characterSheet.getStrength());
         dexterityField.setValue(characterSheet.getDexterity());
         constitutionField.setValue(characterSheet.getConstitution());
@@ -168,8 +179,5 @@ public class AbilityScoreSection extends Section {
         intelligenceModifierLabel.setText(Integer.toString(characterSheet.getIntelligenceModifier()));
         wisdomModifierLabel.setText(Integer.toString(characterSheet.getWisdomModifier()));
         charismaModifierLabel.setText(Integer.toString(characterSheet.getCharismaModifier()));
-
-        return characterSheet;
     }
-
 }

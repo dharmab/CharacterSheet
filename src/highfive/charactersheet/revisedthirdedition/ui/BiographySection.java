@@ -57,21 +57,21 @@ public class BiographySection extends Section {
 
         @Override
         public void focusLost(FocusEvent focusEvent) {
-            refreshParent();
+            updateParent();
         }
     };
 
     private ActionListener actionRefreshListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
-            refreshParent();
+            updateParent();
         }
     };
 
     private ChangeListener changeRefreshListener = new ChangeListener() {
         @Override
         public void stateChanged(ChangeEvent changeEvent) {
-            refreshParent();
+            updateParent();
         }
     };
 
@@ -131,16 +131,16 @@ public class BiographySection extends Section {
         add(sizeField);
     }
 
-    private void refreshParent() {
+    private void updateParent() {
         ((RevisedThirdEditionCharacterSheetView)this.getParent()).refresh();
     }
 
     @Override
-    public CharacterSheet refresh(CharacterSheet characterSheet) {
-        return refresh((RevisedThirdEditionCharacterSheet) characterSheet);
+    public CharacterSheet update(CharacterSheet characterSheet) {
+        return update((RevisedThirdEditionCharacterSheet) characterSheet);
     }
 
-    private RevisedThirdEditionCharacterSheet refresh(RevisedThirdEditionCharacterSheet characterSheet) {
+    private RevisedThirdEditionCharacterSheet update(RevisedThirdEditionCharacterSheet characterSheet) {
         String characterName = characterNameField.getText();
         String playerName = playerNameField.getText();
         String characterClass = classField.getText();
@@ -182,6 +182,18 @@ public class BiographySection extends Section {
             characterSheet.setSize(size);
         }
 
+        load(characterSheet);
+
+        return characterSheet;
+    }
+
+
+    @Override
+    public void load(CharacterSheet characterSheet) {
+        load((RevisedThirdEditionCharacterSheet) characterSheet);
+    }
+
+    private void load(RevisedThirdEditionCharacterSheet characterSheet) {
         characterNameField.setText(characterSheet.getCharacterName());
         playerNameField.setText(characterSheet.getPlayerName());
         classField.setText(characterSheet.getCharacterClass());
@@ -189,9 +201,7 @@ public class BiographySection extends Section {
         raceField.setText(characterSheet.getRace());
         alignmentField.setSelectedItem(parseAlignment(characterSheet.getAlignment()));
         deityField.setText(characterSheet.getDeity());
-        sizeField.setSelectedItem(parseSize(size));
-
-        return characterSheet;
+        sizeField.setSelectedItem(parseSize(characterSheet.getSize()));
     }
 
     private Alignment parseAlignment(String s) {
