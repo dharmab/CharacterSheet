@@ -38,7 +38,7 @@ public class AbilityScoreSection extends Section {
     private ChangeListener refreshListener = new ChangeListener() {
         @Override
         public void stateChanged(ChangeEvent changeEvent) {
-            refreshWidgets();
+            refreshParent();
 
         }
     };
@@ -114,7 +114,7 @@ public class AbilityScoreSection extends Section {
         add(charismaModifierLabel);
     }
 
-    private void refreshWidgets() {
+    private void refreshParent() {
         ((RevisedThirdEditionCharacterSheetView) getParent()).refresh();
     }
 

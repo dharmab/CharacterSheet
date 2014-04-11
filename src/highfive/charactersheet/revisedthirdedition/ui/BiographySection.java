@@ -57,21 +57,21 @@ public class BiographySection extends Section {
 
         @Override
         public void focusLost(FocusEvent focusEvent) {
-            refreshWidgets();
+            refreshParent();
         }
     };
 
     private ActionListener actionRefreshListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
-            refreshWidgets();
+            refreshParent();
         }
     };
 
     private ChangeListener changeRefreshListener = new ChangeListener() {
         @Override
         public void stateChanged(ChangeEvent changeEvent) {
-            refreshWidgets();
+            refreshParent();
         }
     };
 
@@ -131,7 +131,7 @@ public class BiographySection extends Section {
         add(sizeField);
     }
 
-    private void refreshWidgets() {
+    private void refreshParent() {
         ((RevisedThirdEditionCharacterSheetView)this.getParent()).refresh();
     }
 
