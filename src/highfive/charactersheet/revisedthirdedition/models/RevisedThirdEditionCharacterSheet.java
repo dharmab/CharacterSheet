@@ -147,6 +147,14 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet {
         this.characterClass = characterClass;
     }
 
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
     public String getRace() {
         return race;
     }
@@ -172,6 +180,14 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet {
 
     public void setSize(Size size) {
         this.size = size;
+    }
+
+    public String getDeity() {
+        return deity;
+    }
+
+    public void setDeity(String deity) {
+        this.deity = deity;
     }
 
     public int getStrength() {
