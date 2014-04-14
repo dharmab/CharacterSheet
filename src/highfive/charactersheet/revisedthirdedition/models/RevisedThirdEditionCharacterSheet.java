@@ -9,7 +9,6 @@ import java.util.NoSuchElementException;
 
 public class RevisedThirdEditionCharacterSheet extends CharacterSheet {
 
-/*********************************BEGIN FIELDS**************************************/
     // Biographical info
     private String characterName;
     private String playerName;
@@ -19,22 +18,6 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet {
     private Size size;
     private int level;
     private String deity;
-
-    public String getDeity() {
-        return deity;
-    }
-
-    public void setDeity(String deity) {
-        this.deity = deity;
-    }
-
-    public int getLevel() {
-        return level;
-    }
-
-    public void setLevel(int level) {
-        this.level = level;
-    }
 
     //Ability scores
     private int strength;
@@ -60,49 +43,24 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet {
     // Hit points
     private int totalHitPoints;
     private int currentHitPoints;
+
     private int speed;
     private int initiativeMiscModifier;
 
     // Factors for calculating saving throws
     private int fortitudeBonus;
-    private int reflexBonus;
-    private int willBonus;
-
-    public int getFortitudeBonus() {
-        return fortitudeBonus;
-    }
-
-    public void setFortitudeBonus(int fortitudeBonus) {
-        this.fortitudeBonus = fortitudeBonus;
-    }
-
-    public int getReflexBonus() {
-        return reflexBonus;
-    }
-
-    public void setReflexBonus(int reflexBonus) {
-        this.reflexBonus = reflexBonus;
-    }
-
-    public int getWillBonus() {
-        return willBonus;
-    }
-
-    public void setWillBonus(int willBonus) {
-        this.willBonus = willBonus;
-    }
-
     private int fortitudeMagicModifier;
     private int fortitudeMiscModifier;
 
+    private int reflexBonus;
     private int reflexMagicModifier;
     private int reflexMiscModifier;
 
+    private int willBonus;
     private int willMagicModifier;
     private int willMiscModifier;
 
-    //base attack modifier
-
+    // Base attack modifier
     private int baseAttack;
 
     // Skills
@@ -133,8 +91,6 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet {
     //Special Abilities
     private HashSet<SpecialAbility> specialAbilities;
 
-/************************************CONSTRUCTOR METHODS********************************************/
-
     public RevisedThirdEditionCharacterSheet() {
         characterName = "New Character";
         playerName = "";
@@ -157,111 +113,6 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet {
         deity = "";
     }
 
-/********************************UTILITY METHODS*****************************************/
-    /**
-     * Creates a 2 default inventories, "Gear" and "Money"
-     */
-    private void createDefaultInventory() {
-        inventories.put("Gear", new Inventory("Gear"));
-        inventories.put("Money", new Inventory("Money"));
-    }
-
-    /**
-     * Adds an Inventory to the sheet
-     * @param key the name of the Inventory. The parameter will also name the Inventory
-     */
-    public void addInventory(String key) {
-        inventories.put(key, new Inventory(key));
-    }
-
-    /**
-     * Deletes an Inventory from the sheet, removing all items with it.
-     * @param key the name of the Inventory
-     */
-    public void deleteInventory(String key) {
-        inventories.remove(key);
-    }
-
-    /**
-     * Three-parameter version
-     * Adds an item to a specified Inventory
-     * @param inventory  the key of the Inventory to add the item to
-     * @param itemName   item's name
-     * @param itemWeight item's weight
-     */
-    public void addToInventory(String inventory, String itemName, double itemWeight) {
-        addToInventory(inventory, new Item(itemName, itemWeight));
-    }
-
-    /**
-     * 2-parameter version
-     * Adds an item to a specified Inventory
-     * @param key  the key of the Inventory to add the item to
-     * @param item item's name
-     */
-    public void addToInventory(String key, Item item) {
-        if (inventories.containsKey(key)) {
-            Inventory inv = inventories.get(key);
-            inv.add(item);
-            inventories.put(key, inv);
-        } else {
-            Inventory inv = new Inventory(key);
-            inv.add(item);
-            inventories.put(key, inv);
-        }
-    }
-
-    /**
-     * Populate the skills with the standard skills from the
-     * DnD 3.5 character sheet.
-     */
-    private void populateSkills() {
-        skills.put("Appraise", new Skill(Ability.INTELLIGENCE));
-        skills.put("Balance", new Skill(Ability.DEXTERITY));
-        skills.put("Bluff", new Skill(Ability.CHARISMA));
-        skills.put("Climb", new Skill(Ability.STRENGTH));
-        skills.put("Concentration", new Skill(Ability.CONSTITUTION));
-        skills.put("Craft", new Skill(Ability.INTELLIGENCE));
-        skills.put("Decipher Script", new Skill(Ability.INTELLIGENCE));
-        skills.put("Diplomacy", new Skill(Ability.CHARISMA));
-        skills.put("Disable Device", new Skill(Ability.INTELLIGENCE));
-        skills.put("Disguise", new Skill(Ability.CHARISMA));
-        skills.put("Escape Artist", new Skill(Ability.DEXTERITY));
-        skills.put("Forgery", new Skill(Ability.INTELLIGENCE));
-        skills.put("Gather Information", new Skill(Ability.CHARISMA));
-        skills.put("Handle Animal", new Skill(Ability.CHARISMA));
-        skills.put("Heal", new Skill(Ability.WISDOM));
-        skills.put("Hide", new Skill(Ability.DEXTERITY));
-        skills.put("Intimidate", new Skill(Ability.CHARISMA));
-        skills.put("Jump", new Skill(Ability.STRENGTH));
-        skills.put("Knowledge", new Skill(Ability.INTELLIGENCE));
-        skills.put("Listen", new Skill(Ability.WISDOM));
-        skills.put("Move Silently", new Skill(Ability.DEXTERITY));
-        skills.put("Open Lock", new Skill(Ability.DEXTERITY));
-        skills.put("Perform", new Skill(Ability.CHARISMA));
-        skills.put("Profession", new Skill(Ability.WISDOM));
-        skills.put("Ride", new Skill(Ability.DEXTERITY));
-        skills.put("Search", new Skill(Ability.INTELLIGENCE));
-        skills.put("Sense Motive", new Skill(Ability.WISDOM));
-        skills.put("Sleight of Hand", new Skill(Ability.DEXTERITY));
-        skills.put("Spellcraft", new Skill(Ability.INTELLIGENCE));
-        skills.put("Spot", new Skill(Ability.WISDOM));
-        skills.put("Survival", new Skill(Ability.WISDOM));
-        skills.put("Swim", new Skill(Ability.STRENGTH));
-        skills.put("Tumble", new Skill(Ability.DEXTERITY));
-        skills.put("Use Magic Device", new Skill(Ability.CHARISMA));
-        skills.put("Use Rope", new Skill(Ability.DEXTERITY));
-    }
-
-    /**
-     * Adds a new skill to the list of skills
-     * @param newSkill
-     */
-    public void addSkill(String name, Skill newSkill) {
-        skills.put(name, newSkill);
-    }
-
-    // Getters and Setters
     /*
     This is mostly boilerplate, but there are also methods which implement
     logic related to the game rules. For example, rather than store the ability
@@ -456,57 +307,30 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet {
         return getDexterityModifier() + initiativeMiscModifier;
     }
 
-    public HashMap<String, Skill> getSkillsAsHashMap() {
-        return skills;
+    public int getFortitudeBonus() {
+        return fortitudeBonus;
     }
 
-    private Skill getSkill(String skillName) throws NoSuchElementException {
-        if (!skills.containsKey(skillName)) {
-            throw new NoSuchElementException(skillName + "was not found in this character's skills");
-        }
-        return skills.get(skillName);
+    public void setFortitudeBonus(int fortitudeBonus) {
+        this.fortitudeBonus = fortitudeBonus;
     }
 
-    public int getSkillRank(String skillName) throws NoSuchElementException {
-        return getSkill(skillName).getRank();
+    public int getReflexBonus() {
+        return reflexBonus;
     }
 
-    public int getSkillMiscModifier(String skillName) throws NoSuchElementException {
-        return getSkill(skillName).getMiscModifier();
+    public void setReflexBonus(int reflexBonus) {
+        this.reflexBonus = reflexBonus;
     }
 
-    /**
-     * Returns the skill modifier of the given skill
-     *
-     * @param skillname The name of the skill
-     * @return The total skill modifier
-     * @throws NoSuchElementException if the given skill is not found
-     */
-    public int getSkillModifier(String skillname) throws NoSuchElementException {
-        Skill skill = getSkill(skillname);
-        int abilityModifier = 0;
-        switch (skill.getKeyAbility()) {
-            case STRENGTH:
-                abilityModifier = strength;
-                break;
-            case DEXTERITY:
-                abilityModifier = dexterity;
-                break;
-            case CONSTITUTION:
-                abilityModifier = constitution;
-                break;
-            case INTELLIGENCE:
-                abilityModifier = intelligence;
-                break;
-            case WISDOM:
-                abilityModifier = wisdom;
-                break;
-            case CHARISMA:
-                abilityModifier = charisma;
-                break;
-        }
-        return abilityModifier + skill.getRank() + skill.getMiscModifier();
+    public int getWillBonus() {
+        return willBonus;
     }
+
+    public void setWillBonus(int willBonus) {
+        this.willBonus = willBonus;
+    }
+
 
     /**
      * @return the armor class size modifier for this character
@@ -638,7 +462,7 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet {
     public boolean addFeat(String name) {
         Feat feat = new Feat();
         feat.setName(name);
-        return feats.add(feat);
+        return addFeat(feat);
     }
 
     public boolean removeFeat(Feat feat) {
@@ -708,6 +532,161 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet {
 
     public void setArmorClassMiscModifier(int armorClassMiscModifier) {
         this.armorClassMiscModifier = armorClassMiscModifier;
+    }
+
+    public HashMap<String, Skill> getSkillsAsHashMap() {
+        return skills;
+    }
+
+    /**
+     * Creates a 2 default inventories, "Gear" and "Money"
+     */
+    private void createDefaultInventory() {
+        inventories.put("Gear", new Inventory("Gear"));
+        inventories.put("Money", new Inventory("Money"));
+    }
+
+    /**
+     * Adds an Inventory to the sheet
+     * @param key the name of the Inventory. The parameter will also name the Inventory
+     */
+    public void addInventory(String key) {
+        inventories.put(key, new Inventory(key));
+    }
+
+    /**
+     * Deletes an Inventory from the sheet, removing all items with it.
+     * @param key the name of the Inventory
+     */
+    public void deleteInventory(String key) {
+        inventories.remove(key);
+    }
+
+    /**
+     * Three-parameter version
+     * Adds an item to a specified Inventory
+     * @param inventory  the key of the Inventory to add the item to
+     * @param itemName   item's name
+     * @param itemWeight item's weight
+     */
+    public void addToInventory(String inventory, String itemName, double itemWeight) {
+        addToInventory(inventory, new Item(itemName, itemWeight));
+    }
+
+    /**
+     * 2-parameter version
+     * Adds an item to a specified Inventory
+     * @param key  the key of the Inventory to add the item to
+     * @param item item's name
+     */
+    public void addToInventory(String key, Item item) {
+        if (inventories.containsKey(key)) {
+            Inventory inv = inventories.get(key);
+            inv.add(item);
+            inventories.put(key, inv);
+        } else {
+            Inventory inv = new Inventory(key);
+            inv.add(item);
+            inventories.put(key, inv);
+        }
+    }
+
+    /**
+     * Populate the skills with the standard skills from the
+     * DnD 3.5 character sheet.
+     */
+    private void populateSkills() {
+        skills.put("Appraise", new Skill(Ability.INTELLIGENCE));
+        skills.put("Balance", new Skill(Ability.DEXTERITY));
+        skills.put("Bluff", new Skill(Ability.CHARISMA));
+        skills.put("Climb", new Skill(Ability.STRENGTH));
+        skills.put("Concentration", new Skill(Ability.CONSTITUTION));
+        skills.put("Craft", new Skill(Ability.INTELLIGENCE));
+        skills.put("Decipher Script", new Skill(Ability.INTELLIGENCE));
+        skills.put("Diplomacy", new Skill(Ability.CHARISMA));
+        skills.put("Disable Device", new Skill(Ability.INTELLIGENCE));
+        skills.put("Disguise", new Skill(Ability.CHARISMA));
+        skills.put("Escape Artist", new Skill(Ability.DEXTERITY));
+        skills.put("Forgery", new Skill(Ability.INTELLIGENCE));
+        skills.put("Gather Information", new Skill(Ability.CHARISMA));
+        skills.put("Handle Animal", new Skill(Ability.CHARISMA));
+        skills.put("Heal", new Skill(Ability.WISDOM));
+        skills.put("Hide", new Skill(Ability.DEXTERITY));
+        skills.put("Intimidate", new Skill(Ability.CHARISMA));
+        skills.put("Jump", new Skill(Ability.STRENGTH));
+        skills.put("Knowledge", new Skill(Ability.INTELLIGENCE));
+        skills.put("Listen", new Skill(Ability.WISDOM));
+        skills.put("Move Silently", new Skill(Ability.DEXTERITY));
+        skills.put("Open Lock", new Skill(Ability.DEXTERITY));
+        skills.put("Perform", new Skill(Ability.CHARISMA));
+        skills.put("Profession", new Skill(Ability.WISDOM));
+        skills.put("Ride", new Skill(Ability.DEXTERITY));
+        skills.put("Search", new Skill(Ability.INTELLIGENCE));
+        skills.put("Sense Motive", new Skill(Ability.WISDOM));
+        skills.put("Sleight of Hand", new Skill(Ability.DEXTERITY));
+        skills.put("Spellcraft", new Skill(Ability.INTELLIGENCE));
+        skills.put("Spot", new Skill(Ability.WISDOM));
+        skills.put("Survival", new Skill(Ability.WISDOM));
+        skills.put("Swim", new Skill(Ability.STRENGTH));
+        skills.put("Tumble", new Skill(Ability.DEXTERITY));
+        skills.put("Use Magic Device", new Skill(Ability.CHARISMA));
+        skills.put("Use Rope", new Skill(Ability.DEXTERITY));
+    }
+
+    private Skill getSkill(String skillName) throws NoSuchElementException {
+        if (!skills.containsKey(skillName)) {
+            throw new NoSuchElementException(skillName + "was not found in this character's skills");
+        }
+        return skills.get(skillName);
+    }
+
+    /**
+     * Adds a new skill to the list of skills
+     * @param newSkill
+     */
+    public void addSkill(String name, Skill newSkill) {
+        skills.put(name, newSkill);
+    }
+
+    public int getSkillRank(String skillName) throws NoSuchElementException {
+        return getSkill(skillName).getRank();
+    }
+
+    public int getSkillMiscModifier(String skillName) throws NoSuchElementException {
+        return getSkill(skillName).getMiscModifier();
+    }
+
+    /**
+     * Returns the skill modifier of the given skill
+     *
+     * @param skillname The name of the skill
+     * @return The total skill modifier
+     * @throws NoSuchElementException if the given skill is not found
+     */
+    public int getSkillModifier(String skillname) throws NoSuchElementException {
+        Skill skill = getSkill(skillname);
+        int abilityModifier = 0;
+        switch (skill.getKeyAbility()) {
+            case STRENGTH:
+                abilityModifier = strength;
+                break;
+            case DEXTERITY:
+                abilityModifier = dexterity;
+                break;
+            case CONSTITUTION:
+                abilityModifier = constitution;
+                break;
+            case INTELLIGENCE:
+                abilityModifier = intelligence;
+                break;
+            case WISDOM:
+                abilityModifier = wisdom;
+                break;
+            case CHARISMA:
+                abilityModifier = charisma;
+                break;
+        }
+        return abilityModifier + skill.getRank() + skill.getMiscModifier();
     }
 
     public Collection<String> getLanguages() {

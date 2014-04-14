@@ -118,12 +118,12 @@ public class SavingThrowsSection extends Section {
     }
 
     private RevisedThirdEditionCharacterSheet update(RevisedThirdEditionCharacterSheet characterSheet) {
-        int fortitudeBaseSaveBonus = (Integer)fortitudeBaseSaveBonusField.getValue();
-        int fortitudeMiscModifier = (Integer)fortitudeMiscModifierValueField.getValue();
-        int reflexBaseSaveBonus = (Integer)reflexBaseSaveBonusField.getValue();
-        int reflexMiscModifier = (Integer)reflexMiscModifierValueField.getValue();
-        int willBaseSaveBonus = (Integer)willBaseSaveBonusField.getValue();
-        int willMiscModifier = (Integer)willMiscModifierValueField.getValue();
+        int fortitudeBaseSaveBonus = (Integer) fortitudeBaseSaveBonusField.getValue();
+        int fortitudeMiscModifier = (Integer) fortitudeMiscModifierValueField.getValue();
+        int reflexBaseSaveBonus = (Integer) reflexBaseSaveBonusField.getValue();
+        int reflexMiscModifier = (Integer) reflexMiscModifierValueField.getValue();
+        int willBaseSaveBonus = (Integer) willBaseSaveBonusField.getValue();
+        int willMiscModifier = (Integer) willMiscModifierValueField.getValue();
 
         if (fortitudeBaseSaveBonus != characterSheet.getFortitudeBonus()) {
             characterSheet.setFortitudeBonus(fortitudeBaseSaveBonus);
@@ -133,7 +133,7 @@ public class SavingThrowsSection extends Section {
             characterSheet.setReflexBonus(reflexBaseSaveBonus);
         }
 
-        if  (willBaseSaveBonus != characterSheet.getWillBonus()) {
+        if (willBaseSaveBonus != characterSheet.getWillBonus()) {
             characterSheet.setWillBonus(willBaseSaveBonus);
         }
 
