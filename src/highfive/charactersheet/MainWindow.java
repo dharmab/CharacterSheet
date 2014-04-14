@@ -22,15 +22,20 @@ public class MainWindow extends JFrame {
 
     public MainWindow(String title) throws HeadlessException {
         super(title);
-        setupMenuBar();
         newCharacterSheet();
-        setupScrollPane();
+        setupGui();
     }
 
-    private void setupScrollPane() {
+    private void setupGui() {
+        setupMenuBar();
+
+        setLayout(new BorderLayout());
+
         scrollPane = new JScrollPane(characterSheetView);
-        add(scrollPane);
+        scrollPane.getVerticalScrollBar().setUnitIncrement(16);
+        add(scrollPane, BorderLayout.CENTER);
     }
+
 
     private void newCharacterSheet() {
         if (characterSheetView != null) {
@@ -59,7 +64,7 @@ public class MainWindow extends JFrame {
                 try {
                     load();
                 } catch (FileNotFoundException e) {
-                    // TODO show error message
+                    // TODO show error message!
                 }
             }
         });
