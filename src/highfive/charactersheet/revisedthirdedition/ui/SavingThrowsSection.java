@@ -125,13 +125,16 @@ public class SavingThrowsSection extends Section {
         int willBaseSaveBonus = (Integer)willBaseSaveBonusField.getValue();
         int willMiscModifier = (Integer)willMiscModifierValueField.getValue();
 
-        //TODO figure out why this works only if you comment out the will part
-        if (fortitudeBaseSaveBonus != characterSheet.getBaseSaveBonus()) {
-            characterSheet.setBaseSaveBonus(fortitudeBaseSaveBonus);
-        } else if (willBaseSaveBonus != characterSheet.getBaseSaveBonus()) {
-            characterSheet.setBaseSaveBonus(willBaseSaveBonus);
-        } else if (reflexBaseSaveBonus != characterSheet.getBaseSaveBonus()) {
-            characterSheet.setBaseSaveBonus(reflexBaseSaveBonus);
+        if (fortitudeBaseSaveBonus != characterSheet.getFortitudeBonus()) {
+            characterSheet.setFortitudeBonus(fortitudeBaseSaveBonus);
+        }
+
+        if (reflexBaseSaveBonus != characterSheet.getReflexBonus()) {
+            characterSheet.setReflexBonus(reflexBaseSaveBonus);
+        }
+
+        if  (willBaseSaveBonus != characterSheet.getWillBonus()) {
+            characterSheet.setWillBonus(willBaseSaveBonus);
         }
 
         if (fortitudeMiscModifier != characterSheet.getFortitudeMiscModifier()) {
@@ -158,17 +161,17 @@ public class SavingThrowsSection extends Section {
 
     private void load(RevisedThirdEditionCharacterSheet characterSheet) {
         fortitudeValueLabel.setText(Integer.toString(characterSheet.getFortitudeSavingThrow()));
-        fortitudeBaseSaveBonusField.setValue(characterSheet.getBaseSaveBonus());
+        fortitudeBaseSaveBonusField.setValue(characterSheet.getFortitudeBonus());
         constitutionAbilityModifierValueLabel.setText(Integer.toString(characterSheet.getConstitutionModifier()));
         fortitudeMiscModifierValueField.setValue(characterSheet.getFortitudeMiscModifier());
 
         reflexValueLabel.setText(Integer.toString(characterSheet.getReflexSavingThrow()));
-        reflexBaseSaveBonusField.setValue(characterSheet.getBaseSaveBonus());
+        reflexBaseSaveBonusField.setValue(characterSheet.getReflexBonus());
         dexterityAbilityModifierValueLabel.setText(Integer.toString(characterSheet.getDexterityModifier()));
         reflexMiscModifierValueField.setValue(characterSheet.getReflexMiscModifier());
 
         willValueLabel.setText(Integer.toString(characterSheet.getWillSavingThrow()));
-        willBaseSaveBonusField.setValue(characterSheet.getBaseSaveBonus());
+        willBaseSaveBonusField.setValue(characterSheet.getWillBonus());
         wisdomAbilityModifierValueLabel.setText(Integer.toString(characterSheet.getWisdomModifier()));
         willMiscModifierValueField.setValue(characterSheet.getWillMiscModifier());
     }

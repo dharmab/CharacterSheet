@@ -64,14 +64,32 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet {
     private int initiativeMiscModifier;
 
     // Factors for calculating saving throws
-    private int baseSaveBonus;
+    private int fortitudeBonus;
+    private int reflexBonus;
+    private int willBonus;
 
-    public int getBaseSaveBonus() {
-        return baseSaveBonus;
+    public int getFortitudeBonus() {
+        return fortitudeBonus;
     }
 
-    public void setBaseSaveBonus(int baseSaveBonus) {
-        this.baseSaveBonus = baseSaveBonus;
+    public void setFortitudeBonus(int fortitudeBonus) {
+        this.fortitudeBonus = fortitudeBonus;
+    }
+
+    public int getReflexBonus() {
+        return reflexBonus;
+    }
+
+    public void setReflexBonus(int reflexBonus) {
+        this.reflexBonus = reflexBonus;
+    }
+
+    public int getWillBonus() {
+        return willBonus;
+    }
+
+    public void setWillBonus(int willBonus) {
+        this.willBonus = willBonus;
     }
 
     private int fortitudeMagicModifier;
@@ -587,7 +605,7 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet {
      * @return the total Fortitude saving throw bonus
      */
     public int getFortitudeSavingThrow() {
-        return baseSaveBonus
+        return fortitudeBonus
                 + getConstitutionModifier()
                 + fortitudeMagicModifier
                 + fortitudeMiscModifier;
@@ -597,7 +615,7 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet {
      * @return the total Reflex saving throw bonus
      */
     public int getReflexSavingThrow() {
-        return baseSaveBonus
+        return reflexBonus
                 + getDexterityModifier()
                 + reflexMagicModifier
                 + reflexMiscModifier;
@@ -607,7 +625,7 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet {
      * @return the total Will saving throw bonus
      */
     public int getWillSavingThrow() {
-        return baseSaveBonus
+        return willBonus
                 + getWisdomModifier()
                 + willMagicModifier
                 + willMiscModifier;
