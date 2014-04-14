@@ -2,12 +2,13 @@ package highfive.charactersheet.revisedthirdedition.models;
 
 import highfive.charactersheet.CharacterSheet;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.NoSuchElementException;
 
-public class RevisedThirdEditionCharacterSheet extends CharacterSheet {
+public class RevisedThirdEditionCharacterSheet extends CharacterSheet implements Serializable {
 
     // Biographical info
     private String characterName;
@@ -30,10 +31,11 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet {
     // Factors for calculating Armor Class
     private int armorBonus;
     private int shieldBonus;
-    private int sizeModifier;
     private int naturalArmor;
-    private int deflectionModifer;
+    private int deflectionModifier;
     private int armorClassMiscModifier;
+
+
 
     private int touchArmorClass;
     private int flatFootedArmorClass;
@@ -74,14 +76,6 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet {
     private int spellsave;
     private int spellFailure;
 
-    //Animal Companion
-    private HashMap<String, AnimalCompanion> animalCompanions;
-
-    //Wild Shape (Druid)
-    private HashMap<String, WildShape> wildShapes;
-    private boolean currentlyInWildShape;
-    private WildShape currentWildShape;
-
     //Languages
     private HashSet<String> languages;
 
@@ -103,9 +97,6 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet {
         skills = new HashMap<String, Skill>();
         populateSkills();
         spellbooks = new HashMap<String, SpellBook>();
-        animalCompanions = new HashMap<String, AnimalCompanion>();
-        wildShapes = new HashMap<String, WildShape>();
-        currentlyInWildShape = false;
         languages = new HashSet<String>();
         addLanguage("Common");
         feats = new HashSet<Feat>();
@@ -172,10 +163,7 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet {
     }
 
     public Size getSize() {
-        if (currentlyInWildShape) {
-            return currentWildShape.getSize();
-        }
-        else return size;
+        return size;
     }
 
     public void setSize(Size size) {
@@ -191,9 +179,6 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet {
     }
 
     public int getStrength() {
-        if (currentlyInWildShape) {
-            return strength + currentWildShape.getAdditionalStrength();
-        }
         return strength;
     }
 
@@ -206,10 +191,7 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet {
     }
 
     public int getDexterity() {
-        if (currentlyInWildShape) {
-            return dexterity + currentWildShape.getAdditionalDexterity();
-        }
-        else return dexterity;
+        return dexterity;
     }
 
     public void setDexterity(int dexterity) {
@@ -221,10 +203,7 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet {
     }
 
     public int getConstitution() {
-        if (currentlyInWildShape) {
-            return constitution + currentWildShape.getAdditionalConstitution();
-        }
-        else return constitution;
+        return constitution;
     }
 
     public void setConstitution(int constitution) {
@@ -387,10 +366,41 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet {
                 + getDexterityModifier()
                 + getSizeModifier()
                 + naturalArmor
-                + deflectionModifer
+                + deflectionModifier
                 + armorClassMiscModifier;
     }
 
+    public int getTouchArmorClass() {
+        return touchArmorClass;
+    }
+
+    public void setTouchArmorClass(int touchArmorClass) {
+        this.touchArmorClass = touchArmorClass;
+    }
+
+    public int getFlatFootedArmorClass() {
+        return flatFootedArmorClass;
+    }
+
+    public void setFlatFootedArmorClass(int flatFootedArmorClass) {
+        this.flatFootedArmorClass = flatFootedArmorClass;
+    }
+
+    public int getDamageReduction() {
+        return damageReduction;
+    }
+
+    public void setDamageReduction(int damageReduction) {
+        this.damageReduction = damageReduction;
+    }
+
+    public int getBaseAttack() {
+        return baseAttack;
+    }
+
+    public void setBaseAttack(int baseAttack) {
+        this.baseAttack = baseAttack;
+    }
 
     public int getFortitudeMagicModifier() {
         return fortitudeMagicModifier;
@@ -524,22 +534,19 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet {
     }
 
     public int getNaturalArmor() {
-        if (!currentlyInWildShape) {
-            return naturalArmor;
-        }
-        else return currentWildShape.getNaturalArmorBonus();
+        return naturalArmor;
     }
 
     public void setNaturalArmor(int naturalArmor) {
         this.naturalArmor = naturalArmor;
     }
 
-    public int getDeflectionModifer() {
-        return deflectionModifer;
+    public int getDeflectionModifier() {
+        return deflectionModifier;
     }
 
-    public void setDeflectionModifer(int deflectionModifer) {
-        this.deflectionModifer = deflectionModifer;
+    public void setDeflectionModifier(int deflectionModifier) {
+        this.deflectionModifier = deflectionModifier;
     }
 
     public int getArmorClassMiscModifier() {
@@ -675,12 +682,12 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet {
     /**
      * Returns the skill modifier of the given skill
      *
-     * @param skillname The name of the skill
+     * @param skillName The name of the skill
      * @return The total skill modifier
      * @throws NoSuchElementException if the given skill is not found
      */
-    public int getSkillModifier(String skillname) throws NoSuchElementException {
-        Skill skill = getSkill(skillname);
+    public int getSkillModifier(String skillName) throws NoSuchElementException {
+        Skill skill = getSkill(skillName);
         int abilityModifier = 0;
         switch (skill.getKeyAbility()) {
             case STRENGTH:
@@ -715,67 +722,5 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet {
 
     public boolean removeLanguage(String language) {
         return languages.remove(language);
-    }
-
-    public void addAnimalCompanion(String name) {
-        if (animalCompanions.containsKey(name)) {
-            throw new IllegalArgumentException("Cannot have duplicate animal companions");
-        }
-        animalCompanions.put(name, new AnimalCompanion(name));
-    }
-
-    public void removeAnimalCompanion(String name) {
-        if (!animalCompanions.containsKey(name)) {
-            throw new IllegalArgumentException("Animal companion not found");
-        }
-        animalCompanions.remove(name);
-    }
-
-    public HashMap<String, AnimalCompanion> getAnimalCompanions() {
-        return animalCompanions;
-    }
-
-    public void addWildShape(String name) {
-        if (wildShapes.containsKey(name)) {
-            throw new IllegalArgumentException("Cannot have duplicate wild shapes");
-        }
-        wildShapes.put(name, new WildShape(name));
-    }
-
-    public void removeWildShape(String name) {
-        if (!wildShapes.containsKey(name)) {
-            throw new IllegalArgumentException("Wild shape not found");
-        }
-        wildShapes.remove(name);
-    }
-
-    public void changeToWildForm(String name) {
-        if (!wildShapes.containsKey(name)) {
-            throw new IllegalArgumentException("Wild shape not found");
-        }
-        if (!currentlyInWildShape) {
-            currentWildShape = wildShapes.get(name);
-            currentlyInWildShape = true;
-            WildShape tempWildShape = wildShapes.get(name);
-            Collection<SpecialAbility> tempSA = tempWildShape.getSpecialAbilities().values();
-            for (SpecialAbility ability : tempSA) {
-                this.addSpecialAbility(ability);
-            }
-        }
-    }
-
-    public void changeBack(String name) {
-        if (!wildShapes.containsKey(name)) {
-            throw new IllegalArgumentException("Wild shape not found");
-        }
-        if (currentlyInWildShape) {
-            WildShape tempWildShape = wildShapes.get(name);
-            Collection<SpecialAbility> tempSA = tempWildShape.getSpecialAbilities().values();
-            for (SpecialAbility ability : tempSA) {
-                this.removeSpecialAbility(ability);
-            }
-            currentWildShape = null;
-            currentlyInWildShape = false;
-        }
     }
 }

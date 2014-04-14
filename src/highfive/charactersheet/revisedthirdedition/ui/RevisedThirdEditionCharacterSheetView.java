@@ -1,5 +1,6 @@
 package highfive.charactersheet.revisedthirdedition.ui;
 
+import highfive.charactersheet.CharacterSheet;
 import highfive.charactersheet.CharacterSheetView;
 import highfive.charactersheet.revisedthirdedition.models.RevisedThirdEditionCharacterSheet;
 
@@ -54,5 +55,18 @@ public class RevisedThirdEditionCharacterSheetView extends CharacterSheetView {
         abilityScoreSection.update(characterSheet);
         armorClassSection.update(characterSheet);
         savingThrowsSection.update(characterSheet);
+    }
+
+
+    public CharacterSheet getCharacterSheet() {
+        return characterSheet;
+    }
+
+
+    public void setCharacterSheet(CharacterSheet characterSheet) {
+        if (characterSheet.getClass().equals(this.getClass())) {
+            throw new IllegalArgumentException();
+        }
+        this.characterSheet = (RevisedThirdEditionCharacterSheet)characterSheet;
     }
 }
