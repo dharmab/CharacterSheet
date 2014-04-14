@@ -11,9 +11,6 @@ import java.awt.*;
 import java.util.AbstractSet;
 import java.util.HashMap;
 
-/**
- * Created by Marcus on 4/3/2014.
- */
 public class SkillsSection extends Section {
     RevisedThirdEditionCharacterSheet characterSheet;
     AbstractSet<String> skillNames;

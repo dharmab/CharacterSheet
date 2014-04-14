@@ -2,9 +2,6 @@ package highfive.charactersheet.revisedthirdedition.models;
 
 import java.util.HashMap;
 
-/**
- * Created by Marcus on 4/1/2014.
- */
 public class AnimalCompanion {
     String name;
     String typeOfAnimal;

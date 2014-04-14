@@ -665,7 +665,8 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet implements
 
     /**
      * Adds a new skill to the list of skills
-     * @param newSkill
+     * @param name the name of the skill to use as the key
+     * @param newSkill the new skill to add
      */
     public void addSkill(String name, Skill newSkill) {
         skills.put(name, newSkill);

@@ -3,9 +3,6 @@ package highfive.charactersheet.revisedthirdedition.models;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-/**
- * Created by Marcus on 3/29/2014.
- */
 public class SpellBook {
     /*  Bard, Sorcerer: have a spellBook, spellsPerDay
         Cleric: has a spellBook, spellsPerDay, preparedSpells, domainSpells, and domains
@@ -43,7 +40,7 @@ public class SpellBook {
     }
 
     /**
-     * Parameterized constructor
+     * Parametrized constructor
      * @param hasPreparedSpells i.e. divine casting classes and wizards
      * @param hasDomains i.e. clerics
      * @param hasSpecialtySchools i.e. wizards
@@ -102,7 +99,7 @@ public class SpellBook {
         domainSpells.remove(spell.getName());
     }
 
-    public void addtoPreparedSpells(Spell spell) {
+    public void addToPreparedSpells(Spell spell) {
         preparedSpells.put(spell.getName(), spell);
     }
 
@@ -114,7 +111,7 @@ public class SpellBook {
      * @return a 2D array with all the spellbook spells in their appropriate levels
      */
     public Spell[][] getSpellbookAsTable() {
-        ArrayList<Spell> spellCollection = (ArrayList)this.spellBook.values();
+        ArrayList<Spell> spellCollection = (ArrayList<Spell>)this.spellBook.values();
         Spell[][] table = new Spell[10][];
         ArrayList<Spell> tempTable = new ArrayList<Spell>();
         for (int i = 0; i < 10; i++){
@@ -134,7 +131,7 @@ public class SpellBook {
      * @return a 2D array with all the domain spells in their appropriate levels
      */
     public Spell[][] getDomainSpellsAsTable() {
-        ArrayList<Spell> spellCollection = (ArrayList)this.domainSpells.values();
+        ArrayList<Spell> spellCollection = (ArrayList<Spell>)this.domainSpells.values();
         Spell[][] table = new Spell[10][];
         ArrayList<Spell> tempTable = new ArrayList<Spell>();
         for (int i = 0; i < 10; i++){
@@ -154,7 +151,7 @@ public class SpellBook {
      * @return a 2D array with all the prepared spells in their appropriate levels
      */
     public Spell[][] getPreparedSpellsAsTable() {
-        ArrayList<Spell> spellCollection = (ArrayList)this.preparedSpells.values();
+        ArrayList<Spell> spellCollection = (ArrayList<Spell>)this.preparedSpells.values();
         Spell[][] table = new Spell[10][];
         ArrayList<Spell> tempTable = new ArrayList<Spell>();
         for (int i = 0; i < 10; i++){

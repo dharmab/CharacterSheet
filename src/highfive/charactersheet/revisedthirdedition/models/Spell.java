@@ -1,8 +1,5 @@
 package highfive.charactersheet.revisedthirdedition.models;
 
-/**
- * Created by Marcus on 3/31/2014.
- */
 public class Spell {
     String name;
     String description;

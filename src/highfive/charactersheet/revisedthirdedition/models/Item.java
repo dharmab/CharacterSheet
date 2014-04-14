@@ -1,8 +1,5 @@
 package highfive.charactersheet.revisedthirdedition.models;
 
-/**
- * Created by Marcus on 3/27/2014.
- */
 public class Item {
     private String name;
     private double weight;

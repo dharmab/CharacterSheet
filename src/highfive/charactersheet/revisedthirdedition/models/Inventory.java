@@ -2,9 +2,6 @@ package highfive.charactersheet.revisedthirdedition.models;
 
 import java.util.HashMap;
 
-/**
- * Created by Marcus on 3/27/2014.
- */
 public class Inventory {
     private String name;
     private HashMap<Item, Integer> items; //associate items and their quantities
@@ -37,7 +34,7 @@ public class Inventory {
     }
 
     /**
-     * Reduces the quanitiy fo the specified item by zero or more.
+     * Reduces the quantity fo the specified item by zero or more.
      * @param item the item to remove from the inventory
      * @param quantity the number of items to remove from the inventory. Must be non-negative
      * @throws java.lang.IllegalArgumentException if the quantity is negative
