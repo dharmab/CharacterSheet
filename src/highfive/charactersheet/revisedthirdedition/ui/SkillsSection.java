@@ -4,100 +4,134 @@ import highfive.charactersheet.CharacterSheet;
 import highfive.charactersheet.Section;
 import highfive.charactersheet.revisedthirdedition.models.RevisedThirdEditionCharacterSheet;
 import highfive.charactersheet.revisedthirdedition.models.Skill;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import java.awt.*;
-import java.util.AbstractSet;
 import java.util.HashMap;
+import java.util.Map;
 
 public class SkillsSection extends Section {
-    RevisedThirdEditionCharacterSheet characterSheet;
-    AbstractSet<String> skillNames;
-    HashMap<String, Skill> skillsTable;
+
+    private HashMap<String, Skill> skills;
+    private int strengthModifier;
+    private int dexterityModifier;
+    private int constitutionModifier;
+    private int wisdomModifier;
+    private int intelligenceModifier;
+    private int charismaModifier;
+
+    private ChangeListener refreshListener = new ChangeListener() {
+        @Override
+        public void stateChanged(ChangeEvent changeEvent) {
+            updateParent();
+        }
+    };
+
 
     public SkillsSection(String title) {
         super(title);
-        add(buildSection());
     }
 
-    /**
-     * Fills the Skills section with appropriate data, and returns it as a JPanel
-     *
-     * @return the Skills section as a JPanel
-     */
-    private JPanel buildSection() {
-        JPanel skillsPanel = new JPanel(new GridLayout(0, 7));
-        skillsPanel.add(new JLabel("Class Skill"));
-        skillsPanel.add(new JLabel("Skill Name"));
-        skillsPanel.add(new JLabel("Key Ability"));
-        skillsPanel.add(new JLabel("Skill Modifier"));
-        skillsPanel.add(new JLabel("Ability Modifier"));
-        skillsPanel.add(new JLabel("Ranks"));
-        skillsPanel.add(new JLabel("Misc Modifier"));
-        for (String skill : skillNames) {
-            skillsPanel.add(new JCheckBox("", skillsTable.get(skill).getIsClassSkill()));
-            skillsPanel.add(new JLabel(skill));
-            switch (skillsTable.get(skill).getKeyAbility()) {
+    private void rebuild() {
+        removeAll();
+        setLayout(new GridLayout(skills.size() + 1, 5));
+        add(new JLabel("Skill Name"));
+        add(new JLabel("Skill Modifier"));
+        add(new JLabel("Ability Modifier"));
+        add(new JLabel("Ranks"));
+        add(new JLabel("Misc Modifier"));
+
+        for (Map.Entry<String, Skill> entry : skills.entrySet()) {
+            final String key = entry.getKey();
+            final Skill value = entry.getValue();
+
+            int abilityModifier = 0;
+            switch (value.getKeyAbility()) {
                 case STRENGTH:
-                    skillsPanel.add(new JLabel("STR"));
+                    abilityModifier = strengthModifier;
                     break;
                 case DEXTERITY:
-                    skillsPanel.add(new JLabel("DEX"));
+                    abilityModifier = dexterityModifier;
                     break;
                 case CONSTITUTION:
-                    skillsPanel.add(new JLabel("CON"));
+                    abilityModifier = constitutionModifier;
                     break;
                 case INTELLIGENCE:
-                    skillsPanel.add(new JLabel("INT"));
+                    abilityModifier = intelligenceModifier;
                     break;
                 case WISDOM:
-                    skillsPanel.add(new JLabel("WIS"));
+                    abilityModifier = wisdomModifier;
                     break;
                 case CHARISMA:
-                    skillsPanel.add(new JLabel("CHA"));
-                    break;
-                default:
-                    skillsPanel.add(new JLabel("N/A"));
+                    abilityModifier = charismaModifier;
                     break;
             }
-            skillsPanel.add(new JLabel(Integer.toString(characterSheet.getSkillModifier(skill))));
-            switch (skillsTable.get(skill).getKeyAbility()) {
-                case STRENGTH:
-                    skillsPanel.add(new JLabel(Integer.toString(characterSheet.getStrengthModifier())));
-                    break;
-                case DEXTERITY:
-                    skillsPanel.add(new JLabel(Integer.toString(characterSheet.getDexterityModifier())));
-                    break;
-                case CONSTITUTION:
-                    skillsPanel.add(new JLabel(Integer.toString(characterSheet.getConstitutionModifier())));
-                    break;
-                case INTELLIGENCE:
-                    skillsPanel.add(new JLabel(Integer.toString(characterSheet.getIntelligenceModifier())));
-                    break;
-                case WISDOM:
-                    skillsPanel.add(new JLabel(Integer.toString(characterSheet.getWisdomModifier())));
-                    break;
-                case CHARISMA:
-                    skillsPanel.add(new JLabel(Integer.toString(characterSheet.getCharismaModifier())));
-                    break;
-                default:
-                    skillsPanel.add(new JLabel("N/A"));
-                    break;
-            }
-            skillsPanel.add(new JTextField(skillsTable.get(skill).getRank()));
-            skillsPanel.add(new JTextField(skillsTable.get(skill).getMiscModifier()));
+
+            int skillModifier = abilityModifier + value.getRank() + value.getMiscModifier();
+
+            JLabel skillNameLabel = new JLabel(key);
+            JLabel skillModifierLabel = new JLabel(Integer.toString(skillModifier));
+            JLabel abilityModifierLabel = new JLabel(Integer.toString(abilityModifier));
+            final JSpinner skillRankField = new JSpinner(new SpinnerNumberModel(value.getRank(), 0, 99, 1));
+            JSpinner skillMiscModifierField = new JSpinner(new SpinnerNumberModel(value.getMiscModifier(), 0, 99, 1));
+
+            skillRankField.addChangeListener(new ChangeListener() {
+                @Override
+                public void stateChanged(ChangeEvent changeEvent) {
+                    value.setRank((Integer) ((JSpinner) changeEvent.getSource()).getValue());
+                    skills.put(key, value);
+                    updateParent();
+                }
+            });
+            skillMiscModifierField.addChangeListener(new ChangeListener() {
+                @Override
+                public void stateChanged(ChangeEvent changeEvent) {
+                    value.setMiscModifier((Integer) ((JSpinner) changeEvent.getSource()).getValue());
+                    skills.put(key, value);
+                    updateParent();
+                }
+            });
+
+            add(skillNameLabel);
+            add(skillModifierLabel);
+            add(abilityModifierLabel);
+            add(skillRankField);
+            add(skillMiscModifierField);
         }
-        return skillsPanel;
+    }
+
+    private void updateParent() {
+        ((RevisedThirdEditionCharacterSheetView) getParent()).update();
     }
 
     @Override
     public CharacterSheet update(CharacterSheet characterSheet) {
-        throw new NotImplementedException();
+        return update((RevisedThirdEditionCharacterSheet) characterSheet);
+    }
+
+    private RevisedThirdEditionCharacterSheet update(RevisedThirdEditionCharacterSheet characterSheet) {
+        if (skills != null) {
+            characterSheet.setSkills(skills);
+        }
+        load(characterSheet);
+        return characterSheet;
     }
 
     @Override
     public void load(CharacterSheet characterSheet) {
-        throw new NotImplementedException();
+        load((RevisedThirdEditionCharacterSheet) characterSheet);
+    }
+
+    private void load(RevisedThirdEditionCharacterSheet characterSheet) {
+        skills = characterSheet.getSkillsAsHashMap();
+        strengthModifier = characterSheet.getStrengthModifier();
+        dexterityModifier = characterSheet.getDexterityModifier();
+        constitutionModifier = characterSheet.getConstitutionModifier();
+        intelligenceModifier = characterSheet.getIntelligenceModifier();
+        wisdomModifier = characterSheet.getIntelligenceModifier();
+        charismaModifier = characterSheet.getWisdomModifier();
+        rebuild();
     }
 }

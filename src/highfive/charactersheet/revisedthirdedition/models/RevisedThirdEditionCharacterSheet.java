@@ -559,6 +559,10 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet implements
         return skills;
     }
 
+    public void setSkills(HashMap<String, Skill> skills) {
+        this.skills = skills;
+    }
+
     /**
      * Creates a 2 default inventories, "Gear" and "Money"
      */
