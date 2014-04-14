@@ -35,16 +35,14 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet implements
     private int deflectionModifier;
     private int armorClassMiscModifier;
 
-
-
     private int touchArmorClass;
     private int flatFootedArmorClass;
 
     private int damageReduction;
 
     // Hit points
-    private int totalHitPoints;
-    private int currentHitPoints;
+    private int maxHitpoints;
+    private int currentHitpoints;
 
     private int speed;
     private int initiativeMiscModifier;
@@ -260,20 +258,20 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet implements
         return (ability - 10) / 2; // Java rounds down implicitly
     }
 
-    public int getTotalHitPoints() {
-        return totalHitPoints;
+    public int getMaxHitpoints() {
+        return maxHitpoints;
     }
 
-    public void setTotalHitPoints(int totalHitPoints) {
-        this.totalHitPoints = totalHitPoints;
+    public void setMaxHitpoints(int maxHitpoints) {
+        this.maxHitpoints = maxHitpoints;
     }
 
-    public int getCurrentHitPoints() {
-        return currentHitPoints;
+    public int getCurrentHitpoints() {
+        return currentHitpoints;
     }
 
-    public void setCurrentHitPoints(int currentHitPoints) {
-        this.currentHitPoints = currentHitPoints;
+    public void setCurrentHitpoints(int currentHitpoints) {
+        this.currentHitpoints = currentHitpoints;
     }
 
     public int getSpeed() {
