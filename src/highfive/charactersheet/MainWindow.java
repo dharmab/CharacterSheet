@@ -18,19 +18,18 @@ import java.io.FileOutputStream;
 public class MainWindow extends JFrame {
     private CharacterSheetView characterSheetView;
     private String filePath;
-
-    private JMenuBar menuBar;
-    private JMenu fileMenu;
-    private JMenuItem newItem;
-    private JMenuItem loadItem;
-    private JMenuItem saveItem;
-    private JMenuItem saveAsItem;
-    private JMenuItem exitItem;
+    private JScrollPane scrollPane;
 
     public MainWindow(String title) throws HeadlessException {
         super(title);
         setupMenuBar();
         newCharacterSheet();
+        setupScrollPane();
+    }
+
+    private void setupScrollPane() {
+        scrollPane = new JScrollPane(characterSheetView);
+        add(scrollPane);
     }
 
     private void newCharacterSheet() {
@@ -39,12 +38,13 @@ public class MainWindow extends JFrame {
         }
         characterSheetView = new RevisedThirdEditionCharacterSheetView();
         add(characterSheetView);
+        characterSheetView.validate();
     }
 
     private void setupMenuBar() {
-        fileMenu = new JMenu("File");
+        JMenu fileMenu = new JMenu("File");
 
-        newItem = new JMenuItem("New");
+        JMenuItem newItem = new JMenuItem("New");
         newItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
@@ -52,7 +52,7 @@ public class MainWindow extends JFrame {
             }
         });
 
-        loadItem = new JMenuItem("Load");
+        JMenuItem loadItem = new JMenuItem("Load");
         loadItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
@@ -64,14 +64,14 @@ public class MainWindow extends JFrame {
             }
         });
 
-        saveItem = new JMenuItem("Save");
+        JMenuItem saveItem = new JMenuItem("Save");
         saveItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-               save(filePath);
+                save(filePath);
             }
         });
-        saveAsItem = new JMenuItem("Save As");
+        JMenuItem saveAsItem = new JMenuItem("Save As");
 
         saveAsItem.addActionListener(new ActionListener() {
             @Override
@@ -80,7 +80,7 @@ public class MainWindow extends JFrame {
             }
         });
 
-        exitItem = new JMenuItem("Exit");
+        JMenuItem exitItem = new JMenuItem("Exit");
         exitItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
@@ -94,7 +94,7 @@ public class MainWindow extends JFrame {
         fileMenu.add(saveAsItem);
         fileMenu.add(exitItem);
 
-        menuBar = new JMenuBar();
+        JMenuBar menuBar = new JMenuBar();
         menuBar.add(fileMenu);
         setJMenuBar(menuBar);
     }
