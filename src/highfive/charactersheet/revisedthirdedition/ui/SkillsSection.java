@@ -36,8 +36,10 @@ public class SkillsSection extends Section {
 
     private void rebuild() {
         removeAll();
-        setLayout(new GridLayout(skills.size() + 1, 5));
+        setLayout(new GridLayout(skills.size() + 1, 7));
+        add(new JLabel("Class Skill"));
         add(new JLabel("Skill Name"));
+        add(new JLabel("Key Ability"));
         add(new JLabel("Skill Modifier"));
         add(new JLabel("Ability Modifier"));
         add(new JLabel("Ranks"));
@@ -47,36 +49,51 @@ public class SkillsSection extends Section {
             final String key = entry.getKey();
             final Skill value = entry.getValue();
 
+            String keyAbility = "N/A";
             int abilityModifier = 0;
             switch (value.getKeyAbility()) {
                 case STRENGTH:
                     abilityModifier = strengthModifier;
+                    keyAbility = "STR";
                     break;
                 case DEXTERITY:
                     abilityModifier = dexterityModifier;
+                    keyAbility = "DEX";
                     break;
                 case CONSTITUTION:
                     abilityModifier = constitutionModifier;
+                    keyAbility = "CON";
                     break;
                 case INTELLIGENCE:
                     abilityModifier = intelligenceModifier;
+                    keyAbility = "INT";
                     break;
                 case WISDOM:
                     abilityModifier = wisdomModifier;
+                    keyAbility = "WIS";
                     break;
                 case CHARISMA:
                     abilityModifier = charismaModifier;
+                    keyAbility = "CHA";
                     break;
             }
 
             int skillModifier = abilityModifier + value.getRank() + value.getMiscModifier();
 
+            JCheckBox classSkillLabel = new JCheckBox("", value.getIsClassSkill());
             JLabel skillNameLabel = new JLabel(key);
+            JLabel keyAbilityLabel = new JLabel(keyAbility);
             JLabel skillModifierLabel = new JLabel(Integer.toString(skillModifier));
             JLabel abilityModifierLabel = new JLabel(Integer.toString(abilityModifier));
             final JSpinner skillRankField = new JSpinner(new SpinnerNumberModel(value.getRank(), 0, 99, 1));
             JSpinner skillMiscModifierField = new JSpinner(new SpinnerNumberModel(value.getMiscModifier(), 0, 99, 1));
 
+            classSkillLabel.addChangeListener(new ChangeListener() {
+                @Override
+                public void stateChanged(ChangeEvent e) {
+                    value.setIsClassSkill(isEnabled());
+                }
+            });
             skillRankField.addChangeListener(new ChangeListener() {
                 @Override
                 public void stateChanged(ChangeEvent changeEvent) {
@@ -94,7 +111,9 @@ public class SkillsSection extends Section {
                 }
             });
 
+            add(classSkillLabel);
             add(skillNameLabel);
+            add(keyAbilityLabel);
             add(skillModifierLabel);
             add(abilityModifierLabel);
             add(skillRankField);

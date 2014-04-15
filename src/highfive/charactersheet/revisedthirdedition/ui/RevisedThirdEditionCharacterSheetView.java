@@ -17,7 +17,6 @@ public class RevisedThirdEditionCharacterSheetView extends CharacterSheetView {
     private SkillsSection skillSection;
     private AttackSection attackSection;
 
-    //@todo attack section
     //@todo SpecialAbilitiesSection specialAbilitiesSection;
     //@todo SpellsSection spellsSection;
     //@todo AnimalCompanionSection animalCompanionSection;
