@@ -109,13 +109,7 @@ public class MainWindow extends JFrame {
         fileChooser.setFileFilter(new FileFilter() {
             @Override
             public boolean accept(File file) {
-                if (file.getName().toLowerCase().endsWith("xml")) {
-                    return true;
-                }
-                if (file.isDirectory()) {
-                    return true;
-                }
-                return false;
+                return file.getName().toLowerCase().endsWith("xml") || file.isDirectory();
             }
 
             @Override
@@ -149,13 +143,7 @@ public class MainWindow extends JFrame {
         fileChooser.setFileFilter(new FileFilter() {
             @Override
             public boolean accept(File file) {
-                if (file.getName().toLowerCase().endsWith("xml")) {
-                    return true;
-                }
-                if (file.isDirectory()) {
-                    return true;
-                }
-                return false;
+                return file.getName().toLowerCase().endsWith("xml") || file.isDirectory();
             }
 
             @Override
@@ -170,7 +158,7 @@ public class MainWindow extends JFrame {
         XMLDecoder decoder = new XMLDecoder(inputStream);
         characterSheetView = new RevisedThirdEditionCharacterSheetView();
         characterSheetView.setCharacterSheet((RevisedThirdEditionCharacterSheet) decoder.readObject());
-        characterSheetView.update();
+        characterSheetView.load();
         decoder.close();
     }
 

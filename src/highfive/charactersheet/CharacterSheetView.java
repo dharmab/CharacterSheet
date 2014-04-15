@@ -17,6 +17,8 @@ public abstract class CharacterSheetView extends JPanel
      */
     public abstract void update();
 
+    public abstract void load();
+
     public abstract void setCharacterSheet(CharacterSheet characterSheet);
 
     public abstract CharacterSheet getCharacterSheet();

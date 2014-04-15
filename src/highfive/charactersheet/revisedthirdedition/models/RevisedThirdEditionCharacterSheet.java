@@ -479,6 +479,10 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet implements
                 + willMiscModifier;
     }
 
+    public void setFeats(HashSet<Feat> feats) {
+        this.feats = feats;
+    }
+
     public boolean addFeat(Feat feat) {
         return feats.add(feat);
     }

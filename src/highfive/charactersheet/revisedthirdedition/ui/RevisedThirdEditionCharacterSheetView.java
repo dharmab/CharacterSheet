@@ -2,6 +2,7 @@ package highfive.charactersheet.revisedthirdedition.ui;
 
 import highfive.charactersheet.CharacterSheet;
 import highfive.charactersheet.CharacterSheetView;
+import highfive.charactersheet.revisedthirdedition.models.Feat;
 import highfive.charactersheet.revisedthirdedition.models.RevisedThirdEditionCharacterSheet;
 
 import java.awt.*;
@@ -16,6 +17,7 @@ public class RevisedThirdEditionCharacterSheetView extends CharacterSheetView {
     private SavingThrowsSection savingThrowsSection;
     private SkillsSection skillSection;
     private AttackSection attackSection;
+    private FeatsSection featsSection;
 
     //@todo SpecialAbilitiesSection specialAbilitiesSection;
     //@todo SpellsSection spellsSection;
@@ -34,6 +36,7 @@ public class RevisedThirdEditionCharacterSheetView extends CharacterSheetView {
         savingThrowsSection = new SavingThrowsSection("Saving Throws");
         skillSection = new SkillsSection("Skills");
         attackSection = new AttackSection("Attack");
+        featsSection = new FeatsSection("Feats");
 
         setLayout(new GridBagLayout());
         GridBagConstraints constraints = new GridBagConstraints();
@@ -62,6 +65,10 @@ public class RevisedThirdEditionCharacterSheetView extends CharacterSheetView {
         add(attackSection,constraints);
         constraints.gridy++;
 
+        characterSheet.addFeat(new Feat());
+        add(featsSection, constraints);
+        constraints.gridy++;
+
         update();
     }
 
@@ -72,8 +79,18 @@ public class RevisedThirdEditionCharacterSheetView extends CharacterSheetView {
         armorClassSection.update(characterSheet);
         savingThrowsSection.update(characterSheet);
         skillSection.update(characterSheet);
+        featsSection.update(characterSheet);
     }
 
+    public void load() {
+        generalSection.load(characterSheet);
+        abilityScoreSection.load(characterSheet);
+        hitpointsSection.load(characterSheet);
+        armorClassSection.load(characterSheet);
+        savingThrowsSection.load(characterSheet);
+        skillSection.load(characterSheet);
+        featsSection.load(characterSheet);
+    }
 
     public CharacterSheet getCharacterSheet() {
         return characterSheet;
