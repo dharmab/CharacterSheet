@@ -14,6 +14,8 @@ public abstract class Section extends JXTaskPane {
      * to the backing model and then call load()
      * @param characterSheet The character sheet from the parent view
      * @return A synced character sheet
+     * @throws java.lang.ClassCastException if the character sheet is not
+     * of the correct class
      */
     public abstract CharacterSheet update(CharacterSheet characterSheet);
 
@@ -21,6 +23,8 @@ public abstract class Section extends JXTaskPane {
      * This method should read the data from the backing model
      * and then display it to the user
      * @param characterSheet The character sheet from the parent view
+     * @throws java.lang.ClassCastException if the character sheet is not
+     * of the correct class
      */
     public abstract void load(CharacterSheet characterSheet);
 

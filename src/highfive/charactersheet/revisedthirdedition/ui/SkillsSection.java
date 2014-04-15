@@ -123,6 +123,9 @@ public class SkillsSection extends Section {
 
     @Override
     public CharacterSheet update(CharacterSheet characterSheet) {
+        if (!characterSheet.getClass().equals(RevisedThirdEditionCharacterSheet.class)) {
+            throw new ClassCastException();
+        }
         return update((RevisedThirdEditionCharacterSheet) characterSheet);
     }
 
@@ -136,6 +139,9 @@ public class SkillsSection extends Section {
 
     @Override
     public void load(CharacterSheet characterSheet) {
+        if (!characterSheet.getClass().equals(RevisedThirdEditionCharacterSheet.class)) {
+            throw new ClassCastException();
+        }
         load((RevisedThirdEditionCharacterSheet) characterSheet);
     }
 
