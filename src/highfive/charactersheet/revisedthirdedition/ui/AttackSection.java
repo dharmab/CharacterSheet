@@ -31,14 +31,14 @@ public class AttackSection extends Section {
     private JTextField rangeField;
     private JComboBox typeField;
     private JTextField notesField;
-    private JComboBox sizeField;
+    //private JComboBox sizeField;
 
     private String[] ALIGNMENTS = {
             "Lawful Good", "Lawful Neutral", "Lawful Evil",
             "Neutral Good", "Neutral", "Neutral Evil",
             "Chaotic Good", "Chaotic Neutral", "Chaotic Evil"
     };
-    
+
     private String[] SIZES = {
             "Fine",
             "Diminutive",
@@ -91,7 +91,7 @@ public class AttackSection extends Section {
         rangeLabel = new JLabel("Range");
         typeLabel = new JLabel("Type");
         notesLabel = new JLabel("Notes");
-        sizeLabel = new JLabel("Size");
+        //sizeLabel = new JLabel("Size");
 
         attackField = new JTextField(5);
         attackField.addFocusListener(FocusRefreshListener);
@@ -109,9 +109,9 @@ public class AttackSection extends Section {
         typeField.addActionListener(actionRefreshListener);
         notesField = new JTextField(5);
         notesField.addFocusListener(FocusRefreshListener);
-        sizeField = new JComboBox(SIZES);
-        sizeField.setSelectedItem("Medium");
-        sizeField.addActionListener(actionRefreshListener);
+        //sizeField = new JComboBox(SIZES);
+        //sizeField.setSelectedItem("Medium");
+        //sizeField.addActionListener(actionRefreshListener);
     }
 
     private void assembleWidgets() {
@@ -129,8 +129,8 @@ public class AttackSection extends Section {
         add(typeField);
         add(notesLabel);
         add(notesField);
-        add(sizeLabel);
-        add(sizeField);
+        //add(sizeLabel);
+        //add(sizeField);
     }
 
     private void updateParent() {
@@ -150,7 +150,7 @@ public class AttackSection extends Section {
         String race = rangeField.getText();
         Alignment alignment = parseAlignment((String)typeField.getSelectedItem());
         String deity = notesField.getText();
-        Size size = parseSize((String)sizeField.getSelectedItem());
+        //Size size = parseSize((String)sizeField.getSelectedItem());
 
         if (!characterSheet.getCharacterName().equals(characterName)) {
             characterSheet.setCharacterName(characterName);
@@ -180,9 +180,9 @@ public class AttackSection extends Section {
             characterSheet.setDeity(deity);
         }
 
-        if (characterSheet.getSize() != size) {
-            characterSheet.setSize(size);
-        }
+        //if (characterSheet.getSize() != size) {
+         //   characterSheet.setSize(size);
+        //}
 
         load(characterSheet);
 
@@ -203,7 +203,7 @@ public class AttackSection extends Section {
         rangeField.setText(characterSheet.getRace());
         typeField.setSelectedItem(parseAlignment(characterSheet.getAlignment()));
         notesField.setText(characterSheet.getDeity());
-        sizeField.setSelectedItem(parseSize(characterSheet.getSize()));
+        //sizeField.setSelectedItem(parseSize(characterSheet.getSize()));
     }
 
     private Alignment parseAlignment(String s) {
