@@ -27,9 +27,9 @@ public class AttackSection extends Section {
     private JTextField attackField;
     private JTextField attackbonusField;
     private JTextField damageField;
-    private JSpinner criticalField;
+    private JTextField criticalField;
     private JTextField rangeField;
-    private JComboBox typeField;
+    private JTextField typeField;
     private JTextField notesField;
     //private JComboBox sizeField;
 
@@ -99,14 +99,12 @@ public class AttackSection extends Section {
         attackbonusField.addFocusListener(FocusRefreshListener);
         damageField = new JTextField(5);
         damageField.addFocusListener(FocusRefreshListener);
-        criticalField = new JSpinner(new SpinnerNumberModel(1, 1, 30, 1));
-        criticalField.addChangeListener(changeRefreshListener);
+        criticalField = new JTextField(5);
+        criticalField.addFocusListener(FocusRefreshListener);
         rangeField = new JTextField(5);
         rangeField.addFocusListener(FocusRefreshListener);
-        typeField = new JComboBox(ALIGNMENTS);
-        typeField.setEditable(false);
-        typeField.setSelectedItem("Neutral");
-        typeField.addActionListener(actionRefreshListener);
+        typeField = new JTextField(5);
+        typeField.addFocusListener(FocusRefreshListener);
         notesField = new JTextField(5);
         notesField.addFocusListener(FocusRefreshListener);
         //sizeField = new JComboBox(SIZES);
@@ -143,46 +141,47 @@ public class AttackSection extends Section {
     }
 
     private RevisedThirdEditionCharacterSheet update(RevisedThirdEditionCharacterSheet characterSheet) {
-        String characterName = attackField.getText();
-        String playerName = attackbonusField.getText();
-        String characterClass = damageField.getText();
-        int level = (Integer) criticalField.getValue();
-        String race = rangeField.getText();
-        Alignment alignment = parseAlignment((String)typeField.getSelectedItem());
-        String deity = notesField.getText();
+        String attackValue = attackField.getText();
+        String attackBonus = attackbonusField.getText();
+        String damageValue = damageField.getText();
+        String criticalValue= criticalField.getText();
+        String range = rangeField.getText();
+        //Alignment alignment = parseAlignment((String)typeField.getSelectedItem());
+        String notes = notesField.getText();
         //Size size = parseSize((String)sizeField.getSelectedItem());
 
-        if (!characterSheet.getCharacterName().equals(characterName)) {
-            characterSheet.setCharacterName(characterName);
+        //to be implemented
+        /*
+        if (!characterSheet.getCharacterName().equals(attackValue)) {
+            characterSheet.setCharacterName(attackValue);
         }
 
-        if (!characterSheet.getPlayerName().equals(playerName)) {
-            characterSheet.setPlayerName(playerName);
+        if (!characterSheet.getPlayerName().equals(attackBonus)) {
+            characterSheet.setPlayerName(attackBonus);
         }
 
-        if (!characterSheet.getCharacterClass().equals(characterClass)) {
-            characterSheet.setCharacterClass(characterClass);
+        if (!characterSheet.getCharacterClass().equals(damageValue)) {
+            characterSheet.setCharacterClass(damageValue);
         }
 
-        if (characterSheet.getLevel() != level) {
-            characterSheet.setLevel(level);
+        if (characterSheet.getLevel() != criticalValue) {
+            characterSheet.setLevel(criticalValue);
         }
 
-        if (!characterSheet.getRace().equals(race)) {
-            characterSheet.setRace(race);
+        if (!characterSheet.getRace().equals(range)) {
+            characterSheet.setRace(range);
         }
 
-        if (!characterSheet.getAlignment().equals(alignment)) {
-            characterSheet.setAlignment(alignment);
-        }
 
-        if (!characterSheet.getDeity().equals(deity)) {
-            characterSheet.setDeity(deity);
+        if (!characterSheet.getDeity().equals(notes)) {
+            characterSheet.setDeity(notes);
         }
 
         //if (characterSheet.getSize() != size) {
          //   characterSheet.setSize(size);
         //}
+
+        */
 
         load(characterSheet);
 
@@ -196,6 +195,9 @@ public class AttackSection extends Section {
     }
 
     private void load(RevisedThirdEditionCharacterSheet characterSheet) {
+        //need to be implemented
+
+        /*
         attackField.setText(characterSheet.getCharacterName());
         attackbonusField.setText(characterSheet.getPlayerName());
         damageField.setText(characterSheet.getCharacterClass());
@@ -203,6 +205,9 @@ public class AttackSection extends Section {
         rangeField.setText(characterSheet.getRace());
         typeField.setSelectedItem(parseAlignment(characterSheet.getAlignment()));
         notesField.setText(characterSheet.getDeity());
+
+        */
+
         //sizeField.setSelectedItem(parseSize(characterSheet.getSize()));
     }
 
