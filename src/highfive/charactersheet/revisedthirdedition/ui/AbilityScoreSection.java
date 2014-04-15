@@ -114,10 +114,6 @@ public class AbilityScoreSection extends Section {
         add(charismaModifierLabel);
     }
 
-    private void updateParent() {
-        ((RevisedThirdEditionCharacterSheetView) getParent()).update();
-    }
-
     @Override
     public CharacterSheet update(CharacterSheet characterSheet) {
         return update((RevisedThirdEditionCharacterSheet) characterSheet);

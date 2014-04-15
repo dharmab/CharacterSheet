@@ -121,10 +121,6 @@ public class SkillsSection extends Section {
         }
     }
 
-    private void updateParent() {
-        ((RevisedThirdEditionCharacterSheetView) getParent()).update();
-    }
-
     @Override
     public CharacterSheet update(CharacterSheet characterSheet) {
         return update((RevisedThirdEditionCharacterSheet) characterSheet);

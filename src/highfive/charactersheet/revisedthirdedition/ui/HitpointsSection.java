@@ -46,10 +46,6 @@ public class HitpointsSection extends Section {
         maxHitpointsField.addChangeListener(refreshListener);
     }
 
-    private void updateParent() {
-        ((RevisedThirdEditionCharacterSheetView) getParent()).update();
-    }
-
     @Override
     public void load(CharacterSheet characterSheet) {
         load((RevisedThirdEditionCharacterSheet) characterSheet);

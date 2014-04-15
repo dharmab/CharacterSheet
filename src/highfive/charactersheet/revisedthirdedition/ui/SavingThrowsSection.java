@@ -108,10 +108,6 @@ public class SavingThrowsSection extends Section {
         willMiscModifierValueField.addChangeListener(refreshListener);
     }
 
-    private void updateParent() {
-        ((RevisedThirdEditionCharacterSheetView) getParent()).update();
-    }
-
     @Override
     public CharacterSheet update(CharacterSheet characterSheet) {
         return update((RevisedThirdEditionCharacterSheet) characterSheet);

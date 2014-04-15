@@ -131,10 +131,6 @@ public class AttackSection extends Section {
         //add(sizeField);
     }
 
-    private void updateParent() {
-        ((RevisedThirdEditionCharacterSheetView)this.getParent()).update();
-    }
-
     @Override
     public CharacterSheet update(CharacterSheet characterSheet) {
         return update((RevisedThirdEditionCharacterSheet) characterSheet);
