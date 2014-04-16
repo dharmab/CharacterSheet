@@ -511,8 +511,12 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet implements
         return specialAbilities.remove(ability);
     }
 
-    public Collection<SpecialAbility> getSpecialAbilities() {
+    public HashSet<SpecialAbility> getSpecialAbilities() {
         return specialAbilities;
+    }
+
+    public void setSpecialAbilities(HashSet<SpecialAbility> specialAbilities) {
+        this.specialAbilities = specialAbilities;
     }
 
     public int getArmorBonus() {
