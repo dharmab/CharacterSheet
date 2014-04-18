@@ -6,25 +6,15 @@ import highfive.charactersheet.revisedthirdedition.models.Feat;
 import highfive.charactersheet.revisedthirdedition.models.RevisedThirdEditionCharacterSheet;
 
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.HashSet;
 
 public class FeatsSection extends Section {
 
     private HashSet<Feat> feats;
     private JButton addFeatButton;
-    private JButton editFeatButton;
-    private JComboBox<String> featComboBox;
-    private JPanel cardPanel;
-    private ItemListener cardListener = new ItemListener() {
-        @Override
-        public void itemStateChanged(ItemEvent itemEvent) {
-            CardLayout layout = (CardLayout) cardPanel.getLayout();
-            layout.show(cardPanel, (String) itemEvent.getItem());
-        }
-    };
+    private JPanel featPanel;
 
     public FeatsSection(String title) {
         super(title);
@@ -33,37 +23,68 @@ public class FeatsSection extends Section {
     }
 
     private void assembleWidgets() {
-        add(featComboBox);
+        add(featPanel);
         add(addFeatButton);
-        add(editFeatButton);
-        add(cardPanel);
     }
 
     private void initializeWidgets() {
         addFeatButton = new JButton("Add");
-        editFeatButton = new JButton("Edit");
-        featComboBox = new JComboBox<String>();
-        featComboBox.addItemListener(cardListener);
-        cardPanel = new JPanel(new CardLayout());
+        addFeatButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                addFeatDialog();
+            }
+        });
+        featPanel = new JPanel();
     }
 
-    private void rebuild() {
-        featComboBox.removeAllItems();
-        cardPanel.removeAll();
-        for (Feat feat : feats) {
-            featComboBox.addItem(feat.getName());
+    private void addFeatDialog() {
+        JTextField nameField = new JTextField();
+        JTextArea descField = new JTextArea();
 
-            JPanel card = new JPanel();
+        JPanel panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        panel.add(new JLabel("Feat name:"));
+        panel.add(nameField);
+        panel.add(new JLabel("Feat description"));
+        panel.add(descField);
+
+        boolean showAgain = false;
+        do {
+            int option = JOptionPane.showConfirmDialog(null, panel, "New Feat", JOptionPane.OK_CANCEL_OPTION);
+            if (option == JOptionPane.OK_OPTION) {
+                Feat newFeat = new Feat();
+                newFeat.setName(nameField.getText());
+                newFeat.setDescription(descField.getText());
+
+                if (feats.contains(newFeat)) {
+                    JOptionPane.showMessageDialog(this.getTopLevelAncestor(), "New feat must have a unique name.", "Error", JOptionPane.ERROR_MESSAGE);
+                    showAgain = true;
+                } else {
+                    feats.add(newFeat);
+                    updateParent();
+                    showAgain = false;
+                }
+            }
+        } while (showAgain);
+    }
+
+
+    private void rebuild() {
+        featPanel.removeAll();
+        for (Feat feat : feats) {
+            JPanel featCard = new JPanel();
+            featCard.setLayout(new BoxLayout(featCard, BoxLayout.Y_AXIS));
 
             JLabel featNameLabel = new JLabel(feat.getName());
-            card.add(featNameLabel);
+            featCard.add(featNameLabel);
 
             JTextArea featDescriptionText = new JTextArea();
             featDescriptionText.setText(feat.getDescription());
             featDescriptionText.setEditable(false);
-            card.add(featDescriptionText);
+            featCard.add(featDescriptionText);
 
-            cardPanel.add(feat.getName(), card);
+            featPanel.add(featCard);
         }
     }
 

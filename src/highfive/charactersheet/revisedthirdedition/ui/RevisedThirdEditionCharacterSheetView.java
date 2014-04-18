@@ -2,7 +2,6 @@ package highfive.charactersheet.revisedthirdedition.ui;
 
 import highfive.charactersheet.CharacterSheet;
 import highfive.charactersheet.CharacterSheetView;
-import highfive.charactersheet.revisedthirdedition.models.Feat;
 import highfive.charactersheet.revisedthirdedition.models.RevisedThirdEditionCharacterSheet;
 
 import java.awt.*;
@@ -65,7 +64,6 @@ public class RevisedThirdEditionCharacterSheetView extends CharacterSheetView {
         add(attackSection,constraints);
         constraints.gridy++;
 
-        characterSheet.addFeat(new Feat());
         add(featsSection, constraints);
         constraints.gridy++;
 
