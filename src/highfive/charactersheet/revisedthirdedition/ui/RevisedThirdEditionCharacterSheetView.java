@@ -19,6 +19,7 @@ public class RevisedThirdEditionCharacterSheetView extends CharacterSheetView {
     private FeatsSection featsSection;
 
     //@todo SpecialAbilitiesSection specialAbilitiesSection;
+    private SpecialAbilitiesSection specialAbilitiesSection;
     //@todo SpellsSection spellsSection;
     //@todo AnimalCompanionSection animalCompanionSection;
     //@todo AnimalCompanionSection animalCompanionSection;
@@ -36,6 +37,7 @@ public class RevisedThirdEditionCharacterSheetView extends CharacterSheetView {
         skillSection = new SkillsSection("Skills");
         attackSection = new AttackSection("Attack");
         featsSection = new FeatsSection("Feats");
+        specialAbilitiesSection = new SpecialAbilitiesSection("Special Abilities");
 
         setLayout(new GridBagLayout());
         GridBagConstraints constraints = new GridBagConstraints();
@@ -67,6 +69,9 @@ public class RevisedThirdEditionCharacterSheetView extends CharacterSheetView {
         add(featsSection, constraints);
         constraints.gridy++;
 
+        add(specialAbilitiesSection,constraints);
+        constraints.gridy++;
+
         update();
     }
 
@@ -77,6 +82,7 @@ public class RevisedThirdEditionCharacterSheetView extends CharacterSheetView {
         armorClassSection.update(characterSheet);
         savingThrowsSection.update(characterSheet);
         skillSection.update(characterSheet);
+        specialAbilitiesSection.update(characterSheet);
         featsSection.update(characterSheet);
     }
 
