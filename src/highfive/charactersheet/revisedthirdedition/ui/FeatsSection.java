@@ -23,11 +23,6 @@ public class FeatsSection extends Section {
         assembleWidgets();
     }
 
-    private void assembleWidgets() {
-        add(featsPanel);
-        add(addFeatButton);
-    }
-
     private void initializeWidgets() {
         addFeatButton = new JButton("Add");
         addFeatButton.addActionListener(new ActionListener() {
@@ -37,6 +32,11 @@ public class FeatsSection extends Section {
             }
         });
         featsPanel = new JPanel();
+    }
+
+    private void assembleWidgets() {
+        add(featsPanel);
+        add(addFeatButton);
     }
 
     private void editFeatDialog(Feat feat) {
@@ -109,7 +109,6 @@ public class FeatsSection extends Section {
         descField.setRows(30);
         descField.setLineWrap(true);
         descField.setAlignmentX(Component.LEFT_ALIGNMENT);
-
 
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
@@ -203,8 +202,6 @@ public class FeatsSection extends Section {
             featsPanel.add(featPanel);
         }
     }
-
-
 
     @Override
     public CharacterSheet update(CharacterSheet characterSheet) {
