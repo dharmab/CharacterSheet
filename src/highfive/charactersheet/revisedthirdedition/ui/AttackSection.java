@@ -14,7 +14,7 @@ import java.awt.event.FocusListener;
 
 public class AttackSection extends Section {
     private JLabel attackLabel;
-    private JLabel attackbonusLabel;
+    private JLabel attackBonusLabel;
     private JLabel damageLabel;
     private JLabel criticalLabel;
     private JLabel rangeLabel;
@@ -65,7 +65,7 @@ public class AttackSection extends Section {
 
     private void initializeWidgets() {
         attackLabel = new JLabel("Attack");
-        attackbonusLabel = new JLabel("Attack Bonus");
+        attackBonusLabel = new JLabel("Attack Bonus");
         damageLabel = new JLabel("Damage");
         criticalLabel = new JLabel("Critical");
         rangeLabel = new JLabel("Range");
@@ -95,7 +95,7 @@ public class AttackSection extends Section {
     private void assembleWidgets() {
         add(attackLabel);
         add(attackField);
-        add(attackbonusLabel);
+        add(attackBonusLabel);
         add(attackbonusField);
         add(damageLabel);
         add(damageField);

@@ -6,12 +6,10 @@ import java.io.Serializable;
 public class SpecialAbility implements Serializable {
     private String name;
     private String description;
-    private String page;
 
     public SpecialAbility() {
         name = "New Special Ability";
         description = "";
-        page = "";
     }
 
     public String getName() {
@@ -30,13 +28,6 @@ public class SpecialAbility implements Serializable {
         this.description = description;
     }
 
-    public String getPage() {
-        return page;
-    }
-
-    public void setPage(String page) {
-        this.page = page;
-    }
 
     @Override
     public boolean equals(Object o) {

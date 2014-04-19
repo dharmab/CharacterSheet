@@ -70,8 +70,8 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet implements
     private HashMap<String, Inventory> inventories;
 
     //Spells
-    private HashMap<String, SpellBook> spellbooks;
-    private int spellsave;
+    private HashMap<String, SpellBook> spellBooks;
+    private int spellSave;
     private int spellFailure;
 
     //Languages
@@ -94,7 +94,7 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet implements
         createDefaultInventory();
         skills = new HashMap<String, Skill>();
         populateSkills();
-        spellbooks = new HashMap<String, SpellBook>();
+        spellBooks = new HashMap<String, SpellBook>();
         languages = new HashSet<String>();
         addLanguage("Common");
         feats = new HashSet<Feat>();

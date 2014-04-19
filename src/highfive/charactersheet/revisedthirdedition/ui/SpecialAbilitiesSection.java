@@ -21,11 +21,11 @@ public class SpecialAbilitiesSection extends Section{
 
     public SpecialAbilitiesSection(String title) {
         super(title);
-        initialzeWidgets();
+        initializeWidgets();
         assembleWidgets();
     }
 
-    private void initialzeWidgets() {
+    private void initializeWidgets() {
         addSpecialAbilityButton = new JButton("Add");
         addSpecialAbilityButton.addActionListener(new ActionListener() {
             @Override

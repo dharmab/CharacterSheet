@@ -39,7 +39,6 @@ public class AbilityScoreSection extends Section {
         @Override
         public void stateChanged(ChangeEvent changeEvent) {
             updateParent();
-
         }
     };
 
