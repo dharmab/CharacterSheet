@@ -2,14 +2,16 @@ package highfive.charactersheet.revisedthirdedition.ui;
 
 import highfive.charactersheet.CharacterSheet;
 import highfive.charactersheet.CharacterSheetView;
+import highfive.charactersheet.Section;
 import highfive.charactersheet.revisedthirdedition.models.RevisedThirdEditionCharacterSheet;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 public class RevisedThirdEditionCharacterSheetView extends CharacterSheetView {
     private RevisedThirdEditionCharacterSheet characterSheet;
 
-    private BiographySection generalSection;
+    private BiographySection biographySection;
     private AbilityScoreSection abilityScoreSection;
     private HitpointsSection hitpointsSection;
     private ArmorClassSection armorClassSection;
@@ -17,19 +19,15 @@ public class RevisedThirdEditionCharacterSheetView extends CharacterSheetView {
     private SkillsSection skillSection;
     private AttackSection attackSection;
     private FeatsSection featsSection;
-
-    //@todo SpecialAbilitiesSection specialAbilitiesSection;
     private SpecialAbilitiesSection specialAbilitiesSection;
     //@todo SpellsSection spellsSection;
     //@todo AnimalCompanionSection animalCompanionSection;
-    //@todo AnimalCompanionSection animalCompanionSection;
     //@todo ArmorSection armorSection;
     //@todo InventorySection inventorySection;
-    //@todo FeatsSection featsSection;
 
     public RevisedThirdEditionCharacterSheetView() {
         characterSheet = new RevisedThirdEditionCharacterSheet();
-        generalSection = new BiographySection("Character");
+        biographySection = new BiographySection("Character");
         abilityScoreSection = new AbilityScoreSection("Ability Scores");
         hitpointsSection = new HitpointsSection("Hit Points");
         armorClassSection = new ArmorClassSection("Armor Class");
@@ -45,55 +43,40 @@ public class RevisedThirdEditionCharacterSheetView extends CharacterSheetView {
         constraints.gridx = 0;
         constraints.gridy = 0;
 
-        add(generalSection, constraints);
-        constraints.gridy++;
-
-        add(abilityScoreSection, constraints);
-        constraints.gridy++;
-
-        add(hitpointsSection, constraints);
-        constraints.gridy++;
-
-        add(armorClassSection, constraints);
-        constraints.gridy++;
-
-        add(savingThrowsSection, constraints);
-        constraints.gridy++;
-
-        add(skillSection, constraints);
-        constraints.gridy++;
-
-        add(attackSection,constraints);
-        constraints.gridy++;
-
-        add(featsSection, constraints);
-        constraints.gridy++;
-
-        add(specialAbilitiesSection,constraints);
-        constraints.gridy++;
+        for (Section section : getSectionsAsArrayList()) {
+            add(section, constraints);
+            constraints.gridy++;
+        }
 
         update();
     }
 
+    private ArrayList<Section> getSectionsAsArrayList() {
+        ArrayList<Section> arrayList = new ArrayList<Section>();
+
+        arrayList.add(biographySection);
+        arrayList.add(abilityScoreSection);
+        arrayList.add(hitpointsSection);
+        arrayList.add(armorClassSection);
+        arrayList.add(savingThrowsSection);
+        arrayList.add(skillSection);
+        arrayList.add(attackSection);
+        arrayList.add(featsSection);
+        arrayList.add(specialAbilitiesSection);
+
+        return arrayList;
+    }
+
     public void update() {
-        generalSection.update(characterSheet);
-        abilityScoreSection.update(characterSheet);
-        hitpointsSection.update(characterSheet);
-        armorClassSection.update(characterSheet);
-        savingThrowsSection.update(characterSheet);
-        skillSection.update(characterSheet);
-        specialAbilitiesSection.update(characterSheet);
-        featsSection.update(characterSheet);
+        for (Section section : getSectionsAsArrayList()) {
+            section.update(characterSheet);
+        }
     }
 
     public void load() {
-        generalSection.load(characterSheet);
-        abilityScoreSection.load(characterSheet);
-        hitpointsSection.load(characterSheet);
-        armorClassSection.load(characterSheet);
-        savingThrowsSection.load(characterSheet);
-        skillSection.load(characterSheet);
-        featsSection.load(characterSheet);
+        for (Section section : getSectionsAsArrayList()) {
+            section.load(characterSheet);
+        }
     }
 
     public CharacterSheet getCharacterSheet() {
@@ -105,6 +88,6 @@ public class RevisedThirdEditionCharacterSheetView extends CharacterSheetView {
         if (characterSheet.getClass().equals(this.getClass())) {
             throw new IllegalArgumentException();
         }
-        this.characterSheet = (RevisedThirdEditionCharacterSheet)characterSheet;
+        this.characterSheet = (RevisedThirdEditionCharacterSheet) characterSheet;
     }
 }
