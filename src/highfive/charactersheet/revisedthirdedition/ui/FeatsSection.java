@@ -95,16 +95,16 @@ public class FeatsSection extends Section {
     }
 
     private void addFeatDialog() {
-        JLabel nameLabel = new JLabel("Feat name:");
+        JLabel nameLabel = new JLabel("Feat name");
         nameLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
 
         JTextField nameField = new JTextField();
         nameField.setAlignmentX(Component.LEFT_ALIGNMENT);
-        JTextArea descField = new JTextArea();
 
         JLabel descLabel = new JLabel("Feat description");
         descLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
 
+        JTextArea descField = new JTextArea();
         descField.setColumns(40);
         descField.setRows(30);
         descField.setLineWrap(true);

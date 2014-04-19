@@ -575,8 +575,16 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet implements
      * Creates a 2 default inventories, "Gear" and "Money"
      */
     private void createDefaultInventory() {
-        inventories.put("Gear", new Inventory("Gear"));
-        inventories.put("Money", new Inventory("Money"));
+        inventories.put("Gear", new Inventory());
+        inventories.put("Money", new Inventory());
+    }
+
+    public Inventory getInventory(String key) {
+        return inventories.get(key);
+    }
+
+    public void setInventory(String key, Inventory inventory) {
+        inventories.put(key, inventory);
     }
 
     /**
@@ -584,7 +592,7 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet implements
      * @param key the name of the Inventory. The parameter will also name the Inventory
      */
     public void addInventory(String key) {
-        inventories.put(key, new Inventory(key));
+        inventories.put(key, new Inventory());
     }
 
     /**
@@ -618,7 +626,7 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet implements
             inv.add(item);
             inventories.put(key, inv);
         } else {
-            Inventory inv = new Inventory(key);
+            Inventory inv = new Inventory();
             inv.add(item);
             inventories.put(key, inv);
         }

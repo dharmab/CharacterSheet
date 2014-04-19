@@ -2,13 +2,14 @@ package highfive.charactersheet.revisedthirdedition.models;
 
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
-public class Inventory implements Serializable {
-    private String name;
+public class Inventory implements Serializable, Iterable<Map.Entry<Item, Integer>> {
     private HashMap<Item, Integer> items; //associate items and their quantities
 
-    public Inventory(String name) {
-        this.name = name;
+    public Inventory() {
+        this.items = new HashMap<Item, Integer>();
     }
 
     /**
@@ -57,6 +58,14 @@ public class Inventory implements Serializable {
         }
     }
 
+    public boolean setQuantity(Item item, int quantity) {
+        if (items.containsKey(item)) {
+            items.put(item, quantity);
+            return true;
+        }
+        return false;
+    }
+
     /**
      * Reduce the quantity of the specified item by one.
      * @param item the item to remove
@@ -64,7 +73,6 @@ public class Inventory implements Serializable {
     public void remove(Item item) {
         remove(item, 1);
     }
-
 
     /**
      * Remove all of the specified item from this inventory
@@ -78,11 +86,16 @@ public class Inventory implements Serializable {
         return items.get(item);
     }
 
-    public String getName() {
-        return name;
+    public boolean contains(Item item) {
+        return items.containsKey(item);
     }
 
-    public void setName(String name) {
-        this.name = name;
+    @Override
+    public Iterator<Map.Entry<Item, Integer>> iterator() {
+        return items.entrySet().iterator();
+    }
+
+    public int size() {
+        return items.size();
     }
 }
