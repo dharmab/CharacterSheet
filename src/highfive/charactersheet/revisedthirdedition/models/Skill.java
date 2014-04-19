@@ -1,6 +1,8 @@
 package highfive.charactersheet.revisedthirdedition.models;
 
-public class Skill {
+import java.io.Serializable;
+
+public class Skill implements Serializable {
     private Ability keyAbility;
     private int rank;
     private int miscModifier;

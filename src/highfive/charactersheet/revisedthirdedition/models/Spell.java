@@ -1,6 +1,8 @@
 package highfive.charactersheet.revisedthirdedition.models;
 
-public class Spell {
+import java.io.Serializable;
+
+public class Spell implements Serializable {
     String name;
     String description;
     Integer level;

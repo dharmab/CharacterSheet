@@ -1,6 +1,8 @@
 package highfive.charactersheet.revisedthirdedition.models;
 
-public class Feat {
+import java.io.Serializable;
+
+public class Feat implements Serializable {
     private String name;
     private String description;
 

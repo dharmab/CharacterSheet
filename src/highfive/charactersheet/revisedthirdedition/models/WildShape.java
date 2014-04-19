@@ -1,8 +1,9 @@
 package highfive.charactersheet.revisedthirdedition.models;
 
+import java.io.Serializable;
 import java.util.HashMap;
 
-public class WildShape {
+public class WildShape implements Serializable {
     String name;
     int additionalStrength;
     int additionalDexterity;

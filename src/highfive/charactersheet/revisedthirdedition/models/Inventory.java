@@ -1,8 +1,9 @@
 package highfive.charactersheet.revisedthirdedition.models;
 
+import java.io.Serializable;
 import java.util.HashMap;
 
-public class Inventory {
+public class Inventory implements Serializable {
     private String name;
     private HashMap<Item, Integer> items; //associate items and their quantities
 

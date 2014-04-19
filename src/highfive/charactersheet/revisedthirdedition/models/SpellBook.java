@@ -1,9 +1,10 @@
 package highfive.charactersheet.revisedthirdedition.models;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class SpellBook {
+public class SpellBook implements Serializable {
     /*  Bard, Sorcerer: have a spellBook, spellsPerDay
         Cleric: has a spellBook, spellsPerDay, preparedSpells, domainSpells, and domains
         Druid, Paladin, Ranger: have a spellBook, spellsPerDay, preparedSpells

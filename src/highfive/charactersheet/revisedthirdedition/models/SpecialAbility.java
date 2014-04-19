@@ -1,7 +1,9 @@
 package highfive.charactersheet.revisedthirdedition.models;
 
 
-public class SpecialAbility {
+import java.io.Serializable;
+
+public class SpecialAbility implements Serializable {
     private String name;
     private String description;
     private String page;
