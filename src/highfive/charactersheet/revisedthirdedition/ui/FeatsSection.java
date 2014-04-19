@@ -15,7 +15,7 @@ public class FeatsSection extends Section {
 
     private HashSet<Feat> feats;
     private JButton addFeatButton;
-    private JPanel featPanel;
+    private JPanel featsPanel;
 
     public FeatsSection(String title) {
         super(title);
@@ -24,7 +24,7 @@ public class FeatsSection extends Section {
     }
 
     private void assembleWidgets() {
-        add(featPanel);
+        add(featsPanel);
         add(addFeatButton);
     }
 
@@ -36,7 +36,62 @@ public class FeatsSection extends Section {
                 addFeatDialog();
             }
         });
-        featPanel = new JPanel();
+        featsPanel = new JPanel();
+    }
+
+    private void editFeatDialog(Feat feat) {
+        feats.remove(feat);
+        JLabel nameLabel = new JLabel("Feat name:");
+        nameLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+
+        JTextField nameField = new JTextField(feat.getName());
+        nameField.setAlignmentX(Component.LEFT_ALIGNMENT);
+
+        JLabel descLabel = new JLabel("Feat description");
+        JTextArea descField = new JTextArea(feat.getDescription());
+        descLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+
+        descField.setColumns(40);
+        descField.setRows(30);
+        descField.setLineWrap(true);
+        descField.setAlignmentX(Component.LEFT_ALIGNMENT);
+
+
+        JPanel panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        panel.add(nameLabel);
+        panel.add(nameField);
+        panel.add(descLabel);
+        panel.add(descField);
+
+        boolean showAgain = true;
+        do {
+            int option = JOptionPane.showConfirmDialog(null, panel, "Edit Feat", JOptionPane.OK_CANCEL_OPTION);
+            if (option == JOptionPane.OK_OPTION) {
+                String newFeatName = nameField.getText();
+                String newFeatDesc = descField.getText();
+
+                feat.setName(newFeatName);
+
+                if (newFeatDesc == null || newFeatDesc.equals("")) {
+                    feat.setDescription("No description provided.");
+                } else {
+                    feat.setDescription(newFeatDesc);
+                }
+
+                if (feat.getName() == null || feat.getName().equals("")) {
+                    JOptionPane.showMessageDialog(this.getTopLevelAncestor(), "Feat must have a name.", "Error", JOptionPane.ERROR_MESSAGE);
+                } else if (feats.contains(feat)) {
+                    JOptionPane.showMessageDialog(this.getTopLevelAncestor(), "Feat must have a unique name.", "Error", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    feats.add(feat);
+                    updateParent();
+                    showAgain = false;
+                }
+            } else {
+                showAgain = false;
+            }
+        } while (showAgain);
     }
 
     private void addFeatDialog() {
@@ -94,28 +149,62 @@ public class FeatsSection extends Section {
         } while (showAgain);
     }
 
+    private void removeFeatDialog(Feat feat) {
+        feats.remove(feat);
+        updateParent();
+    }
+
     private void rebuild() {
-        featPanel.removeAll();
-        featPanel.setLayout(new BoxLayout(featPanel, BoxLayout.Y_AXIS));
-        for (Feat feat : feats) {
-            JPanel featCard = new JPanel();
-            featCard.setLayout(new BoxLayout(featCard, BoxLayout.Y_AXIS));
+        featsPanel.removeAll();
+        featsPanel.setLayout(new BoxLayout(featsPanel, BoxLayout.Y_AXIS));
+        for (final Feat feat : feats) {
+            JPanel featPanel = new JPanel();
+            featPanel.setLayout(new BoxLayout(featPanel, BoxLayout.Y_AXIS));
 
             JLabel featNameLabel = new JLabel(feat.getName());
             featNameLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
-            featCard.add(featNameLabel);
+            featPanel.add(featNameLabel);
+
+            JButton editButton = new JButton("Edit");
+            editButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent actionEvent) {
+                    editFeatDialog(feat);
+                }
+            });
+
+            JButton removeButton = new JButton("Remove");
+            removeButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent actionEvent) {
+                    removeFeatDialog(feat);
+                }
+            });
+
+            JPanel buttonsPanel = new JPanel();
+            buttonsPanel.add(editButton);
+            buttonsPanel.add(removeButton);
+
+            JPanel featTitlePanel = new JPanel(new BorderLayout());
+            featTitlePanel.add(buttonsPanel, BorderLayout.EAST);
+            featTitlePanel.add(featNameLabel, BorderLayout.WEST);
+            featTitlePanel.setAlignmentX(Component.LEFT_ALIGNMENT);
 
             JTextArea featDescriptionText = new JTextArea();
             featDescriptionText.setText(feat.getDescription());
             featDescriptionText.setEditable(false);
             featDescriptionText.setLineWrap(true);
             featDescriptionText.setAlignmentX(Component.LEFT_ALIGNMENT);
-            featCard.add(featDescriptionText);
-            featCard.add(new JLabel("")); // spacing
 
-            featPanel.add(featCard);
+            featPanel.add(featTitlePanel);
+            featPanel.add(featDescriptionText);
+            featPanel.add(new JLabel("")); // spacing
+
+            featsPanel.add(featPanel);
         }
     }
+
+
 
     @Override
     public CharacterSheet update(CharacterSheet characterSheet) {
