@@ -294,7 +294,7 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet implements
      * Calculates total initiative. Total initiative is equal
      * to the sum of the Dexterity Modifier and Initiative Misc Modifier.
      *
-     * @return the total initiative
+     * @return the total initiative value
      */
     public int getInitiative() {
         return getDexterityModifier() + initiativeMiscModifier;
