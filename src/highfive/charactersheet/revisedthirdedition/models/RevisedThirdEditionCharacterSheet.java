@@ -123,6 +123,7 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet implements
         feats = new HashSet<Feat>();
         specialAbilities = new HashSet<SpecialAbility>();
         deity = "";
+        spellBooks = new HashMap<String, SpellBook>();
     }
 
     /*
