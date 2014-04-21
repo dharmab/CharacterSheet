@@ -156,7 +156,7 @@ public class SpellsSection extends Section {
         spellBookFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         JPanel panel = new JPanel(new GridLayout(0, 1));
         final JLabel spellbookNameLabel = new JLabel("What would you like to call this spellbook?");
-        JTextField spellbookName = new JTextField();
+        final JTextField spellbookName = new JTextField();
         final JCheckBox preparedSpellsBox = new JCheckBox("Does it prepare spells? (divine casting and wizards)");
         final JCheckBox domainsBox = new JCheckBox("Does it have domains? (clerics)");
         final JCheckBox specialtySchoolBox = new JCheckBox("Does it have a specialty/prohibed school? (wizards)");
@@ -165,7 +165,7 @@ public class SpellsSection extends Section {
         doneButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                spellBooks.put(spellbookNameLabel.getText(), new SpellBook(
+                spellBooks.put(spellbookName.getText(), new SpellBook(
                         preparedSpellsBox.isSelected(),
                         domainsBox.isSelected(),
                         specialtySchoolBox.isSelected(),
