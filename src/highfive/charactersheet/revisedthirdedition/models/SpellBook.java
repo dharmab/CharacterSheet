@@ -22,6 +22,7 @@ public class SpellBook implements Serializable {
     private boolean hasDomains;
     private boolean hasSpecialtySchools;
     private boolean hasSpellFailure;
+    private Ability keyAbility;
 
     /**
      * Default constructor, initializes all spellbook fields
@@ -38,6 +39,7 @@ public class SpellBook implements Serializable {
         hasDomains = true;
         hasSpecialtySchools = true;
         hasSpellFailure = true;
+        keyAbility = Ability.INTELLIGENCE;
     }
 
     /**
@@ -48,7 +50,7 @@ public class SpellBook implements Serializable {
      * @param hasSpellFailure i.e. arcane casting classes
      */
     public SpellBook(boolean hasPreparedSpells, boolean hasDomains,
-                     boolean hasSpecialtySchools, boolean hasSpellFailure) {
+                     boolean hasSpecialtySchools, boolean hasSpellFailure, Ability keyAbility) {
         spellBook = new HashMap<String, Spell>();
         spellsPerDay = new HashMap<Integer, Integer>();
         if (hasPreparedSpells) {
@@ -66,6 +68,7 @@ public class SpellBook implements Serializable {
         this.hasDomains = hasDomains;
         this.hasSpecialtySchools = hasSpecialtySchools;
         this.hasSpellFailure = hasSpellFailure;
+        this.keyAbility = keyAbility;
     }
 
     /**
@@ -190,5 +193,18 @@ public class SpellBook implements Serializable {
 
     public boolean hasSpellFailure() {
         return this.hasSpellFailure;
+    }
+
+    public Ability getKeyAbility() {
+        return this.keyAbility;
+    }
+
+    public void setKeyAbility(Ability ability) {
+        this.keyAbility = ability;
+    }
+
+    public void setSpellsPerDay(int level, int num) {
+        spellsPerDay.remove(level);
+        spellsPerDay.put(level, num);
     }
 }
