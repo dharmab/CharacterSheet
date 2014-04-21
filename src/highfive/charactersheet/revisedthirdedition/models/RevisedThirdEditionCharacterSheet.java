@@ -513,6 +513,22 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet implements
                 + willMiscModifier;
     }
 
+    public int getSpellFailure() {
+        return spellFailure;
+    }
+
+    public void setSpellFailure(int spellFailure) {
+        this.spellFailure = spellFailure;
+    }
+
+    public HashMap<String, SpellBook> getSpellBooks() {
+        return spellBooks;
+    }
+
+    public void setSpellBooks(HashMap<String, SpellBook> spellBooks) {
+        this.spellBooks = spellBooks;
+    }
+
     public void setFeats(HashSet<Feat> feats) {
         this.feats = feats;
     }
