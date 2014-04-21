@@ -9,6 +9,7 @@ import highfive.charactersheet.revisedthirdedition.models.Size;
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
@@ -48,6 +49,22 @@ public class BiographySection extends Section {
             "Gargantuan",
             "Colossal"
     };
+    //Added by Archana for missing fields
+    private JLabel ageLabel;
+    private JLabel genderLabel;
+    private JLabel heightLabel;
+    private JLabel weightLabel;
+    private JLabel eyesLabel;
+    private JLabel hairLabel;
+    private JLabel skinLabel;
+
+    private JSpinner ageField;
+    private JTextField genderField;
+    private JSpinner heightField;
+    private JSpinner weightField;
+    private JTextField eyesField;
+    private JTextField hairField;
+    private JTextField skinField;
 
     private FocusListener FocusRefreshListener = new FocusListener() {
         @Override
@@ -110,25 +127,33 @@ public class BiographySection extends Section {
         sizeField = new JComboBox(SIZES);
         sizeField.setSelectedItem("Medium");
         sizeField.addActionListener(actionRefreshListener);
+
+        //Added by Archana for missing fields
+        ageLabel = new JLabel("Age");
+        genderLabel = new JLabel("Gender");
+        heightLabel = new JLabel("Height");
+        weightLabel = new JLabel("Weight");
+        eyesLabel = new JLabel("Eyes");
+        hairLabel = new JLabel("Hair");
+        skinLabel = new JLabel("Skin");
+        ageField = new JSpinner(new SpinnerNumberModel(14, 14, 300, 1));//value,min,max,stepsize
+        ageField.addFocusListener(FocusRefreshListener);
+        genderField = new JTextField(5);
+        genderField.addFocusListener(FocusRefreshListener);
+        heightField = new JSpinner(new SpinnerNumberModel(1, 1, 30, 1));
+        heightField.addFocusListener(FocusRefreshListener);
+        weightField = new JSpinner(new SpinnerNumberModel(1, 1, 30, 1));
+        weightField.addFocusListener(FocusRefreshListener);
+        eyesField = new JTextField(5);
+        eyesField.addFocusListener(FocusRefreshListener);
+        hairField = new JTextField(5);
+        hairField.addFocusListener(FocusRefreshListener);
+        skinField = new JTextField(5);
+        skinField.addFocusListener(FocusRefreshListener);
     }
 
     private void assembleWidgets() {
-        add(characterNameLabel);
-        add(characterNameField);
-        add(playerNameLabel);
-        add(playerNameField);
-        add(classLabel);
-        add(classField);
-        add(levelLabel);
-        add(levelField);
-        add(raceLabel);
-        add(raceField);
-        add(alignmentLabel);
-        add(alignmentField);
-        add(deityLabel);
-        add(deityField);
-        add(sizeLabel);
-        add(sizeField);
+        add(designPanel());
     }
 
     @Override
@@ -148,6 +173,15 @@ public class BiographySection extends Section {
         Alignment alignment = parseAlignment((String)alignmentField.getSelectedItem());
         String deity = deityField.getText();
         Size size = parseSize((String)sizeField.getSelectedItem());
+
+        // Added by Archana
+        int age = (Integer) ageField.getValue();
+        String gender =  genderField.getText();
+        int height = (Integer)heightField.getValue();
+        int weight =  (Integer) weightField.getValue();
+        String eyes = eyesField.getText();
+        String hair = hairField.getText();
+        String skin = skinField.getText();
 
         if (!characterSheet.getCharacterName().equals(characterName)) {
             characterSheet.setCharacterName(characterName);
@@ -181,6 +215,22 @@ public class BiographySection extends Section {
             characterSheet.setSize(size);
         }
 
+        //Added by Archana
+        if(characterSheet.getAge() != age)
+            characterSheet.setAge(age);
+        if(characterSheet.getGender() != gender)
+            characterSheet.setGender(gender);
+        if(characterSheet.getHeight() != height)
+            characterSheet.setHeight(height);
+        if(characterSheet.getWeight() != weight)
+            characterSheet.setWeight(weight);
+        if(characterSheet.getEyes() != eyes)
+            characterSheet.setEyes(eyes);
+        if(characterSheet.getHair() != hair)
+            characterSheet.setHair(hair);
+        if(characterSheet.getSkin() != skin)
+            characterSheet.setSkin(skin);
+
         load(characterSheet);
 
         return characterSheet;
@@ -204,6 +254,15 @@ public class BiographySection extends Section {
         alignmentField.setSelectedItem(parseAlignment(characterSheet.getAlignment()));
         deityField.setText(characterSheet.getDeity());
         sizeField.setSelectedItem(parseSize(characterSheet.getSize()));
+
+        // Added by Archana
+        ageField.setValue(characterSheet.getAge());
+        genderField.setText(characterSheet.getGender());
+        heightField.setValue(characterSheet.getHeight());
+        weightField.setValue(characterSheet.getWeight());
+        eyesField.setText(characterSheet.getEyes());
+        hairField.setText(characterSheet.getHair());
+        skinField.setText(characterSheet.getSkin());
     }
 
     private Alignment parseAlignment(String s) {
@@ -303,4 +362,74 @@ public class BiographySection extends Section {
                 throw new IllegalArgumentException();
         }
     }
+
+    private JPanel designPanel()
+    {
+        //----------------------------------------START OF NAME PANEL----------------------------------------------------------
+        JPanel panel1 = new JPanel(new BorderLayout());
+        panel1.setLayout(new GridBagLayout());
+
+        //row 0
+        panel1.add(characterNameLabel,new CommonFunctions().setGridConstraints(0.5, 0, 0));
+        panel1.add(playerNameLabel,new CommonFunctions().setGridConstraints(0.5, 1, 0));
+        //row 1
+        panel1.add(characterNameField,new CommonFunctions().setGridConstraints(0.5, 0, 1));
+        panel1.add(playerNameField,new CommonFunctions().setGridConstraints(0.5, 1, 1));
+
+        //----------------------------------------END OF NAME PANEL-------------------------------------------------------------
+
+        //----------------------------------------START OF CLASS PANEL----------------------------------------------------------
+        JPanel panel2 = new JPanel(new BorderLayout());
+        panel2.setLayout(new GridBagLayout());
+
+        //row 0
+        panel2.add(classLabel,new CommonFunctions().setGridConstraints(0.5, 0, 0));
+        panel2.add(levelLabel,new CommonFunctions().setGridConstraints(0.5, 1, 0));
+        panel2.add(raceLabel,new CommonFunctions().setGridConstraints(0.5, 2, 0));
+        panel2.add(alignmentLabel,new CommonFunctions().setGridConstraints(0.5, 3, 0));
+        panel2.add(deityLabel,new CommonFunctions().setGridConstraints(0.5, 4, 0));
+        //row 1
+        panel2.add(classField,new CommonFunctions().setGridConstraints(0.5, 0, 1));
+        panel2.add(levelField,new CommonFunctions().setGridConstraints(0.5, 1, 1));
+        panel2.add(raceField,new CommonFunctions().setGridConstraints(0.5, 2, 1));
+        panel2.add(alignmentField,new CommonFunctions().setGridConstraints(0.5, 3, 1));
+        panel2.add(deityField,new CommonFunctions().setGridConstraints(0.5, 4, 1));
+
+        //----------------------------------------END OF CLASS PANEL----------------------------------------------------------
+
+        //----------------------------------------START OF SIZE PANEL----------------------------------------------------------
+        JPanel panel3 = new JPanel(new BorderLayout());
+        panel3.setLayout(new GridBagLayout());
+
+        //row 0
+        panel3.add(sizeLabel,new CommonFunctions().setGridConstraints(0.5, 0, 0));
+        panel3.add(ageLabel,new CommonFunctions().setGridConstraints(0.5, 1, 0));
+        panel3.add(genderLabel,new CommonFunctions().setGridConstraints(0.5, 2, 0));
+        panel3.add(heightLabel,new CommonFunctions().setGridConstraints(0.5, 3, 0));
+        panel3.add(weightLabel,new CommonFunctions().setGridConstraints(0.5, 4, 0));
+        panel3.add(eyesLabel,new CommonFunctions().setGridConstraints(0.5, 5, 0));
+        panel3.add(hairLabel,new CommonFunctions().setGridConstraints(0.5, 6, 0));
+        panel3.add(skinLabel,new CommonFunctions().setGridConstraints(0.5, 7, 0));
+
+        //row 1
+        panel3.add(sizeField,new CommonFunctions().setGridConstraints(0.5, 0, 1));
+        panel3.add(ageField,new CommonFunctions().setGridConstraints(0.5, 1, 1));
+        panel3.add(genderField,new CommonFunctions().setGridConstraints(0.5, 2, 1));
+        panel3.add(heightField,new CommonFunctions().setGridConstraints(0.5, 3, 1));
+        panel3.add(weightField,new CommonFunctions().setGridConstraints(0.5, 4, 1));
+        panel3.add(eyesField,new CommonFunctions().setGridConstraints(0.5, 5, 1));
+        panel3.add(hairField,new CommonFunctions().setGridConstraints(0.5, 6, 1));
+        panel3.add(skinField,new CommonFunctions().setGridConstraints(0.5, 7, 1));
+
+        //----------------------------------------END OF CLASS PANEL----------------------------------------------------------
+
+        JPanel finalPanel = new JPanel(new BorderLayout());
+        finalPanel.setLayout(new GridLayout(3, 0));
+        finalPanel.add(panel1);
+        finalPanel.add(panel2);
+        finalPanel.add(panel3);
+
+        return finalPanel;
+    }
+
 }

@@ -83,6 +83,29 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet implements
     //Special Abilities
     private HashSet<SpecialAbility> specialAbilities;
 
+    // Added by Archana for missing fields for Biogrphy Details
+    private int age;
+    private String gender;
+    private int height;
+    private int weight;
+    private String eyes;
+    private String hair;
+    private String skin;
+
+    // Added by Archana for missing fields for Ability Score
+    private int tempstrength;
+    private int tempdexterity;
+    private int tempconstitution;
+    private int tempwisdom;
+    private int tempintelligence;
+    private int tempcharisma;
+
+    // Added by Archana for missing fields for HP Points
+    private int nonlethaldamage;
+    private String totalhp;
+    private String hpspeed;
+
+
     public RevisedThirdEditionCharacterSheet() {
         characterName = "New Character";
         playerName = "";
@@ -358,8 +381,10 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet implements
      *
      * @return the total armor class
      */
+    //ArmorClass = 10 + armorBonus + shieldBonus + DexModifier + Size + NA + dm + misc
     public int getArmorClass() {
         return armorBonus
+                + 10
                 + shieldBonus
                 + getDexterityModifier()
                 + getSizeModifier()
@@ -367,17 +392,30 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet implements
                 + deflectionModifier
                 + armorClassMiscModifier;
     }
-
+    //ArmorClass = 10 + DexModifier + Size + dm + misc
     public int getTouchArmorClass() {
-        return touchArmorClass;
+        //return touchArmorClass;
+        return armorBonus
+                + 10
+                + getDexterityModifier()
+                + getSizeModifier()
+                + deflectionModifier
+                + armorClassMiscModifier;
     }
 
     public void setTouchArmorClass(int touchArmorClass) {
         this.touchArmorClass = touchArmorClass;
     }
-
+    //ArmorClass = 10 + armorBonus + shieldBonus + Size + NA + dm + misc
     public int getFlatFootedArmorClass() {
-        return flatFootedArmorClass;
+        //return flatFootedArmorClass;
+        return armorBonus
+                + 10
+                + shieldBonus
+                + getSizeModifier()
+                + naturalArmor
+                + deflectionModifier
+                + armorClassMiscModifier;
     }
 
     public void setFlatFootedArmorClass(int flatFootedArmorClass) {
@@ -528,7 +566,7 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet implements
     }
 
     public void setArmorBonus(int armorBonus) {
-        this.armorBonus = armorBonus;
+        this.armorBonus = armorBonus ;
     }
 
     public int getShieldBonus() {
@@ -742,4 +780,164 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet implements
     public boolean removeLanguage(String language) {
         return languages.remove(language);
     }
+
+    // Added by Archana
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
+    public int getWeight() {
+        return weight;
+    }
+
+    public void setWeight(int weight) {
+        this.weight = weight;
+    }
+
+    public String getEyes() {
+        return eyes;
+    }
+
+    public void setEyes(String eyes) {
+        this.eyes = eyes;
+    }
+
+    public String getHair() {
+        return hair;
+    }
+
+    public void setHair(String hair) {
+        this.hair = hair;
+    }
+
+    public String getSkin() {
+        return skin;
+    }
+
+    public void setSkin(String skin) {
+        this.skin = skin;
+    }
+
+    public int getTempstrength() {
+        return tempstrength;
+    }
+
+    public int getTempstrengthModifier() {
+        return getTemporaryAbilityModifier(tempstrength);
+    }
+
+    public void setTempstrength(int tempstrength) {
+        this.tempstrength = tempstrength;
+    }
+
+    public int getTempdexterity() {
+        return tempdexterity;
+    }
+
+    public int getTempdexterityModifier() {
+        return getTemporaryAbilityModifier(tempdexterity);
+    }
+
+    public void setTempdexterity(int tempdexterity) {
+        this.tempdexterity = tempdexterity;
+    }
+
+    public int getTempconstitution() {
+        return tempconstitution;
+    }
+
+    public int getTempconstitutionModifier() {
+        return getTemporaryAbilityModifier(tempconstitution);
+    }
+
+    public void setTempconstitution(int tempconstitution) {
+        this.tempconstitution = tempconstitution;
+    }
+
+    public int getTempwisdom() {
+        return tempwisdom;
+    }
+
+    public int getTempwisdomModifier() {
+        return getTemporaryAbilityModifier(tempwisdom);
+    }
+
+    public void setTempwisdom(int tempwisdom) {
+        this.tempwisdom = tempwisdom;
+    }
+
+    public int getTempintelligence() {
+        return tempintelligence;
+    }
+
+    public int getTempintelligenceModifier() {
+        return getTemporaryAbilityModifier(tempintelligence);
+    }
+
+    public void setTempintelligence(int tempintelligence) {
+        this.tempintelligence = tempintelligence;
+    }
+
+    public int getTempcharisma() {
+        return tempcharisma;
+    }
+
+    public int getTempcharismaModifier() {
+        return getTemporaryAbilityModifier(tempcharisma);
+    }
+
+    public void setTempcharisma(int tempcharisma) {
+        this.tempcharisma = tempcharisma;
+    }
+
+    private int getTemporaryAbilityModifier(int ability) {
+        return (ability - 10) / 2; // Java rounds down implicitly
+    }
+
+    public int getNonlethaldamage() {
+        return nonlethaldamage;
+    }
+
+    public void setNonlethaldamage(int nonlethaldamage) {
+        this.nonlethaldamage = nonlethaldamage;
+    }
+
+    public String getTotalhp() {
+        return currentHitpoints + nonlethaldamage + maxHitpoints +"";
+    }
+
+    public String getHpspeed() {
+        return hpspeed;
+    }
+
+    public void setHpspeed(String hpspeed) {
+        this.hpspeed = hpspeed;
+    }
+
+    public String getTotalInitiative()
+    {
+        return getDexterityModifier() + initiativeMiscModifier +"";
+    }
+
 }
