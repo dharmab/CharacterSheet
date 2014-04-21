@@ -381,10 +381,10 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet implements
      *
      * @return the total armor class
      */
-    //ArmorClass = 10 + armorBonus + shieldBonus + DexModifier + Size + NA + dm + misc
+    
     public int getArmorClass() {
-        return armorBonus
-                + 10
+        return 10
+                + armorBonus
                 + shieldBonus
                 + getDexterityModifier()
                 + getSizeModifier()
@@ -392,11 +392,9 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet implements
                 + deflectionModifier
                 + armorClassMiscModifier;
     }
-    //ArmorClass = 10 + DexModifier + Size + dm + misc
+
     public int getTouchArmorClass() {
-        //return touchArmorClass;
-        return armorBonus
-                + 10
+        return  10
                 + getDexterityModifier()
                 + getSizeModifier()
                 + deflectionModifier
@@ -406,13 +404,11 @@ public class RevisedThirdEditionCharacterSheet extends CharacterSheet implements
     public void setTouchArmorClass(int touchArmorClass) {
         this.touchArmorClass = touchArmorClass;
     }
-    //ArmorClass = 10 + armorBonus + shieldBonus + Size + NA + dm + misc
+
     public int getFlatFootedArmorClass() {
-        //return flatFootedArmorClass;
-        return armorBonus
-                + 10
+        return 10
+                + armorBonus
                 + shieldBonus
-                + getSizeModifier()
                 + naturalArmor
                 + deflectionModifier
                 + armorClassMiscModifier;
